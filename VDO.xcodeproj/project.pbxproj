@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A1B0370FF46ACEEE3E25DE3 /* Pods_VDO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953E4F4DBE828C7C555BC913 /* Pods_VDO.framework */; };
 		733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425BF222FC5CA009B3207 /* AppDelegate.swift */; };
 		733425C2222FC5CA009B3207 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425C1222FC5CA009B3207 /* ViewController.swift */; };
 		733425C5222FC5CA009B3207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733425C3222FC5CA009B3207 /* Main.storyboard */; };
@@ -14,6 +15,11 @@
 		733425CA222FC5CB009B3207 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733425C8222FC5CB009B3207 /* LaunchScreen.storyboard */; };
 		733425D5222FC5CB009B3207 /* VDOTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425D4222FC5CB009B3207 /* VDOTests.swift */; };
 		733425E0222FC5CB009B3207 /* VDOUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425DF222FC5CB009B3207 /* VDOUITests.swift */; };
+		7365FCB122307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
+		7365FCB222307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
+		7365FCB322307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
+		BEFC5D9BAF91F903F6813B35 /* Pods_VDOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7675252B136194613B911AC /* Pods_VDOTests.framework */; };
+		C90C60F13CE235D179FF4297 /* Pods_VDOUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFF957D1A0D163143EDD764C /* Pods_VDOUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		062245B8CE842D99A48A4BC8 /* Pods-VDOTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOTests.debug.xcconfig"; path = "Target Support Files/Pods-VDOTests/Pods-VDOTests.debug.xcconfig"; sourceTree = "<group>"; };
+		6AC43DDA9FCBD28A7022AD16 /* Pods-VDO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDO.release.xcconfig"; path = "Target Support Files/Pods-VDO/Pods-VDO.release.xcconfig"; sourceTree = "<group>"; };
+		6ADE7FF8129130A440B0B29C /* Pods-VDOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOUITests.release.xcconfig"; path = "Target Support Files/Pods-VDOUITests/Pods-VDOUITests.release.xcconfig"; sourceTree = "<group>"; };
+		6F128E7F4B0B4E52D813295D /* Pods-VDOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOUITests.debug.xcconfig"; path = "Target Support Files/Pods-VDOUITests/Pods-VDOUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		733425BC222FC5CA009B3207 /* VDO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VDO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733425BF222FC5CA009B3207 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		733425C1222FC5CA009B3207 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +57,12 @@
 		733425DB222FC5CB009B3207 /* VDOUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VDOUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		733425DF222FC5CB009B3207 /* VDOUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDOUITests.swift; sourceTree = "<group>"; };
 		733425E1222FC5CB009B3207 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7365FCB022307545003A0366 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9293C2AF7888E24B55EF79B4 /* Pods-VDO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDO.debug.xcconfig"; path = "Target Support Files/Pods-VDO/Pods-VDO.debug.xcconfig"; sourceTree = "<group>"; };
+		953E4F4DBE828C7C555BC913 /* Pods_VDO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VDO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFF957D1A0D163143EDD764C /* Pods_VDOUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VDOUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C7675252B136194613B911AC /* Pods_VDOTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VDOTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DED76B6356B8419D1C8481AE /* Pods-VDOTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOTests.release.xcconfig"; path = "Target Support Files/Pods-VDOTests/Pods-VDOTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A1B0370FF46ACEEE3E25DE3 /* Pods_VDO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEFC5D9BAF91F903F6813B35 /* Pods_VDOTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C90C60F13CE235D179FF4297 /* Pods_VDOUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +100,8 @@
 				733425D3222FC5CB009B3207 /* VDOTests */,
 				733425DE222FC5CB009B3207 /* VDOUITests */,
 				733425BD222FC5CA009B3207 /* Products */,
+				C0CD66D2256A6703DFD5048F /* Pods */,
+				FB8EE13192AF1A3CA3785A3D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +124,7 @@
 				733425C6222FC5CB009B3207 /* Assets.xcassets */,
 				733425C8222FC5CB009B3207 /* LaunchScreen.storyboard */,
 				733425CB222FC5CB009B3207 /* Info.plist */,
+				7365FCB022307545003A0366 /* GoogleService-Info.plist */,
 			);
 			path = VDO;
 			sourceTree = "<group>";
@@ -125,6 +147,30 @@
 			path = VDOUITests;
 			sourceTree = "<group>";
 		};
+		C0CD66D2256A6703DFD5048F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9293C2AF7888E24B55EF79B4 /* Pods-VDO.debug.xcconfig */,
+				6AC43DDA9FCBD28A7022AD16 /* Pods-VDO.release.xcconfig */,
+				062245B8CE842D99A48A4BC8 /* Pods-VDOTests.debug.xcconfig */,
+				DED76B6356B8419D1C8481AE /* Pods-VDOTests.release.xcconfig */,
+				6F128E7F4B0B4E52D813295D /* Pods-VDOUITests.debug.xcconfig */,
+				6ADE7FF8129130A440B0B29C /* Pods-VDOUITests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FB8EE13192AF1A3CA3785A3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				953E4F4DBE828C7C555BC913 /* Pods_VDO.framework */,
+				C7675252B136194613B911AC /* Pods_VDOTests.framework */,
+				AFF957D1A0D163143EDD764C /* Pods_VDOUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -132,6 +178,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 733425E4222FC5CB009B3207 /* Build configuration list for PBXNativeTarget "VDO" */;
 			buildPhases = (
+				F2021269F2FEF12F48009E86 /* [CP] Check Pods Manifest.lock */,
 				733425B8222FC5CA009B3207 /* Sources */,
 				733425B9222FC5CA009B3207 /* Frameworks */,
 				733425BA222FC5CA009B3207 /* Resources */,
@@ -149,6 +196,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 733425E7222FC5CB009B3207 /* Build configuration list for PBXNativeTarget "VDOTests" */;
 			buildPhases = (
+				EF8F39653D3ABF3F0E450986 /* [CP] Check Pods Manifest.lock */,
 				733425CC222FC5CB009B3207 /* Sources */,
 				733425CD222FC5CB009B3207 /* Frameworks */,
 				733425CE222FC5CB009B3207 /* Resources */,
@@ -167,6 +215,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 733425EA222FC5CB009B3207 /* Build configuration list for PBXNativeTarget "VDOUITests" */;
 			buildPhases = (
+				32E4258A0D3D56E89740CC90 /* [CP] Check Pods Manifest.lock */,
 				733425D7222FC5CB009B3207 /* Sources */,
 				733425D8222FC5CB009B3207 /* Frameworks */,
 				733425D9222FC5CB009B3207 /* Resources */,
@@ -230,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				733425CA222FC5CB009B3207 /* LaunchScreen.storyboard in Resources */,
+				7365FCB122307545003A0366 /* GoogleService-Info.plist in Resources */,
 				733425C7222FC5CB009B3207 /* Assets.xcassets in Resources */,
 				733425C5222FC5CA009B3207 /* Main.storyboard in Resources */,
 			);
@@ -239,6 +289,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7365FCB222307545003A0366 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,10 +297,80 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7365FCB322307545003A0366 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		32E4258A0D3D56E89740CC90 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VDOUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF8F39653D3ABF3F0E450986 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VDOTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F2021269F2FEF12F48009E86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-VDO-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		733425B8222FC5CA009B3207 /* Sources */ = {
@@ -430,6 +551,7 @@
 		};
 		733425E5222FC5CB009B3207 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9293C2AF7888E24B55EF79B4 /* Pods-VDO.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -448,6 +570,7 @@
 		};
 		733425E6222FC5CB009B3207 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6AC43DDA9FCBD28A7022AD16 /* Pods-VDO.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -466,6 +589,7 @@
 		};
 		733425E8222FC5CB009B3207 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 062245B8CE842D99A48A4BC8 /* Pods-VDOTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -487,6 +611,7 @@
 		};
 		733425E9222FC5CB009B3207 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DED76B6356B8419D1C8481AE /* Pods-VDOTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -508,6 +633,7 @@
 		};
 		733425EB222FC5CB009B3207 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F128E7F4B0B4E52D813295D /* Pods-VDOUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -528,6 +654,7 @@
 		};
 		733425EC222FC5CB009B3207 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6ADE7FF8129130A440B0B29C /* Pods-VDOUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
