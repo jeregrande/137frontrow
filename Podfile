@@ -6,6 +6,7 @@ target 'VDO' do
   use_frameworks!
 
   # Pods for VDO
+  pod 'Firebase/Core'
 
   target 'VDOTests' do
     inherit! :search_paths
