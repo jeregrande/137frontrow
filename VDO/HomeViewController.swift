@@ -10,6 +10,7 @@ import UIKit
 import FirebaseUI
 
 class HomeViewController: UIViewController {
+    @IBOutlet weak var userName: UILabel!
     @IBAction func signOut(_ sender: UIButton) {
         let authUI = FUIAuth.defaultAuthUI()
         
@@ -29,7 +30,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        userName.text = FUIAuth.defaultAuthUI()?.auth?.currentUser?.displayName
         // Do any additional setup after loading the view.
     }
     
