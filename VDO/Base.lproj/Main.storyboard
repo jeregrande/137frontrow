@@ -156,6 +156,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="videoPicker:" destination="SRB-Is-djW" eventType="touchUpInside" id="gcP-eP-3E9"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBE-Nb-HGZ">
                                 <rect key="frame" x="323" y="44" width="36" height="30"/>
@@ -190,6 +193,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qbS-94-evj"/>
                     </view>
+                    <connections>
+                        <outlet property="uploadButton" destination="CkO-pb-fmn" id="NKk-VU-97w"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wdr-LJ-Gbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

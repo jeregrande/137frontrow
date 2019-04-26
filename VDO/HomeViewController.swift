@@ -10,7 +10,10 @@ import UIKit
 import FirebaseUI
 
 class HomeViewController: UIViewController {
+    
+    var imagePicker: ImagePicker!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var uploadButton: UIButton!
     @IBAction func signOut(_ sender: UIButton) {
         let authUI = FUIAuth.defaultAuthUI()
         
@@ -30,9 +33,14 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userName.text = FUIAuth.defaultAuthUI()?.auth?.currentUser?.displayName
+//        userName.text =    FUIAuth.defaultAuthUI()?.auth?.currentUser?.displayName
         // Do any additional setup after loading the view.
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
+    @IBAction func videoPicker(_ sender: UIButton) {
+        self.imagePicker.present(from: sender)
+    }
+
     
 
     /*
@@ -45,4 +53,10 @@ class HomeViewController: UIViewController {
     }
     */
 
+}
+
+extension HomeViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        
+    }
 }
