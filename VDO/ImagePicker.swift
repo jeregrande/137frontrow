@@ -106,7 +106,7 @@ extension ImagePicker: UIImagePickerControllerDelegate {
     public func handleVideoSelectedForURL(url: NSURL){
         let fileName = "shredding.mov"
         let storageRef = Storage.storage().reference().child(fileName)
-            storageRef.putFile(from: url as URL,metadata: nil, completion: {(metadata, error) in
+        let uploadTask = storageRef.putFile(from: url as URL,metadata: nil, completion: {(metadata, error) in
             if error != nil {
                 print("Failed to upload video:", error)
                 return
@@ -121,6 +121,13 @@ extension ImagePicker: UIImagePickerControllerDelegate {
                 }
             })
         } )
+        
+        uploadTask.observe(.progress) { snapshot in
+            if let completedUnitCount = snapshot.progress?.completedUnitCount {
+                
+            }
+            print("Upload Progress: \(snapshot.progress?.completedUnitCount)")
+        }
     }
 }
 

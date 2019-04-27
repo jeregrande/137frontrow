@@ -24,7 +24,6 @@ class LandingViewController: UIViewController, GIDSignInUIDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         
         // Check for an exisiting log in session
-
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signInSilently()
         handle = Auth.auth().addStateDidChangeListener({(auth, user) in
@@ -70,7 +69,31 @@ extension LandingViewController: FUIAuthDelegate {
             return
         }
         
-//        authDataResult?.user.id
+        guard let userID = authDataResult?.user.uid else {return}
+        guard let email = authDataResult?.user.email else {return}
+        guard let displayName = authDataResult?.user.displayName else {return}
+
+        // check if the user exist on the users collection
+        
+        let usersRef = Firestore.firestore().collection("users")
+        let docRef = usersRef.document(userID)
+        docRef.getDocument { (document, error) in
+            if let document = document, document.exists {
+                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+                print("Document data: \(dataDescription)")
+                // ther user exist
+            } else {
+                print("Document does not exist")
+                // create the new user document
+                usersRef.document(userID).setData([
+                    "userID": "\(String(describing: userID))",
+                    "videos": FieldValue.arrayUnion([]),
+                    "albums": FieldValue.arrayUnion([]),
+                    "email": "\(String(describing: email))",
+                    "displayName": "\(displayName)"
+                    ])
+            }
+        }
         performSegue(withIdentifier: "goHome", sender: self)
     }
 }
