@@ -8,8 +8,13 @@
 
 import UIKit
 import FirebaseUI
+import Firebase
+import GoogleSignIn
 
-class LandingViewController: UIViewController {
+class LandingViewController: UIViewController, GIDSignInUIDelegate {
+    
+    var handle: AuthStateDidChangeListenerHandle?
+
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     
@@ -17,6 +22,16 @@ class LandingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Check for an exisiting log in session
+
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signInSilently()
+        handle = Auth.auth().addStateDidChangeListener({(auth, user) in
+            if user  != nil {
+                self.performSegue(withIdentifier: "goHome", sender: nil)
+            }
+        })
     }
 
     @IBAction func logInTapped(_ sender: UIButton) {
@@ -37,6 +52,12 @@ class LandingViewController: UIViewController {
         
         // show it
         present(authViewController, animated: true, completion: nil)
+    }
+    
+    deinit {
+        if let handle = handle {
+            Auth.auth().removeStateDidChangeListener(handle)
+        }
     }
     
 }

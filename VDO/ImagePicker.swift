@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import MobileCoreServices
+import Firebase
 
 public protocol ImagePickerDelegate: class {
     func didSelect(image: UIImage?)
@@ -29,7 +31,8 @@ open class ImagePicker: NSObject {
         
         self.pickerController.delegate = self
         self.pickerController.allowsEditing = true
-        self.pickerController.mediaTypes = ["public.image"]
+        // Select only MP4 videos for now
+        self.pickerController.mediaTypes = [kUTTypeMovie as String]
     }
     
     private func action(for type: UIImagePickerController.SourceType, title: String) -> UIAlertAction? {
@@ -47,9 +50,10 @@ open class ImagePicker: NSObject {
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         
-        if let action = self.action(for: .camera, title: "Take photo") {
-            alertController.addAction(action)
-        }
+        // Save this for now as we can have it record instead of take a photo
+//        if let action = self.action(for: .camera, title: "Take photo") {
+//            alertController.addAction(action)
+//        }
         if let action = self.action(for: .savedPhotosAlbum, title: "Camera roll") {
             alertController.addAction(action)
         }
@@ -83,10 +87,40 @@ extension ImagePicker: UIImagePickerControllerDelegate {
     
     public func imagePickerController(_ picker: UIImagePickerController,
                                       didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        
+        if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? NSURL{
+            print("Here is the file url:", videoURL)
+            
+            handleVideoSelectedForURL(url: videoURL)
+            
+            
+        }
+        
+        /// Stuff for picking images should be removed at some point
         guard let image = info[.editedImage] as? UIImage else {
             return self.pickerController(picker, didSelect: nil)
         }
         self.pickerController(picker, didSelect: image)
+    }
+    
+    public func handleVideoSelectedForURL(url: NSURL){
+        let fileName = "shredding.mov"
+        let storageRef = Storage.storage().reference().child(fileName)
+            storageRef.putFile(from: url as URL,metadata: nil, completion: {(metadata, error) in
+            if error != nil {
+                print("Failed to upload video:", error)
+                return
+            }
+            
+            storageRef.downloadURL(completion: {(url, error) in
+                if error != nil {
+                    print("Failed to download URL:", error)
+                    return
+                } else {
+                    print("Media URL: \(url?.absoluteString)")
+                }
+            })
+        } )
     }
 }
 

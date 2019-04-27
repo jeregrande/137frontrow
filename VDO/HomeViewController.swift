@@ -57,6 +57,6 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        
+        // Do something when the video is selected.
     }
 }
