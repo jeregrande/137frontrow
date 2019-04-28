@@ -41,7 +41,21 @@ class API {
     
     func uploadThumbnailImageForVideo(imageURL: String){
         let storageRef = Storage.storage().reference().child(imageURL)
-        storageRef.putFile(from: <#T##URL#>)
+        
+    }
+    
+    
+    // Given a URL of a thumbnail image and a video ID it updates the thumbnail image of the video
+    func addThumbnailToVideo(withImageURL: String, withVideoID: String){
+        let videoDocument = videoCollection.document(withVideoID)
+        videoDocument.updateData([
+            "thumbnail": withImageURL]) { err in
+                if let err = err {
+                    print("Error updating document \(err)")
+                } else {
+                    print("Document updated")
+                }
+        }
     }
     
     
@@ -77,5 +91,35 @@ class API {
             "notes": ""
             ])
         return video.documentID
+    }
+    
+    // Given an image this function uploads it to firebase storage and return its storage location URL
+    func uploadThumbnailToFireBaseStorageUsingImage(image: UIImage) -> String{
+        var storageURL: String!
+        // create a unique name for the thumbnail image
+        let imageName = NSUUID.init().uuidString
+        // create a storage reference for the image
+        let ref = Storage.storage().reference().child("thumbnail_images").child(imageName)
+        
+        if let uploadData = image.jpegData(compressionQuality: 0.2) {
+            ref.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if error != nil {
+                    print("Failed to upload image:", error)
+                    return
+                }
+                
+                ref.downloadURL(completion: {(url, error) in
+                    if error != nil {
+                        print("Failed to get download URL", error)
+                        return
+                    } else {
+                        if let imageURL = url {
+                            storageURL = url?.absoluteString
+                        }
+                    }
+                })
+            })
+        }
+        return storageURL
     }
 }

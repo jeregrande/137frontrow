@@ -6,14 +6,17 @@
 //  Copyright © 2019 137frontrow. All rights reserved.
 //
 import UIKit
+import AVKit
 import MobileCoreServices
 import Firebase
 
 class UploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var imagePicker: ImagePicker!
+    var api = API()
     
     @IBOutlet weak var uploadProgressBar: UIProgressView!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
     
     
     override func viewDidLoad() {
@@ -49,8 +52,9 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     private func addVideoToCollection(url: URL, name: String){
-        let api = API()
+        // create the new video document and get its ID
         let vidID = api.addVideoToCollection(title: name, fileURL: url.absoluteString)
+        // add the thumbnail image to the video document's values
         api.addVideoToUser(videoID: vidID)
     }
     
@@ -64,10 +68,23 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     public func handleVideoSelectedForURL(url: URL){
         let nsURL = url
+        //Create the thumbnail Image
+        // Upload the thumbnail image to the storage
+        if let thumbnail = thumbnailImageForVideoURL(fileURL: nsURL as NSURL) {
+            // set the Uiimageview as the with the thumbnail image
+            thumbnailImageView.image = thumbnail
+//            // upload the image and get the storageURL
+//            let imageURL = api.uploadThumbnailToFireBaseStorageUsingImage(image: thumbnail)
+//            api.addThumbnailToVideo(withImageURL: imageURL, withVideoID: <#T##String#>)
+            
+        }
+        
+        
         // get the file name
         let fileName =  (url.absoluteString as NSString).lastPathComponent
         let storageRef = Storage.storage().reference().child(fileName)
         let uploadTask = storageRef.putFile(from: url,metadata: nil, completion: {(metadata, error) in
+            
             if error != nil {
                 print("Failed to upload video:", error!)
                 return
@@ -79,11 +96,14 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                     print("Failed to download URL:", error!)
                     return
                 } else {
+                    // Add video to the videos collection
                     self.addVideoToCollection(url: url!, name: fileName)
-                    print("Media URL: \(String(describing: url!.absoluteString))")
                 }
             })
         } )
+        
+        
+        
         
         // Proggress tracker
         uploadTask.observe(.progress) { snapshot in
@@ -102,6 +122,21 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
         
     }
+    
+    // Creates a thumbnail image from the first frame of the video
+    public func thumbnailImageForVideoURL(fileURL: NSURL) -> UIImage? {
+        let asset = AVAsset(url: fileURL as URL)
+        let imageGenereator = AVAssetImageGenerator(asset: asset)
+        
+        do {
+            let thumbnailCGImage = try imageGenereator.copyCGImage(at: CMTimeMake(value: 1,timescale: 60), actualTime: nil)
+            return UIImage(cgImage: thumbnailCGImage)
+        } catch let err {
+            print(err)
+        }
+        return nil
+    }
+    
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)

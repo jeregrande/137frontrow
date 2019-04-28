@@ -515,11 +515,16 @@
                                 <rect key="frame" x="112" y="289" width="150" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </progressView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wcc-Zv-73K">
+                                <rect key="frame" x="67" y="119" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="VgV-Bk-g6Q"/>
                     </view>
                     <connections>
+                        <outlet property="thumbnailImageView" destination="wcc-Zv-73K" id="05O-Wy-uLW"/>
                         <outlet property="uploadProgressBar" destination="gud-tW-kY9" id="rlK-ny-isK"/>
                     </connections>
                 </viewController>

@@ -120,7 +120,7 @@ extension ImagePicker: UIImagePickerControllerDelegate {
                     return
                 } else {
                     
-                    if let thumbnailImage = self.thumbnailImageForVideoURL(fileURL: nsURL) {}
+//                    if let thumbnailImage = self.thumbnailImageForVideoURL(fileURL: nsURL) {}
                     print("Media URL: \(String(describing: url?.absoluteString))")
                 }
             })
@@ -134,19 +134,34 @@ extension ImagePicker: UIImagePickerControllerDelegate {
         }
     }
     
-    // Creates a thumbnail image from the first frame of the video
-    public func thumbnailImageForVideoURL(fileURL: NSURL) -> UIImage? {
-        let asset = AVAsset(url: fileURL as URL)
-        let imageGenereator = AVAssetImageGenerator(asset: asset)
+    private func uploadThumbnailToFireBaseStorageUsingImage(image: UIImage){
+        // create a unique name for the thumbnail image
+        let imageName = NSUUID.init().uuidString
+        // create a storage reference for the image
+        let ref = Storage.storage().reference().child("thumbnail_images").child(imageName)
         
-        do {
-            let thumbnailCGImage = try imageGenereator.copyCGImage(at: CMTimeMake(value: 1,timescale: 60), actualTime: nil)
-            return UIImage(cgImage: thumbnailCGImage)
-        } catch let err {
-            print(err)
+        if let uploadData = image.jpegData(compressionQuality: 0.2) {
+            ref.putData(uploadData, metadata: nil, completion: { (metadata, error) in
+                if error != nil {
+                    print("Failed to upload image:", error)
+                    return
+                }
+                
+                ref.downloadURL(completion: {(url, error) in
+                    if error != nil {
+                        print("Failed to get download URL", error)
+                        return
+                    } else {
+                        if let imageURL = url {
+                            // Add a the tumbnail image value to the video
+                        }
+                    }
+                })
+            })
         }
-        return nil
     }
+    
+    
 }
 
 extension ImagePicker: UINavigationControllerDelegate {
