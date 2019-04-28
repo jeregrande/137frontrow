@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MobileCoreServices
 import Firebase
+import AVKit
 
 public protocol ImagePickerDelegate: class {
     func didSelect(image: UIImage?)
@@ -91,7 +92,7 @@ extension ImagePicker: UIImagePickerControllerDelegate {
         if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? NSURL{
             print("Here is the file url:", videoURL)
             
-            handleVideoSelectedForURL(url: videoURL)
+//            handleVideoSelectedForURL(url: videoURL)
             
             
         }
@@ -104,20 +105,23 @@ extension ImagePicker: UIImagePickerControllerDelegate {
     }
     
     public func handleVideoSelectedForURL(url: NSURL){
+        let nsURL = url
         let fileName = "shredding.mov"
         let storageRef = Storage.storage().reference().child(fileName)
         let uploadTask = storageRef.putFile(from: url as URL,metadata: nil, completion: {(metadata, error) in
             if error != nil {
-                print("Failed to upload video:", error)
+                print("Failed to upload video:", error!)
                 return
             }
             
             storageRef.downloadURL(completion: {(url, error) in
                 if error != nil {
-                    print("Failed to download URL:", error)
+                    print("Failed to download URL:", error!)
                     return
                 } else {
-                    print("Media URL: \(url?.absoluteString)")
+                    
+                    if let thumbnailImage = self.thumbnailImageForVideoURL(fileURL: nsURL) {}
+                    print("Media URL: \(String(describing: url?.absoluteString))")
                 }
             })
         } )
@@ -126,8 +130,22 @@ extension ImagePicker: UIImagePickerControllerDelegate {
             if let completedUnitCount = snapshot.progress?.completedUnitCount {
                 
             }
-            print("Upload Progress: \(snapshot.progress?.completedUnitCount)")
+            print("Upload Progress: \(String(describing: snapshot.progress?.completedUnitCount))")
         }
+    }
+    
+    // Creates a thumbnail image from the first frame of the video
+    public func thumbnailImageForVideoURL(fileURL: NSURL) -> UIImage? {
+        let asset = AVAsset(url: fileURL as URL)
+        let imageGenereator = AVAssetImageGenerator(asset: asset)
+        
+        do {
+            let thumbnailCGImage = try imageGenereator.copyCGImage(at: CMTimeMake(value: 1,timescale: 60), actualTime: nil)
+            return UIImage(cgImage: thumbnailCGImage)
+        } catch let err {
+            print(err)
+        }
+        return nil
     }
 }
 

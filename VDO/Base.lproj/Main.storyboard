@@ -157,7 +157,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <state key="normal" title="+"/>
                                 <connections>
-                                    <action selector="videoPicker:" destination="SRB-Is-djW" eventType="touchUpInside" id="gcP-eP-3E9"/>
+                                    <segue destination="PYg-oc-Tib" kind="show" id="Qx4-nv-znT"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBE-Nb-HGZ">
@@ -193,9 +193,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="qbS-94-evj"/>
                     </view>
-                    <connections>
-                        <outlet property="uploadButton" destination="CkO-pb-fmn" id="NKk-VU-97w"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wdr-LJ-Gbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -463,7 +460,7 @@
         <!--Upload View Controller-->
         <scene sceneID="6LF-2A-Kc1">
             <objects>
-                <viewController id="PYg-oc-Tib" customClass="UploadViewController" sceneMemberID="viewController">
+                <viewController id="PYg-oc-Tib" customClass="UploadViewController" customModule="VDO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oCi-Te-amJ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -473,6 +470,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="handleUploadTap:" destination="PYg-oc-Tib" eventType="touchUpInside" id="o5F-Ja-13C"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BYi-of-3Ze">
                                 <rect key="frame" x="22" y="44" width="48" height="30"/>
@@ -511,10 +511,17 @@
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gud-tW-kY9">
+                                <rect key="frame" x="112" y="289" width="150" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="VgV-Bk-g6Q"/>
                     </view>
+                    <connections>
+                        <outlet property="uploadProgressBar" destination="gud-tW-kY9" id="rlK-ny-isK"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HM6-5q-JQD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

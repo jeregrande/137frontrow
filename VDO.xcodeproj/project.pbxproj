@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		0A1B0370FF46ACEEE3E25DE3 /* Pods_VDO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953E4F4DBE828C7C555BC913 /* Pods_VDO.framework */; };
 		73071A442272E49F0088A802 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73071A432272E49F0088A802 /* ImagePicker.swift */; };
+		7310FB502273FDA600941746 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB4F2273FDA600941746 /* API.swift */; };
+		7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7310FB5122740D8100941746 /* AVFoundation.framework */; };
+		7310FB55227414FC00941746 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB54227414FC00941746 /* UploadViewController.swift */; };
 		733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425BF222FC5CA009B3207 /* AppDelegate.swift */; };
 		733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425C1222FC5CA009B3207 /* LandingViewController.swift */; };
 		733425C5222FC5CA009B3207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733425C3222FC5CA009B3207 /* Main.storyboard */; };
@@ -48,6 +51,9 @@
 		6ADE7FF8129130A440B0B29C /* Pods-VDOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOUITests.release.xcconfig"; path = "Target Support Files/Pods-VDOUITests/Pods-VDOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6F128E7F4B0B4E52D813295D /* Pods-VDOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOUITests.debug.xcconfig"; path = "Target Support Files/Pods-VDOUITests/Pods-VDOUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		73071A432272E49F0088A802 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		7310FB4F2273FDA600941746 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		7310FB5122740D8100941746 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7310FB54227414FC00941746 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		733425BC222FC5CA009B3207 /* VDO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VDO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733425BF222FC5CA009B3207 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		733425C1222FC5CA009B3207 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -76,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */,
 				0A1B0370FF46ACEEE3E25DE3 /* Pods_VDO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -134,6 +141,8 @@
 				7365FCB022307545003A0366 /* GoogleService-Info.plist */,
 				73F153E6225DDCE600802F57 /* HomeViewController.swift */,
 				73071A432272E49F0088A802 /* ImagePicker.swift */,
+				7310FB4F2273FDA600941746 /* API.swift */,
+				7310FB54227414FC00941746 /* UploadViewController.swift */,
 			);
 			path = VDO;
 			sourceTree = "<group>";
@@ -172,6 +181,7 @@
 		FB8EE13192AF1A3CA3785A3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7310FB5122740D8100941746 /* AVFoundation.framework */,
 				953E4F4DBE828C7C555BC913 /* Pods_VDO.framework */,
 				C7675252B136194613B911AC /* Pods_VDOTests.framework */,
 				AFF957D1A0D163143EDD764C /* Pods_VDOUITests.framework */,
@@ -566,9 +576,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */,
+				7310FB55227414FC00941746 /* UploadViewController.swift in Sources */,
 				733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */,
 				73071A442272E49F0088A802 /* ImagePicker.swift in Sources */,
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,
+				7310FB502273FDA600941746 /* API.swift in Sources */,
 				73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
