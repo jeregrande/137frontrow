@@ -8,7 +8,10 @@
 
 import Foundation
 import UIKit
+import Firebase
 
-class Video {
-    var thumbnail: UIImage!
+struct Video {
+    var thumbnail: UIImage
+    var fileURL: String
+    var title: String
 }

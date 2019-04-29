@@ -8,11 +8,21 @@
 
 import Foundation
 import Firebase
+import FirebaseFirestore
 
-class User {
+struct User{
     
-    var videos: [Video]!
+    var dislpayName: String
+//    var albums: [Album]
+    var email: String
+    var userID: String
+    var videos: [Video]
     
-    init(){
+    var dictitonary: [String: Any] {
+        return [
+            "displayName": dislpayName,
+            "email": email,
+            "userID": userID
+        ]
     }
 }

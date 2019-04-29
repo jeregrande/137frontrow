@@ -29,11 +29,11 @@ class API {
     func getOwnVideos(){
         let userDocument = Firestore.firestore().collection("users").document(userID!)
         userDocument.getDocument{(document, error) in
-            if let city = document.flatMap({
-                $0.data().flatMap({(data) in
-                    return Video()
-                })
-            })
+//            if let city = document.flatMap({
+//                $0.data().flatMap({(data) in
+//                    return Video()
+//                })
+//            })
 //            if let document = document, document.exists {
 //                let videos = document.get("videos")
 //                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
@@ -45,14 +45,20 @@ class API {
         }
     }
     
-    func getUser(){
-        let userDocument = Firestore.firestore().collection("users").document(userID!)
-        userDocument.getDocument{(document, error) in
-            if let user = document.flatMap({{ (<#DocumentSnapshot#>) -> U? in
-                <#code#>
-                }})
-        }
-    }
+//    func getUser(){
+//        let userDocument = Firestore.firestore().collection("users").document(userID!)
+//        userDocument.getDocument{(document, error) in
+//            if let user = document.flatMap({
+//                $0.data().flatMap({(data) in
+//                    return User(dislpayName: data["displayName"] as! String, email: data["email"] as! String, userID: data["userID"] as! String)
+//                })
+//            }){
+//                print("user: \(user)")
+//            } else {
+//                print("Document does not exist")
+//            }
+//        }
+//    }
     
     func uploadThumbnailImageForVideo(imageURL: String){
         let storageRef = Storage.storage().reference().child(imageURL)

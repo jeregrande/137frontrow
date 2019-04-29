@@ -14,6 +14,7 @@
 		7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7310FB5122740D8100941746 /* AVFoundation.framework */; };
 		7310FB55227414FC00941746 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB54227414FC00941746 /* UploadViewController.swift */; };
 		73300A6C2276CA43003FB82D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6B2276CA43003FB82D /* Video.swift */; };
+		73300A6E22776490003FB82D /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6D22776490003FB82D /* Album.swift */; };
 		733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425BF222FC5CA009B3207 /* AppDelegate.swift */; };
 		733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425C1222FC5CA009B3207 /* LandingViewController.swift */; };
 		733425C5222FC5CA009B3207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733425C3222FC5CA009B3207 /* Main.storyboard */; };
@@ -58,6 +59,7 @@
 		7310FB5122740D8100941746 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7310FB54227414FC00941746 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		73300A6B2276CA43003FB82D /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		73300A6D22776490003FB82D /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		733425BC222FC5CA009B3207 /* VDO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VDO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733425BF222FC5CA009B3207 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		733425C1222FC5CA009B3207 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			children = (
 				7302ABC82276C7AA0050D292 /* User.swift */,
 				73300A6B2276CA43003FB82D /* Video.swift */,
+				73300A6D22776490003FB82D /* Album.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -278,13 +281,16 @@
 				TargetAttributes = {
 					733425BB222FC5CA009B3207 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					733425CF222FC5CB009B3207 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 733425BB222FC5CA009B3207;
 					};
 					733425DA222FC5CB009B3207 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 733425BB222FC5CA009B3207;
 					};
 				};
@@ -598,6 +604,7 @@
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,
 				7310FB502273FDA600941746 /* API.swift in Sources */,
 				73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */,
+				73300A6E22776490003FB82D /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,7 +789,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -801,7 +808,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -822,7 +829,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VDO.app/VDO";
 			};
@@ -844,7 +851,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VDO.app/VDO";
 			};
@@ -865,7 +872,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDOUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = VDO;
 			};
@@ -886,7 +893,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDOUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = VDO;
 			};

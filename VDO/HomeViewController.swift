@@ -8,14 +8,16 @@
 
 import UIKit
 import FirebaseUI
+import Firebase
 
 class HomeViewController: UIViewController {
     
     var imagePicker: ImagePicker!
-    var user = User()
+    var user: User!
+    let userID = Auth.auth().currentUser?.uid
     @IBOutlet weak var userName: UILabel!
-
-    @IBOutlet var videos: [UIImageView]!
+    @IBOutlet weak var videosScrollView: UIScrollView!
+    
     
     // Sign OUT
     @IBAction func signOut(_ sender: UIButton) {
@@ -40,17 +42,34 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let api = API()
-        user.videos = api.getOwnVideos()
-        api.getOwnVideos()
+////        api.getUser()
+//        let userDocument = Firestore.firestore().collection("users").document(userID!)
+//        userDocument.getDocument{(document, error) in
+//            if let document = document, document.exists {
+//                let videos = document.get("videos")
+//                print(videos)
+//                for video in (videos as? NSArray)! {
+//                    let ref = video as? DocumentReference
+//                    ref?.getDocument{ (document, error) in
+//                        if let vid = document.flatMap({
+//                            $0.data().flatMap({(data) in
+//                                return Video(thumbnail: Storage.storage().reference().child("thumbnail_images").child(data["thumbnail"] as! String).write(toFile: URL("thumbnails/")), fileURL: data["fileURL"], title: data["title"])
+//                            })
+//                        })
+//                    }
+//                    
+//                }
+//        }
+//        }
+        
     }
     
-    func updateViewFromModel(){
-        for index in videos.indices {
-            let imageView = videos[index]
-            let video = user.videos[index]
-            imageView.image = video.
-        }
-    }
+//    func updateViewFromModel(){
+//        for index in videos.indices {
+//            let imageView = videos[index]
+//            let video = user.videos[index]
+//        }
+//    }
 
     
 
