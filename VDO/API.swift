@@ -13,6 +13,7 @@ class API {
     
     let videoCollection = Firestore.firestore().collection("videos")
     let albumCollection = Firestore.firestore().collection("albums")
+    let thumbnailsStorageReference = Storage.storage().reference().child("thumbnail_images")
     let userID = Auth.auth().currentUser?.uid
     
     // Uploads a video to the Storage
@@ -28,14 +29,28 @@ class API {
     func getOwnVideos(){
         let userDocument = Firestore.firestore().collection("users").document(userID!)
         userDocument.getDocument{(document, error) in
-            if let document = document, document.exists {
-                let videos = document.get("videos")
-                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-                print("Document data: \(videos)")
-            }
-            else {
-                print("Document does not exist")
-            }
+            if let city = document.flatMap({
+                $0.data().flatMap({(data) in
+                    return Video()
+                })
+            })
+//            if let document = document, document.exists {
+//                let videos = document.get("videos")
+//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
+//                print("Document data: \(videos)")
+//            }
+//            else {
+//                print("Document does not exist")
+//            }
+        }
+    }
+    
+    func getUser(){
+        let userDocument = Firestore.firestore().collection("users").document(userID!)
+        userDocument.getDocument{(document, error) in
+            if let user = document.flatMap({{ (<#DocumentSnapshot#>) -> U? in
+                <#code#>
+                }})
         }
     }
     
@@ -46,16 +61,8 @@ class API {
     
     
     // Given a URL of a thumbnail image and a video ID it updates the thumbnail image of the video
-    func addThumbnailToVideo(withImageURL: String, withVideoID: String){
-        let videoDocument = videoCollection.document(withVideoID)
-        videoDocument.updateData([
-            "thumbnail": withImageURL]) { err in
-                if let err = err {
-                    print("Error updating document \(err)")
-                } else {
-                    print("Document updated")
-                }
-        }
+    func addThumbnailToVideo(withImage: String, withVideoID: String){
+        
     }
     
     
@@ -93,11 +100,10 @@ class API {
         return video.documentID
     }
     
-    // Given an image this function uploads it to firebase storage and return its storage location URL
-    func uploadThumbnailToFireBaseStorageUsingImage(image: UIImage) -> String{
-        var storageURL: String!
+    // Given an image this function uploads it to firebase storage
+    func uploadThumbnailToFireBaseStorageUsingImage(image: UIImage, videoID: String){
         // create a unique name for the thumbnail image
-        let imageName = NSUUID.init().uuidString
+        let imageName = NSUUID.init().uuidString + ".jpeg"
         // create a storage reference for the image
         let ref = Storage.storage().reference().child("thumbnail_images").child(imageName)
         
@@ -106,20 +112,19 @@ class API {
                 if error != nil {
                     print("Failed to upload image:", error)
                     return
-                }
-                
-                ref.downloadURL(completion: {(url, error) in
-                    if error != nil {
-                        print("Failed to get download URL", error)
-                        return
-                    } else {
-                        if let imageURL = url {
-                            storageURL = url?.absoluteString
+                } else {
+                    ref.downloadURL(completion: {(url, error) in
+                        if error != nil {
+                            print("failed to get download url", error)
+                        } else {
+                            let videoDocument = self.videoCollection.document(videoID)
+                            videoDocument.updateData([
+                                "thumbnail": url!.absoluteString
+                                ])
                         }
-                    }
-                })
+                    })
+                }
             })
         }
-        return storageURL
     }
 }

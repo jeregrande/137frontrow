@@ -12,7 +12,10 @@ import FirebaseUI
 class HomeViewController: UIViewController {
     
     var imagePicker: ImagePicker!
+    var user = User()
     @IBOutlet weak var userName: UILabel!
+
+    @IBOutlet var videos: [UIImageView]!
     
     // Sign OUT
     @IBAction func signOut(_ sender: UIButton) {
@@ -37,7 +40,16 @@ class HomeViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         let api = API()
+        user.videos = api.getOwnVideos()
         api.getOwnVideos()
+    }
+    
+    func updateViewFromModel(){
+        for index in videos.indices {
+            let imageView = videos[index]
+            let video = user.videos[index]
+            imageView.image = video.
+        }
     }
 
     
