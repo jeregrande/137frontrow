@@ -11,10 +11,12 @@ import Firebase
 
 class API {
     
+    let firestore = Firestore.firestore()
     let videoCollection = Firestore.firestore().collection("videos")
     let albumCollection = Firestore.firestore().collection("albums")
+    let userCollection = Firestore.firestore().collection("users")
     let thumbnailsStorageReference = Storage.storage().reference().child("thumbnail_images")
-    let userID = Auth.auth().currentUser?.uid
+    let userID = Auth.auth().currentUser?.uid as! String
     
     // Uploads a video to the Storage
     func uploadVideoByUser(URL: NSURL){
@@ -25,23 +27,60 @@ class API {
         
     }
     
-    // Returns an array of the videos uploaded by the user
-    func getOwnVideos(){
-        let userDocument = Firestore.firestore().collection("users").document(userID!)
-        userDocument.getDocument{(document, error) in
-//            if let city = document.flatMap({
-//                $0.data().flatMap({(data) in
-//                    return Video()
-//                })
-//            })
-//            if let document = document, document.exists {
-//                let videos = document.get("videos")
-//                let dataDescription = document.data().map(String.init(describing:)) ?? "nil"
-//                print("Document data: \(videos)")
-//            }
-//            else {
-//                print("Document does not exist")
-//            }
+    // Returns the user object with the given ID
+    func getUser(withId id:String, completion: @escaping (User?) -> Void){
+        let docRef = userCollection.document(id)
+        docRef.getDocument { (docSnap, error) in
+            
+            guard error == nil, let doc = docSnap, doc.exists == true else {
+                print(error)
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            // make mutable copy of the NSDictionary
+            var dict = doc.data()
+            for (key, value) in dict! {
+                if let value = value as? Date {
+                    let formatter = DateFormatter()
+                    dict?[key] = formatter.string(from: value)
+                }
+            }
+            
+            //Serialize the Dictionary into a JSON Data representation, then decode it using the Decoder().
+            if let data = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
+                let user = try? decoder.decode(User.self, from: data)
+                completion(user)
+            }
+        }
+    }
+    
+    func fetchVideo(withId id:String, completion: @escaping (Video?) -> Void){
+        let docRef = videoCollection.document(id)
+        docRef.getDocument { (docSnap, error) in
+            
+            guard error == nil, let doc = docSnap, doc.exists == true else {
+                print(error)
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            // make mutable copy of the NSDictionary
+            var dict = doc.data()
+            for (key, value) in dict! {
+                if let value = value as? Date {
+                    let formatter = DateFormatter()
+                    dict?[key] = formatter.string(from: value)
+                }
+            }
+            
+            //Serialize the Dictionary into a JSON Data representation, then decode it using the Decoder().
+            if let data = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
+                let video = try? decoder.decode(Video.self, from: data)
+                completion(video)
+            }
         }
     }
     
@@ -73,20 +112,19 @@ class API {
     
     
     // Creates an album with the given title for the current user
-    func createAlbum(withTitle: String){
-        let userDocument = Firestore.firestore().collection("users").document(userID!)
+    func createAlbum(withTitle title: String){
         albumCollection.addDocument(data: [
-            "author": userDocument,
-            "albumAudience": FieldValue.arrayUnion([userDocument])
+            "author": userID,
+            "title": title,
+            "albumAudience": FieldValue.arrayUnion([userID])
             ])
     }
     
     // Adds a reference to the video document into the videos' array of the current user
     func addVideoToUser(videoID: String){
-        let userDocument = Firestore.firestore().collection("users").document(userID!)
-        let videoReference = videoCollection.document(videoID)
+        let userDocument = Firestore.firestore().collection("users").document(userID)
         userDocument.updateData([
-            "videos": FieldValue.arrayUnion([videoReference])])
+            "videos": FieldValue.arrayUnion([videoID])])
     }
 
     
@@ -96,11 +134,9 @@ class API {
             video.setData([
             "title": title,
             "albums": FieldValue.arrayUnion([]),
-            "audience": FieldValue.arrayUnion([Firestore.firestore().collection("users").document(userID!)]),
+            "audience": FieldValue.arrayUnion([userID]),
             "comments": FieldValue.arrayUnion([]),
             "fileURL": fileURL,
-            "format":"mov",
-            "length": 60,
             "notes": ""
             ])
         return video.documentID

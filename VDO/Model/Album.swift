@@ -8,9 +8,9 @@
 
 import Foundation
 
-class Album {
-    var albumAudience: [User]!
-    var author: User!
-    var name: String!
+class Album: Codable {
+    var albumAudience = [String]()
+    var author = ""
+    var title = ""
     var videos: [Video]!
 }

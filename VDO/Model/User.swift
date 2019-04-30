@@ -7,22 +7,11 @@
 //
 
 import Foundation
-import Firebase
-import FirebaseFirestore
 
-struct User{
-    
-    var dislpayName: String
-//    var albums: [Album]
-    var email: String
-    var userID: String
-    var videos: [Video]
-    
-    var dictitonary: [String: Any] {
-        return [
-            "displayName": dislpayName,
-            "email": email,
-            "userID": userID
-        ]
-    }
+struct User: Codable{
+    var displayName = ""
+    var albums = [String]()
+    var email = ""
+    var userID = ""
+    var videos = [String]()
 }

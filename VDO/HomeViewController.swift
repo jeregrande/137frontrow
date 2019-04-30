@@ -10,10 +10,12 @@ import UIKit
 import FirebaseUI
 import Firebase
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UIScrollViewDelegate {
     
     var imagePicker: ImagePicker!
     var user: User!
+    var videos = [Video]()
+    let api = API()
     let userID = Auth.auth().currentUser?.uid
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var videosScrollView: UIScrollView!
@@ -41,36 +43,29 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let api = API()
-////        api.getUser()
-//        let userDocument = Firestore.firestore().collection("users").document(userID!)
-//        userDocument.getDocument{(document, error) in
-//            if let document = document, document.exists {
-//                let videos = document.get("videos")
-//                print(videos)
-//                for video in (videos as? NSArray)! {
-//                    let ref = video as? DocumentReference
-//                    ref?.getDocument{ (document, error) in
-//                        if let vid = document.flatMap({
-//                            $0.data().flatMap({(data) in
-//                                return Video(thumbnail: Storage.storage().reference().child("thumbnail_images").child(data["thumbnail"] as! String).write(toFile: URL("thumbnails/")), fileURL: data["fileURL"], title: data["title"])
-//                            })
-//                        })
-//                    }
-//                    
-//                }
-//        }
-//        }
         
+        api.getUser(withId: userID as! String) { (user) in
+            guard let u = user else{
+                print("error")
+                return
+            }
+            self.user = u
+            for video in user!.videos{
+                self.api.fetchVideo(withId: video, completion: { (video) in
+                    guard let v = video else{
+                        print("error")
+                        return
+                    }
+                    self.videos.append(v)
+                    self.addVideoToScrollView(video: v)
+                })
+            }
+        }
     }
-    
-//    func updateViewFromModel(){
-//        for index in videos.indices {
-//            let imageView = videos[index]
-//            let video = user.videos[index]
-//        }
-//    }
 
+    
+    func addVideoToScrollView(video: Video){
+    }
     
 
     /*

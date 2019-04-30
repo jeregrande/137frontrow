@@ -7,11 +7,14 @@
 //
 
 import Foundation
-import UIKit
-import Firebase
 
-struct Video {
-    var thumbnail: UIImage
-    var fileURL: String
-    var title: String
+struct Video: Codable {
+    var thumbnail = ""
+    var fileURL = ""
+    var title = ""
+    var notes = ""
+    var albums = [String]()
+    var audience = [String]()
+    var comments = [String]()
+    
 }
