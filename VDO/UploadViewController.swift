@@ -11,7 +11,7 @@ import MobileCoreServices
 import Firebase
 
 class UploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+    
     var imagePicker: ImagePicker!
     var api = API()
     
@@ -48,7 +48,7 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         if let thumbnail = self.thumbnailImageForVideoURL(fileURL: nsURL as NSURL) {
             // set the Uiimageview as the with the thumbnail image
             self.thumbnailImageView.image = thumbnail
-//            imageName = self.api.uploadThumbnailToFireBaseStorageUsingImage(image: thumbnail)
+            //            imageName = self.api.uploadThumbnailToFireBaseStorageUsingImage(image: thumbnail)
             // get the file name
             let fileName =  (url.absoluteString as NSString).lastPathComponent
             let storageRef = Storage.storage().reference().child("videos").child(fileName)
@@ -67,7 +67,7 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                     } else {
                         // Add video to the videos collection
                         // create the new video document and get its ID
-                        let vidID = self.api.addVideoToCollection(title: fileName, fileURL: url!.absoluteString)
+                        let vidID = self.api.addVideoToDatabase(title: fileName, fileURL: url!.absoluteString)
                         // add the thumbnail image to the video document's values
                         self.api.addVideoToUser(videoID: vidID)
                         //Create the thumbnail Image
@@ -125,15 +125,15 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
 extension UploadViewController: ImagePickerDelegate {

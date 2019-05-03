@@ -18,20 +18,8 @@ class API {
     let thumbnailsStorageReference = Storage.storage().reference().child("thumbnail_images")
     let userID = Auth.auth().currentUser?.uid as! String
     
-    // Uploads a video to the Storage
-    func uploadVideoByUser(URL: NSURL){
-        
-    }
-    
-    func addVideoToAlbum(){
-        
-    }
     
     func addComment(toVideo videoId: String, withText comment: String){
-        
-    }
-    
-    func addVideoToAlbum(withVideo video:String, withAlbum album:String){
         
     }
     
@@ -94,21 +82,6 @@ class API {
         }
     }
     
-//    func getUser(){
-//        let userDocument = Firestore.firestore().collection("users").document(userID!)
-//        userDocument.getDocument{(document, error) in
-//            if let user = document.flatMap({
-//                $0.data().flatMap({(data) in
-//                    return User(dislpayName: data["displayName"] as! String, email: data["email"] as! String, userID: data["userID"] as! String)
-//                })
-//            }){
-//                print("user: \(user)")
-//            } else {
-//                print("Document does not exist")
-//            }
-//        }
-//    }
-    
     func uploadThumbnailImageForVideo(imageURL: String){
         let storageRef = Storage.storage().reference().child(imageURL)
         
@@ -126,9 +99,47 @@ class API {
         albumCollection.addDocument(data: [
             "author": userID,
             "title": title,
+            "videos": FieldValue.arrayUnion([]),
             "albumAudience": FieldValue.arrayUnion([userID])
             ])
     }
+    
+    
+    
+    func addUserToAblum(withAlbum album: String, withUser user: String){
+        albumCollection.document(album).updateData([
+            "albumAudience": user
+            ])
+    }
+    
+    func removeUserFromAlbum(withAlbum album: String, withUser user: String){
+        albumCollection.document(album).updateData([
+            "albumAudience": FieldValue.arrayRemove([user])
+            ])
+    }
+    
+    func deleteAlbum(withAlbum album: String){
+        albumCollection.document(album).delete(){ err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+    }
+    
+    func addVideoToAlbum(withVideo video: String, withAlbum album: String){
+        albumCollection.document(album).updateData([
+            "videos": FieldValue.arrayUnion([album])
+            ])
+    }
+    
+    func removeVideoWithAlbum(withVideo video:String, withAlbum album: String){
+        albumCollection.document(album).updateData([
+            "videos": FieldValue.arrayRemove([video])
+            ])
+    }
+    
     
     // Adds a reference to the video document into the videos' array of the current user
     func addVideoToUser(videoID: String){
@@ -136,14 +147,12 @@ class API {
         userDocument.updateData([
             "videos": FieldValue.arrayUnion([videoID])])
     }
-
+    
     
     // Adds an entry into the database for that video and returns the document ID of that video
-    func addVideoToCollection(title: String, fileURL: String ) -> String{
+    func addVideoToDatabase(title: String, fileURL: String ) -> String{
         let video = videoCollection.document()
-            video.setData([
-            "title": title,
-            "albums": FieldValue.arrayUnion([]),
+        video.setData([
             "comments": FieldValue.arrayUnion([]),
             "fileURL": fileURL,
             "notes": ""

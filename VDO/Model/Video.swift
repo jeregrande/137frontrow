@@ -11,7 +11,6 @@ import Foundation
 struct Video: Codable {
     var thumbnail = ""
     var fileURL = ""
-    var title = ""
     var notes = ""
     var albums = [String]()
     var comments = [String]()
