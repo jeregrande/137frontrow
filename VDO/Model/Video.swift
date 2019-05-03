@@ -14,7 +14,6 @@ struct Video: Codable {
     var title = ""
     var notes = ""
     var albums = [String]()
-    var audience = [String]()
     var comments = [String]()
     
 }

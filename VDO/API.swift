@@ -27,6 +27,16 @@ class API {
         
     }
     
+    func addComment(toVideo videoId: String, withText comment: String){
+        
+    }
+    
+    func addVideoToAlbum(withVideo video:String, withAlbum album:String){
+        
+    }
+    
+    
+    
     // Returns the user object with the given ID
     func getUser(withId id:String, completion: @escaping (User?) -> Void){
         let docRef = userCollection.document(id)
@@ -134,7 +144,6 @@ class API {
             video.setData([
             "title": title,
             "albums": FieldValue.arrayUnion([]),
-            "audience": FieldValue.arrayUnion([userID]),
             "comments": FieldValue.arrayUnion([]),
             "fileURL": fileURL,
             "notes": ""
