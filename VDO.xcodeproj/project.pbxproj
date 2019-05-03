@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		0A1B0370FF46ACEEE3E25DE3 /* Pods_VDO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953E4F4DBE828C7C555BC913 /* Pods_VDO.framework */; };
+		7302ABC92276C7AA0050D292 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302ABC82276C7AA0050D292 /* User.swift */; };
+		73071A442272E49F0088A802 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73071A432272E49F0088A802 /* ImagePicker.swift */; };
+		7310FB502273FDA600941746 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB4F2273FDA600941746 /* API.swift */; };
+		7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7310FB5122740D8100941746 /* AVFoundation.framework */; };
+		7310FB55227414FC00941746 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB54227414FC00941746 /* UploadViewController.swift */; };
+		73300A6C2276CA43003FB82D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6B2276CA43003FB82D /* Video.swift */; };
+		73300A6E22776490003FB82D /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6D22776490003FB82D /* Album.swift */; };
 		733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425BF222FC5CA009B3207 /* AppDelegate.swift */; };
 		733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425C1222FC5CA009B3207 /* LandingViewController.swift */; };
 		733425C5222FC5CA009B3207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733425C3222FC5CA009B3207 /* Main.storyboard */; };
@@ -46,6 +53,13 @@
 		6AC43DDA9FCBD28A7022AD16 /* Pods-VDO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDO.release.xcconfig"; path = "Target Support Files/Pods-VDO/Pods-VDO.release.xcconfig"; sourceTree = "<group>"; };
 		6ADE7FF8129130A440B0B29C /* Pods-VDOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOUITests.release.xcconfig"; path = "Target Support Files/Pods-VDOUITests/Pods-VDOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6F128E7F4B0B4E52D813295D /* Pods-VDOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOUITests.debug.xcconfig"; path = "Target Support Files/Pods-VDOUITests/Pods-VDOUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		7302ABC82276C7AA0050D292 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		73071A432272E49F0088A802 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		7310FB4F2273FDA600941746 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		7310FB5122740D8100941746 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		7310FB54227414FC00941746 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		73300A6B2276CA43003FB82D /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		73300A6D22776490003FB82D /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		733425BC222FC5CA009B3207 /* VDO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VDO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733425BF222FC5CA009B3207 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		733425C1222FC5CA009B3207 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */,
 				0A1B0370FF46ACEEE3E25DE3 /* Pods_VDO.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -97,6 +112,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7302ABC72276C6F30050D292 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7302ABC82276C7AA0050D292 /* User.swift */,
+				73300A6B2276CA43003FB82D /* Video.swift */,
+				73300A6D22776490003FB82D /* Album.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		733425B3222FC5CA009B3207 = {
 			isa = PBXGroup;
 			children = (
@@ -122,6 +147,7 @@
 		733425BE222FC5CA009B3207 /* VDO */ = {
 			isa = PBXGroup;
 			children = (
+				7302ABC72276C6F30050D292 /* Model */,
 				733425BF222FC5CA009B3207 /* AppDelegate.swift */,
 				733425C1222FC5CA009B3207 /* LandingViewController.swift */,
 				739819A122489D6900C74DE0 /* SignUpViewController.swift */,
@@ -131,6 +157,9 @@
 				733425CB222FC5CB009B3207 /* Info.plist */,
 				7365FCB022307545003A0366 /* GoogleService-Info.plist */,
 				73F153E6225DDCE600802F57 /* HomeViewController.swift */,
+				73071A432272E49F0088A802 /* ImagePicker.swift */,
+				7310FB4F2273FDA600941746 /* API.swift */,
+				7310FB54227414FC00941746 /* UploadViewController.swift */,
 			);
 			path = VDO;
 			sourceTree = "<group>";
@@ -169,6 +198,7 @@
 		FB8EE13192AF1A3CA3785A3D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7310FB5122740D8100941746 /* AVFoundation.framework */,
 				953E4F4DBE828C7C555BC913 /* Pods_VDO.framework */,
 				C7675252B136194613B911AC /* Pods_VDOTests.framework */,
 				AFF957D1A0D163143EDD764C /* Pods_VDOUITests.framework */,
@@ -251,13 +281,16 @@
 				TargetAttributes = {
 					733425BB222FC5CA009B3207 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 					};
 					733425CF222FC5CB009B3207 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 733425BB222FC5CA009B3207;
 					};
 					733425DA222FC5CB009B3207 = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1020;
 						TestTargetID = 733425BB222FC5CA009B3207;
 					};
 				};
@@ -563,9 +596,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */,
+				7310FB55227414FC00941746 /* UploadViewController.swift in Sources */,
 				733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */,
+				73071A442272E49F0088A802 /* ImagePicker.swift in Sources */,
+				73300A6C2276CA43003FB82D /* Video.swift in Sources */,
+				7302ABC92276C7AA0050D292 /* User.swift in Sources */,
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,
+				7310FB502273FDA600941746 /* API.swift in Sources */,
 				73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */,
+				73300A6E22776490003FB82D /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,7 +789,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -769,7 +808,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -790,7 +829,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VDO.app/VDO";
 			};
@@ -812,7 +851,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDOTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/VDO.app/VDO";
 			};
@@ -833,7 +872,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDOUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = VDO;
 			};
@@ -854,7 +893,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.137frontrow.VDOUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = VDO;
 			};

@@ -8,9 +8,20 @@
 
 import UIKit
 import FirebaseUI
+import Firebase
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, UIScrollViewDelegate {
+    
+    var imagePicker: ImagePicker!
+    var user: User!
+    var videos = [Video]()
+    let api = API()
+    let userID = Auth.auth().currentUser?.uid
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var videosScrollView: UIScrollView!
+    
+    
+    // Sign OUT
     @IBAction func signOut(_ sender: UIButton) {
         let authUI = FUIAuth.defaultAuthUI()
         
@@ -30,8 +41,30 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userName.text = FUIAuth.defaultAuthUI()?.auth?.currentUser?.displayName
         // Do any additional setup after loading the view.
+        
+        
+        api.getUser(withId: userID as! String) { (user) in
+            guard let u = user else{
+                print("error")
+                return
+            }
+            self.user = u
+            for video in user!.videos{
+                self.api.fetchVideo(withId: video, completion: { (video) in
+                    guard let v = video else{
+                        print("error")
+                        return
+                    }
+                    self.videos.append(v)
+                    self.addVideoToScrollView(video: v)
+                })
+            }
+        }
+    }
+
+    
+    func addVideoToScrollView(video: Video){
     }
     
 
@@ -46,3 +79,4 @@ class HomeViewController: UIViewController {
     */
 
 }
+
