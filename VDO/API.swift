@@ -19,12 +19,6 @@ class API {
     let userID = Auth.auth().currentUser?.uid as! String
     
     
-    func addComment(toVideo videoId: String, withText comment: String){
-        
-    }
-    
-    
-    
     // Returns the user object with the given ID
     func getUser(withId id:String, completion: @escaping (User?) -> Void){
         let docRef = userCollection.document(id)
@@ -82,6 +76,47 @@ class API {
         }
     }
     
+    // Gets the given album object given the album's ID
+    func fetchAlbum(withId id:String, completion: @escaping (Album?) -> Void){
+        let docRef = videoCollection.document(id)
+        docRef.getDocument { (docSnap, error) in
+            
+            guard error == nil, let doc = docSnap, doc.exists == true else {
+                print(error)
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            // make mutable copy of the NSDictionary
+            var dict = doc.data()
+            for (key, value) in dict! {
+                if let value = value as? Date {
+                    let formatter = DateFormatter()
+                    dict?[key] = formatter.string(from: value)
+                }
+            }
+            
+            //Serialize the Dictionary into a JSON Data representation, then decode it using the Decoder().
+            if let data = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
+                let album = try? decoder.decode(Album.self, from: data)
+                completion(album)
+            }
+        }
+    }
+    
+    // Returns an array of Album id's where the userID is in the album audience
+    func getAlbumsShared(withUser user: String, completion: @escaping ([String]) -> Void){
+        var albums = [String]()
+        let querry = albumCollection.whereField("albumAudience", arrayContains: user)
+        querry.getDocuments { (qs, error) in
+            qs?.documents.forEach({ (document) in
+                albums.append(document.documentID)
+            })
+            completion(albums)
+        }
+    }
+    
     func uploadThumbnailImageForVideo(imageURL: String){
         let storageRef = Storage.storage().reference().child(imageURL)
         
@@ -103,7 +138,6 @@ class API {
             "albumAudience": FieldValue.arrayUnion([userID])
             ])
     }
-    
     
     
     func addUserToAblum(withAlbum album: String, withUser user: String){
@@ -146,6 +180,19 @@ class API {
         let userDocument = Firestore.firestore().collection("users").document(userID)
         userDocument.updateData([
             "videos": FieldValue.arrayUnion([videoID])])
+    }
+    
+    // Adds all thevideos in one album to the other album
+    func addAlbumToAlbum(from album: String,to : String){
+        albumCollection.document(album).getDocument { (document, error) in
+            if let document = document, document.exists {
+                if let audience = document.get("videos") {
+                    self.albumCollection.document(to).updateData([
+                        "videos": FieldValue.arrayUnion(audience as! [Any])
+                        ])
+                }
+            }
+        }
     }
     
     

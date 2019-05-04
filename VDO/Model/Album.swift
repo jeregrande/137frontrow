@@ -12,5 +12,5 @@ class Album: Codable {
     var albumAudience = [String]()
     var author = ""
     var title = ""
-    var videos: [Video]!
+    var videos = [String]()
 }
