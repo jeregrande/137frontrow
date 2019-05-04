@@ -72,8 +72,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                         self.api.addVideoToUser(videoID: vidID)
                         //Create the thumbnail Image
                         // upload the image and get the storageURL
-                        
-                        //                    self.api.addThumbnailToVideo(withImage: self.imageName!, withVideoID: vidID)
                         self.api.uploadThumbnailToFireBaseStorageUsingImage(image: thumbnail, videoID: vidID)
                     }
                 })

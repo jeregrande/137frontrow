@@ -12,7 +12,6 @@ struct Video: Codable {
     var thumbnail = ""
     var fileURL = ""
     var notes = ""
-    var albums = [String]()
     var comments = [String]()
     
 }

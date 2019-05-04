@@ -15,6 +15,7 @@ class API {
     let videoCollection = Firestore.firestore().collection("videos")
     let albumCollection = Firestore.firestore().collection("albums")
     let userCollection = Firestore.firestore().collection("users")
+    let storageRef = Storage.storage()
     let thumbnailsStorageReference = Storage.storage().reference().child("thumbnail_images")
     let userID = Auth.auth().currentUser?.uid as! String
     
@@ -210,7 +211,7 @@ class API {
     // Given an image this function uploads it to firebase storage
     func uploadThumbnailToFireBaseStorageUsingImage(image: UIImage, videoID: String){
         // create a unique name for the thumbnail image
-        let imageName = NSUUID.init().uuidString + ".jpeg"
+        let imageName = videoID + ".jpeg"
         // create a storage reference for the image
         let ref = Storage.storage().reference().child("thumbnail_images").child(imageName)
         
@@ -232,6 +233,28 @@ class API {
                     })
                 }
             })
+        }
+    }
+    
+    func getThumbnailImage(forVideo videoID: String, completition: @escaping (UIImage) -> Void) {
+        let ref = thumbnailsStorageReference.child(videoID + ".jpeg")
+        ref.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+            if let error = error {
+                print("error \(error)")
+            } else {
+                completition(UIImage(data: data!)!)
+            }
+        }
+    }
+    
+    func getThumbnailImage(withImageURL imageURL: String, completition: @escaping (UIImage) -> Void){
+        let ref = storageRef.reference(forURL: imageURL)
+        ref.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+            if let error = error {
+                print("error \(error)")
+            } else {
+                completition(UIImage(data: data!)!)
+            }
         }
     }
 }

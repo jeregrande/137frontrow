@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0A1B0370FF46ACEEE3E25DE3 /* Pods_VDO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 953E4F4DBE828C7C555BC913 /* Pods_VDO.framework */; };
 		7302ABC92276C7AA0050D292 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302ABC82276C7AA0050D292 /* User.swift */; };
+		7303B466227E1AA100030DB8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7303B465227E1AA100030DB8 /* Comment.swift */; };
+		7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7303B467227E1DC900030DB8 /* VideoViewController.swift */; };
 		73071A442272E49F0088A802 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73071A432272E49F0088A802 /* ImagePicker.swift */; };
 		7310FB502273FDA600941746 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB4F2273FDA600941746 /* API.swift */; };
 		7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7310FB5122740D8100941746 /* AVFoundation.framework */; };
@@ -54,6 +56,8 @@
 		6ADE7FF8129130A440B0B29C /* Pods-VDOUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOUITests.release.xcconfig"; path = "Target Support Files/Pods-VDOUITests/Pods-VDOUITests.release.xcconfig"; sourceTree = "<group>"; };
 		6F128E7F4B0B4E52D813295D /* Pods-VDOUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDOUITests.debug.xcconfig"; path = "Target Support Files/Pods-VDOUITests/Pods-VDOUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7302ABC82276C7AA0050D292 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		7303B465227E1AA100030DB8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		7303B467227E1DC900030DB8 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
 		73071A432272E49F0088A802 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7310FB4F2273FDA600941746 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		7310FB5122740D8100941746 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
@@ -116,6 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				7302ABC82276C7AA0050D292 /* User.swift */,
+				7303B465227E1AA100030DB8 /* Comment.swift */,
 				73300A6B2276CA43003FB82D /* Video.swift */,
 				73300A6D22776490003FB82D /* Album.swift */,
 			);
@@ -160,6 +165,7 @@
 				73071A432272E49F0088A802 /* ImagePicker.swift */,
 				7310FB4F2273FDA600941746 /* API.swift */,
 				7310FB54227414FC00941746 /* UploadViewController.swift */,
+				7303B467227E1DC900030DB8 /* VideoViewController.swift */,
 			);
 			path = VDO;
 			sourceTree = "<group>";
@@ -597,6 +603,7 @@
 			files = (
 				739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */,
 				7310FB55227414FC00941746 /* UploadViewController.swift in Sources */,
+				7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */,
 				733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */,
 				73071A442272E49F0088A802 /* ImagePicker.swift in Sources */,
 				73300A6C2276CA43003FB82D /* Video.swift in Sources */,
@@ -604,6 +611,7 @@
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,
 				7310FB502273FDA600941746 /* API.swift in Sources */,
 				73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */,
+				7303B466227E1AA100030DB8 /* Comment.swift in Sources */,
 				73300A6E22776490003FB82D /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

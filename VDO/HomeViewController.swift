@@ -13,13 +13,12 @@ import Firebase
 class HomeViewController: UIViewController, UIScrollViewDelegate {
     
     var imagePicker: ImagePicker!
-    var user: User!
-    var videos = [Video]()
+    var user: User! {didSet{getVideosForUser()}}
+    var videos = [Video]() {didSet{updateViewFromModel()}}
     let api = API()
     let userID = Auth.auth().currentUser?.uid
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var videosScrollView: UIScrollView!
     
+    @IBOutlet weak var mainScrollView: UIScrollView!
     
     // Sign OUT
     @IBAction func signOut(_ sender: UIButton) {
@@ -28,7 +27,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         guard authUI != nil else{
             return
         }
-
+        
         do {
             try authUI?.signOut()
             dismiss(animated: true, completion: nil)
@@ -44,39 +43,86 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         // Do any additional setup after loading the view.
         
         
+        // Get the user object
         api.getUser(withId: userID as! String) { (user) in
-            guard let u = user else{
+            guard user != nil else{
                 print("error")
                 return
             }
-            self.user = u
-            for video in user!.videos{
-                self.api.fetchVideo(withId: video, completion: { (video) in
-                    guard let v = video else{
-                        print("error")
-                        return
-                    }
-                    self.videos.append(v)
-                    self.addVideoToScrollView(video: v)
-                })
-            }
+            self.user = user
         }
     }
-
+    
+    // Get the videos of the user
+    func getVideosForUser(){
+        print("User's Videos: \(self.user.videos)")
+        self.user.videos.forEach({ (videoID) in
+            self.api.fetchVideo(withId: videoID, completion: { (video) in
+                guard video != nil else {
+                    print("error")
+                    return
+                }
+                self.videos.append(video!)
+                print("Video Object \(video)")
+            })
+        })
+    }
+    
+    func updateViewFromModel(){
+        let video = videos[videos.endIndex-1]
+        let imageView = UIImageView()
+        
+        let xPosisiton = self.view.frame.width
+        
+        imageView.frame = CGRect(x: xPosisiton, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+        imageView.contentMode = .scaleAspectFit
+        mainScrollView.contentSize.width = mainScrollView.frame.width
+        mainScrollView.addSubview(imageView)
+        
+        let thumbnailImageURL = video.thumbnail
+        
+        //            let storage = Storage.storage()
+        //            let storageRef = storage.reference()
+        //            let ref = storage.reference(forURL: thumbnailImageURL)
+        //            ref.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+        //                if let error = error {
+        //                    print("error \(error)")
+        //                } else {
+        //                    imageView.image = UIImage(data: data!)
+        //                }
+        //            }
+        
+        //            self.api.getThumbnailImage(forVideo: "w3GXULE0jxQLKWMvP6J5", completition: {(image) in
+        //                guard image != nil else {
+        //                    print("error")
+        //                    return
+        //                }
+        //                imageView.image = image
+        //            })
+        
+        self.api.getThumbnailImage(withImageURL: thumbnailImageURL, completition: {(image) in
+            guard image != nil else {
+                print("error")
+                return
+            }
+            imageView.image = image
+        })
+    }
+    
     
     func addVideoToScrollView(video: Video){
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
 
