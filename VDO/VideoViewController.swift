@@ -12,6 +12,8 @@ import AVFoundation
 class VideoViewController: UIViewController {
     
     @IBOutlet weak var videoThumbnail: UIImageView!
+    var player: AVPlayer?
+    var playerLayer: AVPlayerLayer?
     var video: Video?
     
     lazy var videoImageView: UIImageView = {
@@ -35,26 +37,24 @@ class VideoViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
-            let player = AVPlayer(url: url as URL)
+            player = AVPlayer(url: url as URL)
             
-            let playerLayer = AVPlayerLayer(player: player)
-            playerLayer.frame = videoThumbnail.bounds
-            videoThumbnail.layer.addSublayer(playerLayer)
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.frame = videoThumbnail.bounds
+            videoThumbnail.layer.addSublayer(playerLayer!)
             
-            player.play()
-            
+            player!.play()
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "Exit Video View":
+                player?.pause()
+            default: break
+            }
+        }
     }
-    */
 
 }

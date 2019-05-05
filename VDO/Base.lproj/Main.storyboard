@@ -227,6 +227,7 @@
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="signOut:" destination="SRB-Is-djW" eventType="touchUpInside" id="2Kh-Vv-Q0F"/>
+                                    <segue destination="SRB-Is-djW" kind="show" identifier="Exit Video View" id="zmh-43-AoD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uej-tx-CDE">
@@ -912,4 +913,7 @@
             <point key="canvasLocation" x="-1338" y="831"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="zmh-43-AoD"/>
+    </inferredMetricsTieBreakers>
 </document>
