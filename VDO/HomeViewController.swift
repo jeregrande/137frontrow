@@ -42,6 +42,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
+//        mainScrollView.translatesAutoresizingMaskIntoConstraints = false
         
         // Get the user object
         api.getUser(withId: userID as! String) { (user) in
@@ -69,15 +70,13 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func updateViewFromModel(){
-        let video = videos[videos.endIndex-1]
+        let i = videos.endIndex - 1
+        let video = videos[i]
+        let yPosition = self.view.frame.height / 4  * CGFloat(i)
         let imageView = UIImageView()
-        
-        let xPosisiton = self.view.frame.width
-        
-        imageView.frame = CGRect(x: xPosisiton, y: 0, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height)
+        imageView.frame = CGRect(x: 0, y: yPosition, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height / 4)
         imageView.contentMode = .scaleAspectFit
-        mainScrollView.contentSize.width = mainScrollView.frame.width
-        mainScrollView.addSubview(imageView)
+        mainScrollView.contentSize.height = (mainScrollView.frame.height / 4) * CGFloat(i + 1)
         
         let thumbnailImageURL = video.thumbnail
         
@@ -106,6 +105,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
                 return
             }
             imageView.image = image
+            self.mainScrollView.addSubview(imageView)
         })
     }
     

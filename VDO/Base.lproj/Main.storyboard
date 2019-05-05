@@ -165,8 +165,8 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="More"/>
                             </button>
-                            <searchBar contentMode="redraw" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sia-Aa-ulo">
-                                <rect key="frame" x="0.0" y="68" width="414" height="56"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Sia-Aa-ulo">
+                                <rect key="frame" x="0.5" y="68" width="413" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43H-8U-5je">
@@ -176,7 +176,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D2Y-gM-VYE">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2Y-gM-VYE">
                                 <rect key="frame" x="20" y="168" width="374" height="694"/>
                             </scrollView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AbR-5d-KmE">
@@ -191,12 +191,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="AbR-5d-KmE" firstAttribute="centerX" secondItem="Fnj-O9-Q9P" secondAttribute="centerX" id="2ba-BX-utW"/>
-                            <constraint firstItem="Sia-Aa-ulo" firstAttribute="centerY" secondItem="Fnj-O9-Q9P" secondAttribute="centerY" constant="-352" id="3tJ-pv-jSu"/>
-                            <constraint firstItem="D2Y-gM-VYE" firstAttribute="top" secondItem="AbR-5d-KmE" secondAttribute="bottom" constant="8" id="ZBf-OB-gJe"/>
-                            <constraint firstItem="AbR-5d-KmE" firstAttribute="top" secondItem="Sia-Aa-ulo" secondAttribute="bottom" constant="8" id="aJk-sR-JKZ"/>
+                            <constraint firstItem="D2Y-gM-VYE" firstAttribute="bottom" secondItem="qbS-94-evj" secondAttribute="bottom" id="Ehk-IC-u3O"/>
+                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="AbR-5d-KmE" secondAttribute="trailing" constant="42.5" id="Eor-fx-Xvp"/>
+                            <constraint firstItem="Sia-Aa-ulo" firstAttribute="leading" secondItem="Fnj-O9-Q9P" secondAttribute="leading" constant="0.47999999999999998" id="G4P-9I-UJh"/>
+                            <constraint firstItem="AbR-5d-KmE" firstAttribute="leading" secondItem="qbS-94-evj" secondAttribute="leading" constant="42.5" id="LmF-8h-dN3"/>
                             <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="D2Y-gM-VYE" secondAttribute="trailing" constant="20" id="b8Y-Tn-K9E"/>
+                            <constraint firstItem="AbR-5d-KmE" firstAttribute="top" secondItem="Sia-Aa-ulo" secondAttribute="bottom" constant="8" id="crF-CV-iwV"/>
                             <constraint firstItem="D2Y-gM-VYE" firstAttribute="leading" secondItem="qbS-94-evj" secondAttribute="leading" constant="20" id="miV-4O-brU"/>
-                            <constraint firstItem="D2Y-gM-VYE" firstAttribute="bottom" secondItem="qbS-94-evj" secondAttribute="bottom" id="tLA-qh-RZT"/>
+                            <constraint firstItem="Sia-Aa-ulo" firstAttribute="top" secondItem="Fnj-O9-Q9P" secondAttribute="top" constant="68" id="sPO-F1-1yD"/>
+                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="Sia-Aa-ulo" secondAttribute="trailing" constant="0.47999999999999998" id="sdX-KN-gY1"/>
+                            <constraint firstItem="D2Y-gM-VYE" firstAttribute="top" secondItem="AbR-5d-KmE" secondAttribute="bottom" constant="8" id="u3U-MX-lst"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qbS-94-evj"/>
                     </view>
