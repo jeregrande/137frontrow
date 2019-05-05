@@ -7,8 +7,12 @@
 //
 
 import UIKit
+import AVFoundation
 
 class VideoViewController: UIViewController {
+    
+    @IBOutlet weak var videoThumbnail: UIImageView!
+    var video: Video?
     
     lazy var videoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -30,7 +34,16 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        
+        if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
+            let player = AVPlayer(url: url as URL)
+            
+            let playerLayer = AVPlayerLayer(player: player)
+            playerLayer.frame = videoThumbnail.bounds
+            videoThumbnail.layer.addSublayer(playerLayer)
+            
+            player.play()
+            
+        }
     }
     
 

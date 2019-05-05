@@ -151,15 +151,6 @@
                                     <action selector="signOut:" destination="SRB-Is-djW" eventType="touchUpInside" id="ov4-J1-LAm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-pb-fmn">
-                                <rect key="frame" x="285" y="705" width="56" height="55"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                <state key="normal" title="+"/>
-                                <connections>
-                                    <segue destination="PYg-oc-Tib" kind="show" id="Qx4-nv-znT"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBE-Nb-HGZ">
                                 <rect key="frame" x="323" y="44" width="36" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -176,9 +167,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2Y-gM-VYE">
-                                <rect key="frame" x="20" y="168" width="374" height="694"/>
-                            </scrollView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AbR-5d-KmE">
                                 <rect key="frame" x="42.5" y="132" width="329" height="29"/>
                                 <segments>
@@ -187,6 +175,18 @@
                                     <segment title="Shared with me"/>
                                 </segments>
                             </segmentedControl>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2Y-gM-VYE">
+                                <rect key="frame" x="20" y="168" width="374" height="694"/>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-pb-fmn">
+                                <rect key="frame" x="285" y="705" width="56" height="55"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <segue destination="PYg-oc-Tib" kind="show" id="Qx4-nv-znT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -206,6 +206,7 @@
                     </view>
                     <connections>
                         <outlet property="mainScrollView" destination="D2Y-gM-VYE" id="zDo-EH-s4A"/>
+                        <segue destination="PLO-7q-qaO" kind="show" identifier="Select Video" id="85P-zu-A82"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wdr-LJ-Gbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -259,14 +260,21 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IIk-6O-rvH">
+                                <rect key="frame" x="20" y="82" width="374" height="243"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="se4-0B-lAC"/>
                     </view>
+                    <connections>
+                        <outlet property="videoThumbnail" destination="IIk-6O-rvH" id="uph-aQ-u6K"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2za-gW-Z52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="134" y="1521"/>
+            <point key="canvasLocation" x="133.33333333333334" y="1520.7589285714284"/>
         </scene>
         <!--Comments View Controller-->
         <scene sceneID="I70-dK-mL3">
