@@ -93,7 +93,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             buttonView.trailingAnchor.constraint(equalTo: self.mainScrollView.trailingAnchor, constant: 0).isActive = true
             buttonView.widthAnchor.constraint(equalTo: self.mainScrollView.widthAnchor).isActive = true
             buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 9.0/16.0).isActive = true
-            buttonView.topAnchor.constraint(equalTo: self.mainScrollView.topAnchor, constant: buttonView.frame.height * CGFloat(i)).isActive = true
+            buttonView.topAnchor.constraint(equalTo: self.mainScrollView.topAnchor, constant: 260 * CGFloat(i)).isActive = true
             var contentRect = CGRect.zero
             for view in self.mainScrollView.subviews {
                 contentRect = contentRect.union(view.frame)
