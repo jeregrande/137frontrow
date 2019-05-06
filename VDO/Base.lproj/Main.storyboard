@@ -265,6 +265,14 @@
                                 <rect key="frame" x="20" y="82" width="374" height="243"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHl-kG-fcm">
+                                <rect key="frame" x="158" y="422" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Full Screen"/>
+                                <connections>
+                                    <action selector="handleFullScreen:" destination="PLO-7q-qaO" eventType="touchUpInside" id="O15-yr-fAy"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="se4-0B-lAC"/>
@@ -914,6 +922,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="85P-zu-A82"/>
         <segue reference="zmh-43-AoD"/>
     </inferredMetricsTieBreakers>
 </document>

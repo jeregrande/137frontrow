@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import AVKit
 
 class VideoViewController: UIViewController {
     
@@ -15,15 +16,14 @@ class VideoViewController: UIViewController {
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
     var video: Video?
-    
-    lazy var videoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.layer.masksToBounds = true
-        imageView.contentMode = .scaleAspectFill
-        imageView.isUserInteractionEnabled = true
-        return imageView
-    }()
+    let api = API()
+    @IBAction func handleFullScreen(_ sender: Any) {
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = self.player
+        self.present(playerViewController, animated: true) {
+            playerViewController.player!.play()
+        }
+    }
     
     let playButton: UIButton = {
         let button = UIButton(type: .system)
@@ -36,15 +36,26 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        setVideoThumbnail()
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
             player = AVPlayer(url: url as URL)
-            
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = videoThumbnail.bounds
             videoThumbnail.layer.addSublayer(playerLayer!)
             
             player!.play()
         }
+    }
+    
+    func setVideoThumbnail(){
+        let thumbnailImageURL = video?.thumbnail
+        self.api.getThumbnailImage(withImageURL: thumbnailImageURL!, completition: {(image) in
+            guard image != nil else {
+                print("error")
+                return
+            }
+            self.videoThumbnail.image = image
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
