@@ -24,7 +24,10 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var thumbnailImageView: UIImageView!
     @IBOutlet weak var actionButton: UIButton!
     @IBOutlet weak var titleField: UITextField!
-    
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var notesLabel: UILabel!
+    @IBOutlet weak var notesTextView: UITextView!
+    @IBOutlet weak var helperTextLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +68,7 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                     } else {
                         // Add video to the videos collection
                         // create the new video document and get its ID
-                        let vidID = self.api.addVideoToDatabase(title: title, fileURL: url!.absoluteString, notes: "")
+                        let vidID = self.api.addVideoToDatabase(title: title, fileURL: url!.absoluteString, notes: self.notesTextView.text)
                         // add the thumbnail image to the video document's values
                         self.api.addVideoToUser(videoID: vidID)
                         //Create the thumbnail Image
@@ -95,11 +98,21 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         }
     }
     
+    func showEditFields(){
+        helperTextLabel.isHidden = true
+        titleField.isHidden = false
+        titleLabel.isHidden = false
+        notesLabel.isHidden = false
+        notesTextView.isHidden = false
+        
+    }
+    
     
     // Do this when the user finishes selecting a video from the imagepicker
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL{
             handleVideoSelectedForURL(url: videoURL)
+            showEditFields()
             self.videoURL = videoURL
         }
         dismiss(animated: true, completion: nil)

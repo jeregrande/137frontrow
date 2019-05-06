@@ -13,6 +13,8 @@ import AVKit
 class VideoViewController: UIViewController {
     
     @IBOutlet weak var videoThumbnail: UIImageView!
+    @IBOutlet weak var videoTitleLabel: UILabel!
+    
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
     var video: Video?
@@ -36,6 +38,7 @@ class VideoViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        videoTitleLabel.text = video?.title
         setVideoThumbnail()
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
             player = AVPlayer(url: url as URL)
