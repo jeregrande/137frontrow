@@ -42,9 +42,10 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //        mainScrollView.translatesAutoresizingMaskIntoConstraints = false
+                mainScrollView.translatesAutoresizingMaskIntoConstraints = false
         
         // Get the user object
+        
         api.getUser(withId: userID as! String) { (user) in
             guard user != nil else{
                 print("error")
@@ -72,15 +73,13 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     func updateViewFromModel(){
         let i = videos.endIndex - 1
         let video = videos[i]
-        let yPosition = self.view.frame.height / 4  * CGFloat(i)
+//        let yPosition = self.view.frame.height / 4  * CGFloat(i)
         
         let buttonView = UIButton()
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
         buttonView.tag = i
-        buttonView.frame = CGRect(x: 0, y: yPosition, width: self.mainScrollView.frame.width, height: self.mainScrollView.frame.height / 4)
-        
         
         buttonView.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
-        mainScrollView.contentSize.height = (mainScrollView.frame.height / 4) * CGFloat(i + 1)
         
         let thumbnailImageURL = video.thumbnail
         self.api.getThumbnailImage(withImageURL: thumbnailImageURL, completition: {(image) in
@@ -90,6 +89,16 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             }
             buttonView.setBackgroundImage(image, for: .normal)
             self.mainScrollView.addSubview(buttonView)
+            buttonView.leadingAnchor.constraint(equalTo: self.mainScrollView.leadingAnchor).isActive = true
+            buttonView.trailingAnchor.constraint(equalTo: self.mainScrollView.trailingAnchor, constant: 0).isActive = true
+            buttonView.widthAnchor.constraint(equalTo: self.mainScrollView.widthAnchor).isActive = true
+            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 9.0/16.0).isActive = true
+            buttonView.topAnchor.constraint(equalTo: self.mainScrollView.topAnchor, constant: buttonView.frame.height * CGFloat(i)).isActive = true
+            var contentRect = CGRect.zero
+            for view in self.mainScrollView.subviews {
+                contentRect = contentRect.union(view.frame)
+            }
+            self.mainScrollView.contentSize = contentRect.size
         })
     }
     
