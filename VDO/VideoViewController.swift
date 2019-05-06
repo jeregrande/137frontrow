@@ -42,8 +42,6 @@ class VideoViewController: UIViewController {
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = videoThumbnail.bounds
             videoThumbnail.layer.addSublayer(playerLayer!)
-            
-            player!.play()
         }
     }
     

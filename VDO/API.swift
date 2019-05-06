@@ -198,12 +198,13 @@ class API {
     
     
     // Adds an entry into the database for that video and returns the document ID of that video
-    func addVideoToDatabase(title: String, fileURL: String ) -> String{
+    func addVideoToDatabase(title: String, fileURL: String, notes: String ) -> String{
         let video = videoCollection.document()
         video.setData([
             "comments": FieldValue.arrayUnion([]),
             "fileURL": fileURL,
-            "notes": ""
+            "notes": notes,
+            "title": title
             ])
         return video.documentID
     }

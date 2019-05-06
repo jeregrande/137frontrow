@@ -12,20 +12,29 @@ import Firebase
 
 class UploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let SELECT_VIDEO = "Select Video"
+    let UPLOAD_VIDEO = "Upload"
+    
     var imagePicker: ImagePicker!
     var api = API()
+    var videoURL: URL?
+    var thumbnailURL: URL?
     
     @IBOutlet weak var uploadProgressBar: UIProgressView!
     @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var titleField: UITextField!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        // make sure the button has the appropriate title when the VC is created.
+        actionButton.setTitle(SELECT_VIDEO, for: .normal)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
-    @IBAction func handleUploadTap(_ sender: UIButton) {
+    func handleSelectVideoTap() {
         // create the image picker
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -35,24 +44,13 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         present(imagePickerController, animated: true, completion: nil)
     }
     
-    // Do this when the user finishes selecting a video from the imagepicker
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL{
-            handleVideoSelectedForURL(url: videoURL)
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-    public func handleVideoSelectedForURL(url: URL){
-        let nsURL = url
-        if let thumbnail = self.thumbnailImageForVideoURL(fileURL: nsURL as NSURL) {
-            // set the Uiimageview as the with the thumbnail image
-            self.thumbnailImageView.image = thumbnail
-            //            imageName = self.api.uploadThumbnailToFireBaseStorageUsingImage(image: thumbnail)
-            // get the file name
-            let fileName =  (url.absoluteString as NSString).lastPathComponent
+    func handleUploadVideoTap(){
+        // Check that the title field is not empty
+        if let title = titleField.text {
+            //         get the file name
+            let fileName =  (videoURL!.absoluteString as NSString).lastPathComponent
             let storageRef = Storage.storage().reference().child("videos").child(fileName)
-            let uploadTask = storageRef.putFile(from: url,metadata: nil, completion: {(metadata, error) in
+            let uploadTask = storageRef.putFile(from: videoURL!,metadata: nil, completion: {(metadata, error) in
                 
                 if error != nil {
                     print("Failed to upload video:", error!)
@@ -67,12 +65,12 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                     } else {
                         // Add video to the videos collection
                         // create the new video document and get its ID
-                        let vidID = self.api.addVideoToDatabase(title: fileName, fileURL: url!.absoluteString)
+                        let vidID = self.api.addVideoToDatabase(title: title, fileURL: url!.absoluteString, notes: "")
                         // add the thumbnail image to the video document's values
                         self.api.addVideoToUser(videoID: vidID)
                         //Create the thumbnail Image
                         // upload the image and get the storageURL
-                        self.api.uploadThumbnailToFireBaseStorageUsingImage(image: thumbnail, videoID: vidID)
+                        self.api.uploadThumbnailToFireBaseStorageUsingImage(image: self.thumbnailImageView!.image!, videoID: vidID)
                     }
                 })
             } )
@@ -83,7 +81,39 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
             // Completition Tracker
             createCompletitionTracker(withUploadTask: uploadTask)
         }
+    }
+    
+    // Handle the action depending on the button's text
+    @IBAction func handleActionButtonPressed(_ sender: UIButton) {
+        switch sender.currentTitle {
+        case SELECT_VIDEO:
+            handleSelectVideoTap()
+        case UPLOAD_VIDEO:
+            handleUploadVideoTap()
+        default:
+            break
+        }
+    }
+    
+    
+    // Do this when the user finishes selecting a video from the imagepicker
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let videoURL = info[UIImagePickerController.InfoKey.mediaURL] as? URL{
+            handleVideoSelectedForURL(url: videoURL)
+            self.videoURL = videoURL
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    // Prepares the video for upload process
+    public func handleVideoSelectedForURL(url: URL){
+        let nsURL = url
+        actionButton.setTitle(UPLOAD_VIDEO, for: .normal)
         
+        if let thumbnail = self.thumbnailImageForVideoURL(fileURL: nsURL as NSURL) {
+            // set the Uiimageview as the with the thumbnail image
+            self.thumbnailImageView.image = thumbnail
+        }
     }
     
     private func createProgressTrackerForUploadTask(uploadTask: StorageUploadTask){
@@ -121,16 +151,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }
 
