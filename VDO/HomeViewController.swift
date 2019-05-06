@@ -89,6 +89,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             }
             buttonView.setBackgroundImage(image, for: .normal)
             self.mainScrollView.addSubview(buttonView)
+            buttonView.setTitle(video.title, for: .normal)
             buttonView.leadingAnchor.constraint(equalTo: self.mainScrollView.leadingAnchor).isActive = true
             buttonView.trailingAnchor.constraint(equalTo: self.mainScrollView.trailingAnchor, constant: 0).isActive = true
             buttonView.widthAnchor.constraint(equalTo: self.mainScrollView.widthAnchor).isActive = true

@@ -83,7 +83,7 @@ class API {
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {
-                print(error)
+                print("Error \(error)")
                 return
             }
             
@@ -257,5 +257,10 @@ class API {
                 completition(UIImage(data: data!)!)
             }
         }
+    }
+    
+    // deletes the given video from the user's list of videos 
+    func delete(video: String){
+        
     }
 }

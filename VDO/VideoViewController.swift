@@ -14,16 +14,26 @@ class VideoViewController: UIViewController {
     
     @IBOutlet weak var videoThumbnail: UIImageView!
     @IBOutlet weak var videoTitleLabel: UILabel!
-    
+
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
     var video: Video?
     let api = API()
     @IBAction func handleFullScreen(_ sender: Any) {
+        player?.pause()
         let playerViewController = AVPlayerViewController()
-        playerViewController.player = self.player
-        self.present(playerViewController, animated: true) {
-            playerViewController.player!.play()
+        playerViewController.player = player
+        NotificationCenter.default.addObserver(self, selector: #selector(avPlayerClosed), name: Notification.Name("avPlayerDidDismiss"), object: nil)
+        present(playerViewController, animated: true) {() in
+            DispatchQueue.main.async {
+                self.player?.play()
+            }
+        }
+    }
+    
+    @objc func avPlayerClosed(_ notifiaction: Notification){
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {() in
+            self.player?.play()
         }
     }
     
@@ -41,7 +51,10 @@ class VideoViewController: UIViewController {
         videoTitleLabel.text = video?.title
         setVideoThumbnail()
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
-            player = AVPlayer(url: url as URL)
+            let asset = AVAsset(url: url as URL)
+            let playerItem = AVPlayerItem(asset: asset)
+            
+            player = AVPlayer(playerItem: playerItem)
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = videoThumbnail.bounds
             videoThumbnail.layer.addSublayer(playerLayer!)
@@ -68,5 +81,16 @@ class VideoViewController: UIViewController {
             }
         }
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        player?.removeObserver(self, forKeyPath: "timeControlStatus")
+    }
+}
 
+extension AVPlayerViewController {
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.player?.pause()
+        NotificationCenter.default.post(name: Notification.Name("avPlayerDidDismiss"), object: nil, userInfo: nil)
+    }
 }
