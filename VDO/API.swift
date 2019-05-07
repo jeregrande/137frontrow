@@ -79,7 +79,7 @@ class API {
     
     // Gets the given album object given the album's ID
     func fetchAlbum(withId id:String, completion: @escaping (Album?) -> Void){
-        let docRef = videoCollection.document(id)
+        let docRef = albumCollection.document(id)
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {

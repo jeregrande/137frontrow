@@ -18,6 +18,7 @@ class VideoViewController: UIViewController {
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
     var video: Video?
+    var album: Album? // Only for testing
     let api = API()
     @IBAction func handleFullScreen(_ sender: Any) {
         let playerViewController = AVPlayerViewController()
