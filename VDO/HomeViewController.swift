@@ -42,8 +42,12 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-                mainScrollView.translatesAutoresizingMaskIntoConstraints = false
+        mainScrollView.translatesAutoresizingMaskIntoConstraints = false
         
+        getUserData()
+    }
+    
+    func getUserData(){
         // Get the user object
         
         api.getUser(withId: userID as! String) { (user) in
@@ -73,7 +77,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     func updateViewFromModel(){
         let i = videos.endIndex - 1
         let video = videos[i]
-//        let yPosition = self.view.frame.height / 4  * CGFloat(i)
+        //        let yPosition = self.view.frame.height / 4  * CGFloat(i)
         
         let buttonView = UIButton()
         buttonView.translatesAutoresizingMaskIntoConstraints = false
@@ -90,6 +94,9 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             buttonView.setBackgroundImage(image, for: .normal)
             self.mainScrollView.addSubview(buttonView)
             buttonView.setTitle(video.title, for: .normal)
+            buttonView.contentHorizontalAlignment = .left
+            buttonView.contentVerticalAlignment = .bottom
+            buttonView.titleLabel?.shadowColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
             buttonView.leadingAnchor.constraint(equalTo: self.mainScrollView.leadingAnchor).isActive = true
             buttonView.trailingAnchor.constraint(equalTo: self.mainScrollView.trailingAnchor, constant: 0).isActive = true
             buttonView.widthAnchor.constraint(equalTo: self.mainScrollView.widthAnchor).isActive = true
@@ -109,17 +116,6 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         print("Button pressed with index: \(sender.tag)")
         performSegue(withIdentifier: "Select Video", sender: video)
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {

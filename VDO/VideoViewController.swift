@@ -14,7 +14,8 @@ class VideoViewController: UIViewController {
     
     @IBOutlet weak var videoThumbnail: UIImageView!
     @IBOutlet weak var videoTitleLabel: UILabel!
-
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
     var video: Video?
@@ -57,7 +58,23 @@ class VideoViewController: UIViewController {
             player = AVPlayer(playerItem: playerItem)
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = videoThumbnail.bounds
+            playerLayer?.videoGravity = .resizeAspect
             videoThumbnail.layer.addSublayer(playerLayer!)
+            player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 2), queue: DispatchQueue.main) {[weak self] (progressTime) in
+                if let duration = self!.player?.currentItem?.duration {
+                    
+                    let durationSeconds = CMTimeGetSeconds(duration)
+                    let seconds = CMTimeGetSeconds(progressTime)
+                    let progress = Float(seconds/durationSeconds)
+                    
+                    DispatchQueue.main.async {
+                        self?.progressBar.progress = progress
+                        if progress >= 1.0 {
+                            self?.progressBar.progress = 0.0
+                        }
+                    }
+                }
+            }
         }
     }
     
@@ -71,6 +88,29 @@ class VideoViewController: UIViewController {
             self.videoThumbnail.image = image
         })
     }
+    @IBAction func handlePlayPause(_ sender: UIButton) {
+        switch sender.currentTitle {
+        case "Play":
+            playVideo()
+            sender.setTitle("Pause", for: .normal)
+        case "Pause":
+            pauseVideo()
+            sender.setTitle("Play", for: .normal)
+        default:
+            break
+        }
+    }
+    
+    public func playVideo(){
+        print("playVid")
+        player?.play()
+    }
+    
+    public func pauseVideo(){
+        print("Pause vid")
+        player?.pause()
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {

@@ -104,7 +104,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         titleLabel.isHidden = false
         notesLabel.isHidden = false
         notesTextView.isHidden = false
-        
     }
     
     
