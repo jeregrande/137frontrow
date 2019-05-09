@@ -7,8 +7,10 @@
 //
 
 import Foundation
+import Firebase
 
 struct Comment: Codable {
     var body = ""
     var userID = ""
+    var timestamp = Int()
 }
