@@ -62,7 +62,8 @@ class API {
             
             // make mutable copy of the NSDictionary
             var dict = doc.data()
-            print(doc.data())
+            dict?["videoID"] = doc.documentID
+            
             for (key, value) in dict! {
                 if let value = value as? Date {
                     let formatter = DateFormatter()

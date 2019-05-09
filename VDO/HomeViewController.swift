@@ -81,14 +81,16 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         // itterate over all the video ID's for the user
         self.user.videos.forEach({ (videoID) in
             
-            self.api.fetchVideo(withId: videoID, completion: { (video) in
-                guard video != nil else {
-                    print("error")
-                    return
-                }
-                self.videos.append(video!)
-                print("Video Object \(video)")
-            })
+            if !videos.contains(where: { $0.videoID == videoID }){
+                self.api.fetchVideo(withId: videoID, completion: { (video) in
+                    guard video != nil else {
+                        print("error")
+                        return
+                    }
+                    self.videos.append(video!)
+                })
+            }
+            // do nothing, the video is already in the view
         })
     }
     
@@ -107,12 +109,15 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
                 print("error")
                 return
             }
+            
+            
+            
             buttonView.setBackgroundImage(image, for: .normal)
             self.mainScrollView.addSubview(buttonView)
             buttonView.setTitle(video.title, for: .normal)
             buttonView.contentHorizontalAlignment = .left
             buttonView.contentVerticalAlignment = .bottom
-            buttonView.titleLabel?.shadowColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            buttonView.titleLabel?.shadowColor = #colorLiteral(red: 0.240886867, green: 0.2943176925, blue: 0.3582493663, alpha: 1)
             buttonView.leadingAnchor.constraint(equalTo: self.mainScrollView.leadingAnchor).isActive = true
             buttonView.trailingAnchor.constraint(equalTo: self.mainScrollView.trailingAnchor, constant: 0).isActive = true
             buttonView.widthAnchor.constraint(equalTo: self.mainScrollView.widthAnchor).isActive = true
