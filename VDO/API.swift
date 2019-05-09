@@ -15,14 +15,9 @@ class API {
     let videoCollection = Firestore.firestore().collection("videos")
     let albumCollection = Firestore.firestore().collection("albums")
     let userCollection = Firestore.firestore().collection("users")
+    let storageRef = Storage.storage()
     let thumbnailsStorageReference = Storage.storage().reference().child("thumbnail_images")
     let userID = Auth.auth().currentUser?.uid as! String
-    
-    
-    func addComment(toVideo videoId: String, withText comment: String){
-        
-    }
-    
     
     
     // Returns the user object with the given ID
@@ -31,7 +26,7 @@ class API {
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {
-                print(error)
+                print("Error Document not Found: \(error.debugDescription)")
                 return
             }
             
@@ -59,7 +54,38 @@ class API {
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {
-                print(error)
+                print("Error Document not Found: \(error.debugDescription)")
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            // make mutable copy of the NSDictionary
+            var dict = doc.data()
+            dict?["videoID"] = doc.documentID
+            
+            for (key, value) in dict! {
+                if let value = value as? Date {
+                    let formatter = DateFormatter()
+                    dict?[key] = formatter.string(from: value)
+                }
+            }
+            
+            //Serialize the Dictionary into a JSON Data representation, then decode it using the Decoder().
+            if let data = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
+                let video = try? decoder.decode(Video.self, from: data)
+                completion(video)
+            }
+        }
+    }
+    
+    // Gets the given album object given the album's ID
+    func fetchAlbum(withId id:String, completion: @escaping (Album?) -> Void){
+        let docRef = videoCollection.document(id)
+        docRef.getDocument { (docSnap, error) in
+            
+            guard error == nil, let doc = docSnap, doc.exists == true else {
+                print("Error Document not Found: \(error.debugDescription)")
                 return
             }
             
@@ -76,9 +102,21 @@ class API {
             
             //Serialize the Dictionary into a JSON Data representation, then decode it using the Decoder().
             if let data = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
-                let video = try? decoder.decode(Video.self, from: data)
-                completion(video)
+                let album = try? decoder.decode(Album.self, from: data)
+                completion(album)
             }
+        }
+    }
+    
+    // Returns an array of Album id's where the userID is in the album audience
+    func getAlbumsShared(withUser user: String, completion: @escaping ([String]) -> Void){
+        var albums = [String]()
+        let querry = albumCollection.whereField("albumAudience", arrayContains: user)
+        querry.getDocuments { (qs, error) in
+            qs?.documents.forEach({ (document) in
+                albums.append(document.documentID)
+            })
+            completion(albums)
         }
     }
     
@@ -103,7 +141,6 @@ class API {
             "albumAudience": FieldValue.arrayUnion([userID])
             ])
     }
-    
     
     
     func addUserToAblum(withAlbum album: String, withUser user: String){
@@ -148,14 +185,28 @@ class API {
             "videos": FieldValue.arrayUnion([videoID])])
     }
     
+    // Adds all thevideos in one album to the other album
+    func addAlbumToAlbum(from album: String,to : String){
+        albumCollection.document(album).getDocument { (document, error) in
+            if let document = document, document.exists {
+                if let audience = document.get("videos") {
+                    self.albumCollection.document(to).updateData([
+                        "videos": FieldValue.arrayUnion(audience as! [Any])
+                        ])
+                }
+            }
+        }
+    }
+    
     
     // Adds an entry into the database for that video and returns the document ID of that video
-    func addVideoToDatabase(title: String, fileURL: String ) -> String{
+    func addVideoToDatabase(title: String, fileURL: String, notes: String ) -> String{
         let video = videoCollection.document()
         video.setData([
             "comments": FieldValue.arrayUnion([]),
             "fileURL": fileURL,
-            "notes": ""
+            "notes": notes,
+            "title": title
             ])
         return video.documentID
     }
@@ -163,7 +214,7 @@ class API {
     // Given an image this function uploads it to firebase storage
     func uploadThumbnailToFireBaseStorageUsingImage(image: UIImage, videoID: String){
         // create a unique name for the thumbnail image
-        let imageName = NSUUID.init().uuidString + ".jpeg"
+        let imageName = videoID + ".jpeg"
         // create a storage reference for the image
         let ref = Storage.storage().reference().child("thumbnail_images").child(imageName)
         
@@ -186,5 +237,42 @@ class API {
                 }
             })
         }
+    }
+    
+    func getThumbnailImage(forVideo videoID: String, completition: @escaping (UIImage) -> Void) {
+        let ref = thumbnailsStorageReference.child(videoID + ".jpeg")
+        ref.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+            if let error = error {
+                print("error \(error)")
+            } else {
+                completition(UIImage(data: data!)!)
+            }
+        }
+    }
+    
+    func getThumbnailImage(withImageURL imageURL: String, completition: @escaping (UIImage) -> Void){
+        let ref = storageRef.reference(forURL: imageURL)
+        ref.getData(maxSize: 1 * 1024 * 1024) { (data, error) in
+            if let error = error {
+                print("error \(error)")
+            } else {
+                completition(UIImage(data: data!)!)
+            }
+        }
+    }
+    
+    // deletes the given video from the user's list of videos 
+    func delete(video: String){
+        let userRef = userCollection.document(userID).updateData([
+            "videos": FieldValue.arrayRemove([video])
+            ])
+        // TODO go through all the comments and delte this video
+        let querry = albumCollection.whereField("videos", arrayContains: video)
+        querry.getDocuments { (qs, error) in
+            qs?.documents.forEach({ (document) in
+                self.removeVideoWithAlbum(withVideo: video, withAlbum: document.documentID)
+            })
+        }
+        videoCollection.document(video).delete()
     }
 }
