@@ -26,7 +26,7 @@ class API {
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {
-                print(error)
+                print("Error Document not Found: \(error.debugDescription)")
                 return
             }
             
@@ -54,7 +54,7 @@ class API {
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {
-                print(error)
+                print("Error Document not Found: \(error.debugDescription)")
                 return
             }
             
@@ -62,6 +62,7 @@ class API {
             
             // make mutable copy of the NSDictionary
             var dict = doc.data()
+            print(doc.data())
             for (key, value) in dict! {
                 if let value = value as? Date {
                     let formatter = DateFormatter()
@@ -83,7 +84,7 @@ class API {
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {
-                print("Error \(error)")
+                print("Error Document not Found: \(error.debugDescription)")
                 return
             }
             
@@ -261,6 +262,16 @@ class API {
     
     // deletes the given video from the user's list of videos 
     func delete(video: String){
-        
+        let userRef = userCollection.document(userID).updateData([
+            "videos": FieldValue.arrayRemove([video])
+            ])
+        // TODO go through all the comments and delte this video
+        let querry = albumCollection.whereField("videos", arrayContains: video)
+        querry.getDocuments { (qs, error) in
+            qs?.documents.forEach({ (document) in
+                self.removeVideoWithAlbum(withVideo: video, withAlbum: document.documentID)
+            })
+        }
+        videoCollection.document(video).delete()
     }
 }

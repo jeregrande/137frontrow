@@ -86,6 +86,7 @@ class VideoViewController: UIViewController {
                 return
             }
             self.videoThumbnail.image = image
+            self.progressBar.isHidden = false
         })
     }
     @IBAction func handlePlayPause(_ sender: UIButton) {

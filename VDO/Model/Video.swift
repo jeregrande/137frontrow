@@ -10,6 +10,7 @@ import Foundation
 
 struct Video: Codable {
     var thumbnail = ""
+//    var videoID = ""
     var fileURL = ""
     var notes = ""
     var title = ""

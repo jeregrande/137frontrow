@@ -14,7 +14,7 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
     
     var imagePicker: ImagePicker!
     var user: User! {didSet{getVideosForUser()}}
-    var videos = [Video]() {didSet{updateViewFromModel()}}
+    var videos = [Video]() {didSet{addVideoToScrollView()}}
     let api = API()
     let userID = Auth.auth().currentUser?.uid
     
@@ -44,25 +44,43 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
         
         mainScrollView.translatesAutoresizingMaskIntoConstraints = false
         
-        getUserData()
-    }
-    
-    func getUserData(){
-        // Get the user object
-        
         api.getUser(withId: userID as! String) { (user) in
             guard user != nil else{
                 print("error")
                 return
             }
             self.user = user
+            self.addVideoChangeListener()
+        }
+    }
+    
+    func addVideoChangeListener(){
+        api.userCollection.document(userID as! String).addSnapshotListener{documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error)")
+                return
+            }
+            guard let data = document.data() else {
+                print("Document was empty:")
+                return
+            }
+            print("Current user's videos: \(data["videos"])")
+            // check if the video is already in the array
+            if let newVideos = data["videos"] {
+                for newVid in newVideos as! Array<String>{
+                    if !self.user.videos.contains(newVid){
+                        self.user.videos.append(newVid)
+                    }
+                }
+            }
         }
     }
     
     // Get the videos of the user
     func getVideosForUser(){
-        print("User's Videos: \(self.user.videos)")
+        // itterate over all the video ID's for the user
         self.user.videos.forEach({ (videoID) in
+            
             self.api.fetchVideo(withId: videoID, completion: { (video) in
                 guard video != nil else {
                     print("error")
@@ -73,6 +91,74 @@ class HomeViewController: UIViewController, UIScrollViewDelegate {
             })
         })
     }
+    
+    func addVideoToScrollView(){
+        let i = videos.endIndex - 1
+        let video = videos[i]
+        let buttonView = UIButton()
+        buttonView.translatesAutoresizingMaskIntoConstraints = false
+        buttonView.tag = i
+        
+        buttonView.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
+        
+        let thumbnailImageURL = video.thumbnail
+        self.api.getThumbnailImage(withImageURL: thumbnailImageURL, completition: {(image) in
+            guard image != nil else {
+                print("error")
+                return
+            }
+            buttonView.setBackgroundImage(image, for: .normal)
+            self.mainScrollView.addSubview(buttonView)
+            buttonView.setTitle(video.title, for: .normal)
+            buttonView.contentHorizontalAlignment = .left
+            buttonView.contentVerticalAlignment = .bottom
+            buttonView.titleLabel?.shadowColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            buttonView.leadingAnchor.constraint(equalTo: self.mainScrollView.leadingAnchor).isActive = true
+            buttonView.trailingAnchor.constraint(equalTo: self.mainScrollView.trailingAnchor, constant: 0).isActive = true
+            buttonView.widthAnchor.constraint(equalTo: self.mainScrollView.widthAnchor).isActive = true
+            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 9.0/16.0).isActive = true
+            buttonView.topAnchor.constraint(equalTo: self.mainScrollView.topAnchor, constant: 260 * CGFloat(i)).isActive = true
+            var contentRect = CGRect.zero
+            for view in self.mainScrollView.subviews {
+                contentRect = contentRect.union(view.frame)
+            }
+            self.mainScrollView.contentSize = contentRect.size
+        })
+    }
+    
+    //    func addVideoToScrollView(video: Video){
+    //        let i = videos.endIndex - 1
+    //
+    //        let buttonView = UIButton()
+    //        buttonView.translatesAutoresizingMaskIntoConstraints = false
+    //        buttonView.tag = i
+    //
+    //        buttonView.addTarget(self, action: #selector(didPressButton), for: .touchUpInside)
+    //
+    //        let thumbnailImageURL = video.thumbnail
+    //        self.api.getThumbnailImage(withImageURL: thumbnailImageURL, completition: {(image) in
+    //            guard image != nil else {
+    //                print("error")
+    //                return
+    //            }
+    //            buttonView.setBackgroundImage(image, for: .normal)
+    //            self.mainScrollView.addSubview(buttonView)
+    //            buttonView.setTitle(video.title, for: .normal)
+    //            buttonView.contentHorizontalAlignment = .left
+    //            buttonView.contentVerticalAlignment = .bottom
+    //            buttonView.titleLabel?.shadowColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+    //            buttonView.leadingAnchor.constraint(equalTo: self.mainScrollView.leadingAnchor).isActive = true
+    //            buttonView.trailingAnchor.constraint(equalTo: self.mainScrollView.trailingAnchor, constant: 0).isActive = true
+    //            buttonView.widthAnchor.constraint(equalTo: self.mainScrollView.widthAnchor).isActive = true
+    //            buttonView.heightAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 9.0/16.0).isActive = true
+    //            buttonView.topAnchor.constraint(equalTo: self.mainScrollView.topAnchor, constant: 260 * CGFloat(i)).isActive = true
+    //            var contentRect = CGRect.zero
+    //            for view in self.mainScrollView.subviews {
+    //                contentRect = contentRect.union(view.frame)
+    //            }
+    //            self.mainScrollView.contentSize = contentRect.size
+    //        })
+    //    }
     
     func updateViewFromModel(){
         let i = videos.endIndex - 1
