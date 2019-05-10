@@ -117,8 +117,9 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         let comment = comments[indexPath.item]
         print("Comment: \(comment.body)")
         cell.textView.text  = comment.body
-        cell.userNameLabel.text = comment.userID
-        
+        api.getUser(withId: comment.userID) { (user) in
+            cell.userNameLabel.text = user?.displayName
+        }
         return cell
     }
     

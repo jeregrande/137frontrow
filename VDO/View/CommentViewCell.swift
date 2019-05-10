@@ -16,6 +16,7 @@ class CommentViewCell: UICollectionViewCell {
         tv.textColor = #colorLiteral(red: 0.240886867, green: 0.2943176925, blue: 0.3582493663, alpha: 1)
         tv.font = UIFont.systemFont(ofSize: 16)
         tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.isEditable = false
         return tv
     }()
     
