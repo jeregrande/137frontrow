@@ -39,7 +39,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
     var video: Video?{didSet{
-        observeComments()
+        getCommentsData()
         }}
     var comments = [Comment]()
     let api = API()
@@ -71,11 +71,10 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        observeComments()
         // Do any additional setup after loading the view.
         videoTitleLabel.text = video?.title
         videoNotesTextView.text = video?.notes
-        
         
         commentView.register(CommentViewCell.self, forCellWithReuseIdentifier: cellID)
         setCommentInputComponent()
@@ -109,7 +108,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (video?.comments.count)!
+        return comments.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -204,10 +203,6 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         
     }
     
-    func fecthCommentData(completition: @escaping ([Comment]) -> Void ){
-        
-    }
-    
     
     @objc func handleCommentSend(){
         api.addComment(withText: inputTextField.text!, toVideo: video!.videoID)
@@ -256,40 +251,30 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
                 print("Document data was empty")
                 return
             }
-            if let newComments = data["comments"] {
-                for newComment in newComments as! Array<String> {
-                    if !(self.video?.comments.contains(newComment))!{
-                        self.api.fetchComment(withId: newComment) { (comment) in
-                            print("Comment: \(comment?.body)")
-                            self.comments.append(comment!)
-                            self.video?.comments.append(newComment)
-                        }
+            if let newComments = data["comments"]{
+                print("New Comments: \(newComments)")
+                for newCommentId in newComments as! Array<String> {
+                    if !(self.video?.comments.contains(newCommentId))!{
+                        self.video?.comments.append(newCommentId)
                     }
                 }
-                DispatchQueue.main.async(execute: {
-                    self.commentView.reloadData()
-                })
             }
         }
-//        listener.remove()
         
     }
     
-    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    //        return video?.comments.count ?? 0
-    //    }
-    
-    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    //        let cell:UITableViewCell = (tableView.dequeueReusableCell(withIdentifier: cellID) as UITableViewCell?)!
-    //        api.fetchComment(withId: (video?.comments[indexPath.row])!) { (comment) in
-    //            print("Comment: \(comment?.body)")
-    //            self.comments.append(comment!)
-    //            cell.textLabel?.text  = comment?.body
-    //            cell.detailTextLabel?.text = "By user: at time )"
-    //        }
-    //
-    //        return cell
-    //    }
+    func getCommentsData(){
+        comments.removeAll()
+        for commentID in video!.comments {
+            api.fetchComment(withId: commentID) { (comment) in
+                print("Comment: \(comment)")
+                self.comments.append(comment!)
+                DispatchQueue.main.async(execute: {
+                    self.commentView?.reloadData()
+                })
+            }
+        }
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
