@@ -10,12 +10,14 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class VideoViewController: UIViewController, UITextFieldDelegate {
+class VideoViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var videoThumbnail: UIImageView!
     @IBOutlet weak var videoTitleLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var videoNotesTextView: UITextView!
+    
+    let cellID = "CellId"
     
     lazy var inputTextField: UITextField = {
         let textField = UITextField()
@@ -33,10 +35,20 @@ class VideoViewController: UIViewController, UITextFieldDelegate {
         return button
     }()
     
+    lazy var commentView: UITableView = {
+        let tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
+    
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
     var video: Video?
+    var comments = [Comment]()
     let api = API()
+    
     @IBAction func handleFullScreen(_ sender: Any) {
         player?.pause()
         let playerViewController = AVPlayerViewController()
@@ -66,11 +78,12 @@ class VideoViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+        self.commentView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         videoTitleLabel.text = video?.title
         videoNotesTextView.text = video?.notes
         setCommentInputComponent()
         
-        getComments()
+        observeComments()
         
         setVideoThumbnail()
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
@@ -114,13 +127,15 @@ class VideoViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func handlePlayPause(_ sender: UIButton) {
-        switch sender.currentTitle {
-        case "Play":
+        switch sender.tag {
+        case 0:
             playVideo()
-            sender.setTitle("Pause", for: .normal)
-        case "Pause":
+            sender.tag = 1
+            sender.setImage(UIImage(named: "pause_button"), for: .normal)
+        case 1:
             pauseVideo()
-            sender.setTitle("Play", for: .normal)
+            sender.tag = 0
+            sender.setImage(UIImage(named: "play_button"), for: .normal)
         default:
             break
         }
@@ -167,15 +182,21 @@ class VideoViewController: UIViewController, UITextFieldDelegate {
         separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
+        view.addSubview(commentView)
+        commentView.topAnchor.constraint(equalTo: videoNotesTextView.bottomAnchor, constant: 10).isActive = true
+        commentView.bottomAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        commentView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        commentView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
     }
+
     
     @objc func handleCommentSend(){
-        print(inputTextField.text)
         api.addComment(withText: inputTextField.text!, toVideo: video!.videoID)
+        inputTextField.text = nil
     }
     
     @objc func validateCommentText(){
-        print("text changed" )
         if (inputTextField.text != nil) {
             sendButton.isEnabled = true
         } else {
@@ -197,6 +218,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate {
         for comment in video!.comments{
             api.fetchComment(withId: comment) { (comment) in
                 print("Comment: \(comment?.body)")
+                self.comments.append(comment!)
             }
         }
     }
@@ -206,6 +228,53 @@ class VideoViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    func observeComments(){
+        let listener = api.videoCollection.document(video!.videoID).addSnapshotListener { documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("Error fetching document \(error)")
+                return
+            }
+            guard let data = document.data() else {
+                print("Document data was empty")
+                return
+            }
+            if let newComments = data["comments"] {
+                for newComment in newComments as! Array<String> {
+                    if !(self.video?.comments.contains(newComment))!{
+                        self.api.fetchComment(withId: newComment) { (comment) in
+                            print("Comment: \(comment?.body)")
+                            self.video?.comments.append(newComment)
+                            
+                            DispatchQueue.main.async(execute: {
+                                self.commentView.reloadData()
+                            })
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return video?.comments.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell:UITableViewCell = (tableView.dequeueReusableCell(withIdentifier: cellID) as UITableViewCell?)!
+        api.fetchComment(withId: (video?.comments[indexPath.row])!) { (comment) in
+            print("Comment: \(comment?.body)")
+            self.comments.append(comment!)
+            cell.textLabel?.text  = comment?.body
+            cell.detailTextLabel?.text = "By user: at time )"
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 72
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
