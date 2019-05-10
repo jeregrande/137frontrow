@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ViewPreviewCell: UICollectionViewCell {
     let thumbnailView: UIImageView = {
@@ -28,11 +29,19 @@ class ViewPreviewCell: UICollectionViewCell {
         return label
     }()
     
+    let activityIndicator: UIActivityIndicatorView = {
+        let ai = UIActivityIndicatorView(frame: CGRect(x: 100, y: 100, width: 100, height: 100))
+        ai.style = UIActivityIndicatorView.Style.gray
+        ai.translatesAutoresizingMaskIntoConstraints = false
+        return ai
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         addSubview(thumbnailView)
         addSubview(videoTitleLabel)
+//        addSubview(activityIndicator)
         
         thumbnailView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         thumbnailView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true

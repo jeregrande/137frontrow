@@ -176,7 +176,7 @@
                                 </segments>
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BdB-kI-RWs">
-                                <rect key="frame" x="0.0" y="168" width="414" height="694"/>
+                                <rect key="frame" x="0.0" y="168" width="414" height="628"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qZM-xp-qN9">
                                     <size key="itemSize" width="50" height="50"/>
@@ -186,12 +186,12 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                                 <connections>
-                                    <outlet property="dataSource" destination="SRB-Is-djW" id="FXo-rr-XsY"/>
-                                    <outlet property="delegate" destination="SRB-Is-djW" id="IP0-rd-QLr"/>
+                                    <outlet property="dataSource" destination="SRB-Is-djW" id="khh-5v-V8K"/>
+                                    <outlet property="delegate" destination="SRB-Is-djW" id="J1M-3Z-YGi"/>
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-pb-fmn">
-                                <rect key="frame" x="20" y="796" width="374" height="66"/>
+                                <rect key="frame" x="20" y="807" width="374" height="66"/>
                                 <color key="backgroundColor" red="0.32209893630000003" green="0.27378335770000001" blue="0.41960775569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <color key="tintColor" red="0.96807536530000005" green="0.96807536530000005" blue="0.96807536530000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -209,8 +209,8 @@
                             <constraint firstItem="CkO-pb-fmn" firstAttribute="leading" secondItem="qbS-94-evj" secondAttribute="leading" constant="20" id="Hy6-RN-euL"/>
                             <constraint firstItem="BdB-kI-RWs" firstAttribute="top" secondItem="AbR-5d-KmE" secondAttribute="bottom" constant="8" id="Ixh-UX-Xj6"/>
                             <constraint firstItem="AbR-5d-KmE" firstAttribute="leading" secondItem="qbS-94-evj" secondAttribute="leading" constant="42.5" id="LmF-8h-dN3"/>
-                            <constraint firstItem="qbS-94-evj" firstAttribute="bottom" secondItem="BdB-kI-RWs" secondAttribute="bottom" id="TSS-7I-J0y"/>
-                            <constraint firstItem="qbS-94-evj" firstAttribute="bottom" secondItem="CkO-pb-fmn" secondAttribute="bottom" id="aIo-jr-QUA"/>
+                            <constraint firstItem="CkO-pb-fmn" firstAttribute="top" secondItem="BdB-kI-RWs" secondAttribute="bottom" constant="11" id="TSS-7I-J0y"/>
+                            <constraint firstAttribute="bottom" secondItem="CkO-pb-fmn" secondAttribute="bottom" constant="23" id="aIo-jr-QUA"/>
                             <constraint firstItem="AbR-5d-KmE" firstAttribute="top" secondItem="Sia-Aa-ulo" secondAttribute="bottom" constant="8" id="crF-CV-iwV"/>
                             <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="BdB-kI-RWs" secondAttribute="trailing" id="dB0-rr-Hw0"/>
                             <constraint firstItem="Sia-Aa-ulo" firstAttribute="top" secondItem="Fnj-O9-Q9P" secondAttribute="top" constant="68" id="sPO-F1-1yD"/>
@@ -221,7 +221,7 @@
                         <viewLayoutGuide key="safeArea" id="qbS-94-evj"/>
                     </view>
                     <connections>
-                        <outlet property="mainScrollView" destination="BdB-kI-RWs" id="7Do-Hr-IvE"/>
+                        <outlet property="mainScrollView" destination="BdB-kI-RWs" id="TeE-3E-jOt"/>
                         <segue destination="PLO-7q-qaO" kind="show" identifier="Select Video" id="85P-zu-A82"/>
                     </connections>
                 </viewController>
@@ -1051,7 +1051,6 @@
         <image name="play_button" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="85P-zu-A82"/>
-        <segue reference="zmh-43-AoD"/>
+        <segue reference="5sz-V3-qZN"/>
     </inferredMetricsTieBreakers>
 </document>
