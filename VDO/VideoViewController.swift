@@ -10,14 +10,15 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class VideoViewController: UIViewController, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource {
+class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet weak var videoThumbnail: UIImageView!
     @IBOutlet weak var videoTitleLabel: UILabel!
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var videoNotesTextView: UITextView!
     
-    let cellID = "CellId"
+    @IBOutlet weak var commentView: UICollectionView!
+    let cellID = "cellID"
     
     lazy var inputTextField: UITextField = {
         let textField = UITextField()
@@ -35,17 +36,11 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         return button
     }()
     
-    lazy var commentView: UITableView = {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
-    
     var player: AVPlayer?
     var playerLayer: AVPlayerLayer?
-    var video: Video?
+    var video: Video?{didSet{
+        observeComments()
+        }}
     var comments = [Comment]()
     let api = API()
     
@@ -78,12 +73,12 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        self.commentView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         videoTitleLabel.text = video?.title
         videoNotesTextView.text = video?.notes
-        setCommentInputComponent()
         
-        observeComments()
+        
+        commentView.register(CommentViewCell.self, forCellWithReuseIdentifier: cellID)
+        setCommentInputComponent()
         
         setVideoThumbnail()
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
@@ -111,6 +106,31 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                 }
             }
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return (video?.comments.count)!
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! CommentViewCell
+        
+        let comment = comments[indexPath.item]
+        print("Comment: \(comment.body)")
+        cell.textView.text  = comment.body
+        cell.userNameLabel.text = comment.userID
+        
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 80)
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // handle tap events
+        print("You selected cell #\(indexPath.item)!")
     }
     
     
@@ -182,14 +202,12 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UITableViewDel
         separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         
-        view.addSubview(commentView)
-        commentView.topAnchor.constraint(equalTo: videoNotesTextView.bottomAnchor, constant: 10).isActive = true
-        commentView.bottomAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        commentView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        commentView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    }
+    
+    func fecthCommentData(completition: @escaping ([Comment]) -> Void ){
         
     }
-
+    
     
     @objc func handleCommentSend(){
         api.addComment(withText: inputTextField.text!, toVideo: video!.videoID)
@@ -243,38 +261,35 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UITableViewDel
                     if !(self.video?.comments.contains(newComment))!{
                         self.api.fetchComment(withId: newComment) { (comment) in
                             print("Comment: \(comment?.body)")
+                            self.comments.append(comment!)
                             self.video?.comments.append(newComment)
-                            
-                            DispatchQueue.main.async(execute: {
-                                self.commentView.reloadData()
-                            })
                         }
                     }
                 }
+                DispatchQueue.main.async(execute: {
+                    self.commentView.reloadData()
+                })
             }
         }
-
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return video?.comments.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell:UITableViewCell = (tableView.dequeueReusableCell(withIdentifier: cellID) as UITableViewCell?)!
-        api.fetchComment(withId: (video?.comments[indexPath.row])!) { (comment) in
-            print("Comment: \(comment?.body)")
-            self.comments.append(comment!)
-            cell.textLabel?.text  = comment?.body
-            cell.detailTextLabel?.text = "By user: at time )"
-        }
+//        listener.remove()
         
-        return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 72
-    }
+    //    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    //        return video?.comments.count ?? 0
+    //    }
+    
+    //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //        let cell:UITableViewCell = (tableView.dequeueReusableCell(withIdentifier: cellID) as UITableViewCell?)!
+    //        api.fetchComment(withId: (video?.comments[indexPath.row])!) { (comment) in
+    //            print("Comment: \(comment?.body)")
+    //            self.comments.append(comment!)
+    //            cell.textLabel?.text  = comment?.body
+    //            cell.detailTextLabel?.text = "By user: at time )"
+    //        }
+    //
+    //        return cell
+    //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
