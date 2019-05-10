@@ -15,6 +15,7 @@
 		7310FB502273FDA600941746 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB4F2273FDA600941746 /* API.swift */; };
 		7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7310FB5122740D8100941746 /* AVFoundation.framework */; };
 		7310FB55227414FC00941746 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB54227414FC00941746 /* UploadViewController.swift */; };
+		732988CB2285E9E6004C0949 /* VideoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732988CA2285E9E6004C0949 /* VideoPreviewCell.swift */; };
 		73300A6C2276CA43003FB82D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6B2276CA43003FB82D /* Video.swift */; };
 		73300A6E22776490003FB82D /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6D22776490003FB82D /* Album.swift */; };
 		733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425BF222FC5CA009B3207 /* AppDelegate.swift */; };
@@ -64,6 +65,7 @@
 		7310FB4F2273FDA600941746 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		7310FB5122740D8100941746 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7310FB54227414FC00941746 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
+		732988CA2285E9E6004C0949 /* VideoPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewCell.swift; sourceTree = "<group>"; };
 		73300A6B2276CA43003FB82D /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		73300A6D22776490003FB82D /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		733425BC222FC5CA009B3207 /* VDO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VDO.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -206,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				736BEE1D2285339C0015C106 /* CommentViewCell.swift */,
+				732988CA2285E9E6004C0949 /* VideoPreviewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -632,6 +635,7 @@
 				73300A6C2276CA43003FB82D /* Video.swift in Sources */,
 				7302ABC92276C7AA0050D292 /* User.swift in Sources */,
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,
+				732988CB2285E9E6004C0949 /* VideoPreviewCell.swift in Sources */,
 				7310FB502273FDA600941746 /* API.swift in Sources */,
 				73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */,
 				7303B466227E1AA100030DB8 /* Comment.swift in Sources */,
