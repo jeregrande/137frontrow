@@ -225,26 +225,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyT-C4-DUJ">
-                                <rect key="frame" x="16" y="44" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iyT-C4-DUJ">
+                                <rect key="frame" x="14" y="44" width="34" height="30"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="signOut:" destination="SRB-Is-djW" eventType="touchUpInside" id="2Kh-Vv-Q0F"/>
                                     <segue destination="SRB-Is-djW" kind="show" identifier="Exit Video View" id="zmh-43-AoD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uej-tx-CDE">
-                                <rect key="frame" x="305" y="44" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uej-tx-CDE">
+                                <rect key="frame" x="346" y="44" width="54" height="30"/>
                                 <state key="normal" title="Options"/>
                                 <connections>
                                     <action selector="signOut:" destination="SRB-Is-djW" eventType="touchUpInside" id="VcY-Wf-Uhf"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Video Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3X-cl-pFA">
-                                <rect key="frame" x="139" y="44" width="96" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3X-cl-pFA">
+                                <rect key="frame" x="159" y="44" width="96" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -310,11 +307,31 @@
                                     <action selector="handlePlayPause:" destination="PLO-7q-qaO" eventType="touchUpInside" id="4tH-iP-skl"/>
                                 </connections>
                             </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="NC0-2A-QcZ">
+                                <rect key="frame" x="16" y="455" width="382" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="j5b-wt-ffA"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8nB-5p-OtW">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="PLO-7q-qaO" id="ffe-dt-RWF"/>
+                                    <outlet property="delegate" destination="PLO-7q-qaO" id="wvH-I1-9uY"/>
+                                </connections>
+                            </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="NC0-2A-QcZ" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="16" id="1rH-wb-cPD"/>
                             <constraint firstItem="o5n-Hl-8rF" firstAttribute="top" secondItem="I5j-k7-6GL" secondAttribute="bottom" constant="18" id="4qn-zB-9Qa"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" constant="38" id="8BW-6v-55u"/>
+                            <constraint firstItem="b3X-cl-pFA" firstAttribute="centerX" secondItem="SaU-sd-7nC" secondAttribute="centerX" id="8gC-hO-igo"/>
                             <constraint firstItem="uf2-v8-ZNa" firstAttribute="top" secondItem="o5n-Hl-8rF" secondAttribute="bottom" constant="12.5" id="9oE-Yz-wPk"/>
                             <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="o5n-Hl-8rF" secondAttribute="trailing" constant="24" id="EVj-hG-qaw"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="trailing" secondItem="se4-0B-lAC" secondAttribute="trailing" id="HZv-Pg-sO1"/>
@@ -322,14 +339,22 @@
                             <constraint firstItem="o5n-Hl-8rF" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="16" id="N6U-5L-8Jm"/>
                             <constraint firstItem="o5n-Hl-8rF" firstAttribute="top" secondItem="JHl-kG-fcm" secondAttribute="bottom" constant="18" id="OGA-ab-CCj"/>
                             <constraint firstItem="uf2-v8-ZNa" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="16" id="Tba-Va-A07"/>
+                            <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="NC0-2A-QcZ" secondAttribute="trailing" constant="16" id="VZR-Ss-JZM"/>
+                            <constraint firstItem="iyT-C4-DUJ" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" id="bFO-Ry-0Zy"/>
                             <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="uf2-v8-ZNa" secondAttribute="trailing" constant="16" id="bQq-Vd-aMn"/>
+                            <constraint firstItem="iyT-C4-DUJ" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="14" id="f5a-B4-mjf"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" id="hI8-fC-FPS"/>
+                            <constraint firstItem="b3X-cl-pFA" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" id="ha7-gF-CE1"/>
                             <constraint firstAttribute="trailing" secondItem="JHl-kG-fcm" secondAttribute="trailing" constant="8" id="jTW-wv-bpO"/>
+                            <constraint firstItem="NC0-2A-QcZ" firstAttribute="top" secondItem="uf2-v8-ZNa" secondAttribute="bottom" constant="8" id="oZW-QF-RZx"/>
+                            <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="Uej-tx-CDE" secondAttribute="trailing" constant="14" id="t6d-lF-ojU"/>
+                            <constraint firstItem="Uej-tx-CDE" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" id="x3r-cF-7bR"/>
                             <constraint firstItem="I5j-k7-6GL" firstAttribute="centerX" secondItem="SaU-sd-7nC" secondAttribute="centerX" id="y5X-go-Am4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="se4-0B-lAC"/>
                     </view>
                     <connections>
+                        <outlet property="commentView" destination="NC0-2A-QcZ" id="OLX-YR-W3d"/>
                         <outlet property="progressBar" destination="Inc-y0-THG" id="eUT-Y9-ojo"/>
                         <outlet property="videoNotesTextView" destination="uf2-v8-ZNa" id="YPW-w1-OjS"/>
                         <outlet property="videoThumbnail" destination="IIk-6O-rvH" id="uph-aQ-u6K"/>
