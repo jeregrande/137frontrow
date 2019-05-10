@@ -255,59 +255,83 @@
                                     <constraint firstAttribute="width" secondItem="IIk-6O-rvH" secondAttribute="height" multiplier="16:9" id="Du2-ru-SIy"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHl-kG-fcm">
-                                <rect key="frame" x="330" y="285" width="76" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHl-kG-fcm">
+                                <rect key="frame" x="330" y="275" width="76" height="30"/>
                                 <color key="backgroundColor" red="0.4994111061" green="0.98671096560000005" blue="0.87945538759999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="76" id="F4T-TF-jRv"/>
+                                    <constraint firstAttribute="height" constant="30" id="cl5-r2-zsv"/>
+                                    <constraint firstAttribute="width" secondItem="JHl-kG-fcm" secondAttribute="height" multiplier="38:15" id="xbW-Bg-fwJ"/>
+                                </constraints>
                                 <color key="tintColor" red="0.240886867" green="0.29431769250000001" blue="0.35824936629999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Full Screen"/>
                                 <connections>
                                     <action selector="handleFullScreen:" destination="PLO-7q-qaO" eventType="touchUpInside" id="O15-yr-fAy"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Video Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-Hl-8rF">
-                                <rect key="frame" x="16" y="323" width="374" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5n-Hl-8rF">
+                                <rect key="frame" x="16" y="323" width="374" height="31.5"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5j-k7-6GL">
-                                <rect key="frame" x="182" y="285" width="50" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.50568040030000005" green="1" blue="0.89022371730000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                                <color key="tintColor" red="0.240886867" green="0.29431769250000001" blue="0.35824936629999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Play"/>
-                                <connections>
-                                    <action selector="handlePlayPause:" destination="PLO-7q-qaO" eventType="touchUpInside" id="4tH-iP-skl"/>
-                                </connections>
-                            </button>
                             <progressView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Inc-y0-THG">
                                 <rect key="frame" x="16" y="275" width="378" height="2"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QfH-1z-xaC">
-                                <rect key="frame" x="16" y="817" width="374" height="51"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uf2-v8-ZNa">
+                                <rect key="frame" x="16" y="367" width="382" height="80"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="CYU-Xl-2TT"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No Comments, be the first to add one" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5W-ni-e3h">
+                                <rect key="frame" x="63" y="586" width="288" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.065227447101928848" green="0.475124159523858" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="Add Comment">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I5j-k7-6GL">
+                                <rect key="frame" x="192" y="275" width="30" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="9t9-6r-5Qe"/>
+                                    <constraint firstAttribute="width" secondItem="I5j-k7-6GL" secondAttribute="height" multiplier="1:1" id="aDp-cH-AIn"/>
+                                    <constraint firstAttribute="height" constant="30" id="gIW-zZ-yae"/>
+                                </constraints>
+                                <color key="tintColor" red="0.240886867" green="0.29431769250000001" blue="0.35824936629999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Play" image="play_button"/>
+                                <connections>
+                                    <action selector="handlePlayPause:" destination="PLO-7q-qaO" eventType="touchUpInside" id="4tH-iP-skl"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="o5n-Hl-8rF" firstAttribute="top" secondItem="I5j-k7-6GL" secondAttribute="bottom" constant="18" id="4qn-zB-9Qa"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" constant="38" id="8BW-6v-55u"/>
+                            <constraint firstItem="uf2-v8-ZNa" firstAttribute="top" secondItem="o5n-Hl-8rF" secondAttribute="bottom" constant="12.5" id="9oE-Yz-wPk"/>
+                            <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="o5n-Hl-8rF" secondAttribute="trailing" constant="24" id="EVj-hG-qaw"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="trailing" secondItem="se4-0B-lAC" secondAttribute="trailing" id="HZv-Pg-sO1"/>
+                            <constraint firstItem="o5n-Hl-8rF" firstAttribute="top" secondItem="IIk-6O-rvH" secondAttribute="bottom" constant="8" id="Jqq-UE-Uw7"/>
+                            <constraint firstItem="o5n-Hl-8rF" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="16" id="N6U-5L-8Jm"/>
+                            <constraint firstItem="o5n-Hl-8rF" firstAttribute="top" secondItem="JHl-kG-fcm" secondAttribute="bottom" constant="18" id="OGA-ab-CCj"/>
+                            <constraint firstItem="uf2-v8-ZNa" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="16" id="Tba-Va-A07"/>
+                            <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="uf2-v8-ZNa" secondAttribute="trailing" constant="16" id="bQq-Vd-aMn"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" id="hI8-fC-FPS"/>
+                            <constraint firstAttribute="trailing" secondItem="JHl-kG-fcm" secondAttribute="trailing" constant="8" id="jTW-wv-bpO"/>
+                            <constraint firstItem="I5j-k7-6GL" firstAttribute="centerX" secondItem="SaU-sd-7nC" secondAttribute="centerX" id="y5X-go-Am4"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="se4-0B-lAC"/>
                     </view>
                     <connections>
                         <outlet property="progressBar" destination="Inc-y0-THG" id="eUT-Y9-ojo"/>
+                        <outlet property="videoNotesTextView" destination="uf2-v8-ZNa" id="YPW-w1-OjS"/>
                         <outlet property="videoThumbnail" destination="IIk-6O-rvH" id="uph-aQ-u6K"/>
                         <outlet property="videoTitleLabel" destination="o5n-Hl-8rF" id="jHr-W6-HdG"/>
                     </connections>
@@ -562,17 +586,6 @@
                                     <constraint firstAttribute="height" constant="4" id="uGU-4z-WMP"/>
                                 </constraints>
                             </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWs-z4-dbg">
-                                <rect key="frame" x="22" y="767" width="372" height="66"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.240886867" green="0.29431769250000001" blue="0.35824936629999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <state key="normal" title="Select Video"/>
-                                <connections>
-                                    <action selector="handleActionButtonPressed:" destination="PYg-oc-Tib" eventType="touchUpInside" id="iEh-l2-SfM"/>
-                                </connections>
-                            </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q9B-cp-iv7">
                                 <rect key="frame" x="22" y="342" width="50" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -601,6 +614,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWs-z4-dbg">
+                                <rect key="frame" x="22" y="796" width="372" height="66"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.32209893630000003" green="0.27378335770000001" blue="0.41960775569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Select Video"/>
+                                <connections>
+                                    <action selector="handleActionButtonPressed:" destination="PYg-oc-Tib" eventType="touchUpInside" id="iEh-l2-SfM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -986,6 +1010,9 @@
             <point key="canvasLocation" x="-1338" y="831"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="play_button" width="500" height="500"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="zmh-43-AoD"/>
     </inferredMetricsTieBreakers>

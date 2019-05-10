@@ -15,6 +15,7 @@ class API {
     let videoCollection = Firestore.firestore().collection("videos")
     let albumCollection = Firestore.firestore().collection("albums")
     let userCollection = Firestore.firestore().collection("users")
+    let commentCollection = Firestore.firestore().collection("comments")
     let storageRef = Storage.storage()
     let thumbnailsStorageReference = Storage.storage().reference().child("thumbnail_images")
     let userID = Auth.auth().currentUser?.uid as! String
@@ -104,6 +105,35 @@ class API {
             if let data = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
                 let album = try? decoder.decode(Album.self, from: data)
                 completion(album)
+            }
+        }
+    }
+    
+    // Gets the given comment object given the comment id
+    func fetchComment(withId id:String, completion: @escaping (Comment?) -> Void){
+        let docRef = commentCollection.document(id)
+        docRef.getDocument { (docSnap, error) in
+            
+            guard error == nil, let doc = docSnap, doc.exists == true else {
+                print("Error Document not Found: \(error.debugDescription)")
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            // make mutable copy of the NSDictionary
+            var dict = doc.data()
+            for (key, value) in dict! {
+                if let value = value as? Date {
+                    let formatter = DateFormatter()
+                    dict?[key] = formatter.string(from: value)
+                }
+            }
+            
+            //Serialize the Dictionary into a JSON Data representation, then decode it using the Decoder().
+            if let data = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
+                let comment = try? decoder.decode(Comment.self, from: data)
+                completion(comment)
             }
         }
     }
@@ -275,4 +305,35 @@ class API {
         }
         videoCollection.document(video).delete()
     }
+    
+    private func addComment(withID commentID: String, toVideo videoID: String){
+        videoCollection.document(videoID).updateData([
+            "comments": FieldValue.arrayUnion([commentID])
+        ]) { err in
+            if let err = err {
+                print("Error updating the document: \(err)")
+            } else {
+                print("Document succesfully updated")
+            }
+        }
+    }
+    
+    func addComment(withText text: String, toVideo video: String){
+        let docData: [String: Any] = [
+            "body": text,
+            "timestamp": Int(NSDate().timeIntervalSince1970),
+            "userID": userID
+        ]
+        var comment: DocumentReference? = nil
+        comment = commentCollection.addDocument(data: docData) {err in
+            if let err = err{
+                print("Error adding document: \(err)")
+            } else {
+                print("Document Added with id \(comment!.documentID)")
+                self.addComment(withID: comment!.documentID, toVideo: video)
+            }
+        }
+        
+    }
+    
 }
