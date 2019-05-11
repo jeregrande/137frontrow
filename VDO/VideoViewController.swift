@@ -77,7 +77,11 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         videoNotesTextView.text = video?.notes
         
         commentView.register(CommentViewCell.self, forCellWithReuseIdentifier: cellID)
+        
+        commentView.keyboardDismissMode = .interactive
         setCommentInputComponent()
+        
+        setupKeyboardObserver()
         
         setVideoThumbnail()
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
@@ -170,7 +174,9 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         
         // constraint anchors
         containerView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        containerViewBottomAnchor = containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        containerViewBottomAnchor?.isActive = true
         containerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
@@ -204,6 +210,33 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         
     }
     
+    var containerViewBottomAnchor: NSLayoutConstraint?
+    
+    func setupKeyboardObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func handleKeyboardWillShow(notification: Notification){
+        let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        print(keyboardFrame.height)
+        let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+        
+        // move input area
+        containerViewBottomAnchor?.constant = -keyboardFrame.height + view.safeAreaInsets.bottom
+        UIView.animate(withDuration: keyboardDuration as! TimeInterval){
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func handleKeyboardWillHide(notification: Notification){
+        let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+        containerViewBottomAnchor?.constant = 0
+        UIView.animate(withDuration: keyboardDuration as! TimeInterval){
+            self.view.layoutIfNeeded()
+        }
+    }
     
     @objc func handleCommentSend(){
         api.addComment(withText: inputTextField.text!, toVideo: video!.videoID)
@@ -271,6 +304,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
                 print("Comment: \(comment)")
                 self.comments.append(comment!)
                 DispatchQueue.main.async(execute: {
+                    print("table data reloaded")
                     self.commentView?.reloadData()
                 })
             }
@@ -286,6 +320,13 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
             }
         }
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
         player?.removeObserver(self, forKeyPath: "timeControlStatus")

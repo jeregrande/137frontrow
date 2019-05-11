@@ -47,18 +47,19 @@ class ViewPreviewCell: UICollectionViewCell {
         thumbnailView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         thumbnailView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         thumbnailView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        
-        let blur = UIBlurEffect(style: .light)
-        let blurView = UIVisualEffectView(effect: blur)
-        blurView.clipsToBounds = true
-        blurView.frame = thumbnailView.bounds
-        thumbnailView.addSubview(blurView)
-        thumbnailView.sendSubviewToBack(blurView)
+    
         
         videoTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         videoTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
         videoTitleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
         videoTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        
+//        let blur = UIBlurEffect(style: .light)
+//        let blurView = UIVisualEffectView(effect: blur)
+//        blurView.translatesAutoresizingMaskIntoConstraints = false
+//        blurView.clipsToBounds = true
+//        blurView.frame = thumbnailView.bounds
+//        addSubview(blurView)
     }
     
     required init?(coder aDecoder: NSCoder) {

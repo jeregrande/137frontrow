@@ -112,12 +112,23 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
                 }
                 self.videos.append(video!)
                 self.filteredData.append(video!)
-                DispatchQueue.main.async(execute: {
-                    self.mainScrollView?.reloadData()
-                })
+                self.timer?.invalidate()
+                self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+
             }
         }
     }
+    
+    // Workaround for fixing table reloads
+    var timer: Timer?
+    
+    @objc func handleReloadTable(){
+        DispatchQueue.main.async(execute: {
+            print("table data reloaded")
+            self.mainScrollView?.reloadData()
+        })
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
