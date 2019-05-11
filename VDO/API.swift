@@ -51,6 +51,37 @@ class API {
         }
     }
     
+    func addUserDocumentListener(withId id:String, completion: @escaping (User?) -> Void){
+        userCollection.document(id).addSnapshotListener{documentSnapshot, error in
+            guard let document = documentSnapshot else {
+                print("Error fetching document: \(error)")
+                return
+            }
+            // DO SOMETHING
+            guard error == nil, document.exists == true else {
+                print("Error Document not Found: \(error.debugDescription)")
+                return
+            }
+            
+            let decoder = JSONDecoder()
+            
+            // make mutable copy of the NSDictionary
+            var dict = document.data()
+            for (key, value) in dict! {
+                if let value = value as? Date {
+                    let formatter = DateFormatter()
+                    dict?[key] = formatter.string(from: value)
+                }
+            }
+            
+            //Serialize the Dictionary into a JSON Data representation, then decode it using the Decoder().
+            if let data = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
+                let user = try? decoder.decode(User.self, from: data)
+                completion(user)
+            }
+        }
+    }
+    
     func fetchVideo(withId id:String, completion: @escaping (Video?) -> Void){
         let docRef = videoCollection.document(id)
         docRef.getDocument { (docSnap, error) in
