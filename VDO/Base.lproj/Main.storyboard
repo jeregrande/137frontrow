@@ -651,10 +651,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWs-z4-dbg">
-                                <rect key="frame" x="22" y="796" width="372" height="66"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWs-z4-dbg">
+                                <rect key="frame" x="20" y="796" width="374" height="66"/>
                                 <color key="backgroundColor" red="0.32209893630000003" green="0.27378335770000001" blue="0.41960775569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="tqL-o9-zUC"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Select Video"/>
@@ -665,10 +667,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="iWs-z4-dbg" firstAttribute="bottom" secondItem="VgV-Bk-g6Q" secondAttribute="bottom" id="2Lw-lG-gKK"/>
                             <constraint firstItem="VgV-Bk-g6Q" firstAttribute="trailing" secondItem="gud-tW-kY9" secondAttribute="trailing" constant="46" id="6dp-kE-imK"/>
                             <constraint firstItem="gud-tW-kY9" firstAttribute="top" secondItem="VgV-Bk-g6Q" secondAttribute="top" constant="139" id="9Xb-aA-Veh"/>
+                            <constraint firstItem="VgV-Bk-g6Q" firstAttribute="trailing" secondItem="iWs-z4-dbg" secondAttribute="trailing" constant="20" id="Jng-AZ-6e8"/>
                             <constraint firstItem="wcc-Zv-73K" firstAttribute="leading" secondItem="VgV-Bk-g6Q" secondAttribute="leading" id="Qlb-hx-hcK"/>
                             <constraint firstItem="wcc-Zv-73K" firstAttribute="top" secondItem="VgV-Bk-g6Q" secondAttribute="top" constant="42" id="Qmf-BW-2T3"/>
+                            <constraint firstItem="iWs-z4-dbg" firstAttribute="leading" secondItem="VgV-Bk-g6Q" secondAttribute="leading" constant="20" id="XGJ-7B-8b7"/>
                             <constraint firstItem="VgV-Bk-g6Q" firstAttribute="trailing" secondItem="wcc-Zv-73K" secondAttribute="trailing" id="caM-5H-VpP"/>
                             <constraint firstItem="gud-tW-kY9" firstAttribute="leading" secondItem="VgV-Bk-g6Q" secondAttribute="leading" constant="48" id="fJG-Uc-GO7"/>
                         </constraints>
@@ -1051,6 +1056,7 @@
         <image name="play_button" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Qx4-nv-znT"/>
         <segue reference="5sz-V3-qZN"/>
     </inferredMetricsTieBreakers>
 </document>

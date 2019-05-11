@@ -11,6 +11,7 @@ import Firebase
 
 class API {
     
+    //Firebase
     let firestore = Firestore.firestore()
     let videoCollection = Firestore.firestore().collection("videos")
     let albumCollection = Firestore.firestore().collection("albums")

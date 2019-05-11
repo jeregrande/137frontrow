@@ -13,6 +13,7 @@ target 'VDO' do
   pod 'FirebaseUI'
   
   
+  
   target 'VDOTests' do
     inherit! :search_paths
     # Pods for testing
@@ -21,6 +22,7 @@ target 'VDO' do
     
     # UI Auth firebase
     pod 'FirebaseUI'
+
   end
 
   target 'VDOUITests' do
