@@ -159,6 +159,9 @@
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Sia-Aa-ulo">
                                 <rect key="frame" x="0.5" y="68" width="413" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="SRB-Is-djW" id="ZGP-CM-6pD"/>
+                                </connections>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43H-8U-5je">
                                 <rect key="frame" x="164" y="44" width="46" height="21"/>
@@ -222,6 +225,7 @@
                     </view>
                     <connections>
                         <outlet property="mainScrollView" destination="BdB-kI-RWs" id="TeE-3E-jOt"/>
+                        <outlet property="searchBar" destination="Sia-Aa-ulo" id="EH4-Gj-rmm"/>
                         <segue destination="PLO-7q-qaO" kind="show" identifier="Select Video" id="85P-zu-A82"/>
                     </connections>
                 </viewController>
@@ -644,17 +648,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a video to begin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwm-HO-8V6">
-                                <rect key="frame" x="121" y="327" width="175" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select a video to begin" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwm-HO-8V6">
+                                <rect key="frame" x="119.5" y="437.5" width="175" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWs-z4-dbg">
-                                <rect key="frame" x="22" y="796" width="372" height="66"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWs-z4-dbg">
+                                <rect key="frame" x="20" y="796" width="374" height="66"/>
                                 <color key="backgroundColor" red="0.32209893630000003" green="0.27378335770000001" blue="0.41960775569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="tqL-o9-zUC"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="28"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Select Video"/>
@@ -665,12 +670,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="iWs-z4-dbg" firstAttribute="bottom" secondItem="VgV-Bk-g6Q" secondAttribute="bottom" id="2Lw-lG-gKK"/>
                             <constraint firstItem="VgV-Bk-g6Q" firstAttribute="trailing" secondItem="gud-tW-kY9" secondAttribute="trailing" constant="46" id="6dp-kE-imK"/>
                             <constraint firstItem="gud-tW-kY9" firstAttribute="top" secondItem="VgV-Bk-g6Q" secondAttribute="top" constant="139" id="9Xb-aA-Veh"/>
+                            <constraint firstItem="VgV-Bk-g6Q" firstAttribute="trailing" secondItem="iWs-z4-dbg" secondAttribute="trailing" constant="20" id="Jng-AZ-6e8"/>
                             <constraint firstItem="wcc-Zv-73K" firstAttribute="leading" secondItem="VgV-Bk-g6Q" secondAttribute="leading" id="Qlb-hx-hcK"/>
                             <constraint firstItem="wcc-Zv-73K" firstAttribute="top" secondItem="VgV-Bk-g6Q" secondAttribute="top" constant="42" id="Qmf-BW-2T3"/>
+                            <constraint firstItem="iWs-z4-dbg" firstAttribute="leading" secondItem="VgV-Bk-g6Q" secondAttribute="leading" constant="20" id="XGJ-7B-8b7"/>
                             <constraint firstItem="VgV-Bk-g6Q" firstAttribute="trailing" secondItem="wcc-Zv-73K" secondAttribute="trailing" id="caM-5H-VpP"/>
+                            <constraint firstItem="Vwm-HO-8V6" firstAttribute="centerX" secondItem="oCi-Te-amJ" secondAttribute="centerX" id="etl-3D-fcY"/>
                             <constraint firstItem="gud-tW-kY9" firstAttribute="leading" secondItem="VgV-Bk-g6Q" secondAttribute="leading" constant="48" id="fJG-Uc-GO7"/>
+                            <constraint firstItem="Vwm-HO-8V6" firstAttribute="centerY" secondItem="oCi-Te-amJ" secondAttribute="centerY" id="hdJ-R9-6ic"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="VgV-Bk-g6Q"/>
                     </view>

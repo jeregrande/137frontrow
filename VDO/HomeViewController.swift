@@ -10,40 +10,30 @@ import UIKit
 import FirebaseUI
 import Firebase
 
-class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ViewPreviewCell
-        let video = videos[indexPath.item]
-        api.getThumbnailImage(forVideo: video.videoID) { (image) in
-            cell.thumbnailView.image = image
-        }
-        cell.videoTitleLabel.text = video.title
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Item selected at: \(indexPath.item)")
-        let video = videos[indexPath.item]
-        performSegue(withIdentifier: "Select Video", sender: video)
-    }
+class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
     
     var imagePicker: ImagePicker!
     var user: User! {didSet{getVideosForUser()}}
-    //    var videos = [Video]() {didSet{addVideoToScrollView()}}
     var videos = [Video]()
+    var filteredData = [Video]()
     let api = API()
     let userID = Auth.auth().currentUser?.uid
     let cellID = "cellID"
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mainScrollView: UICollectionView!
+    
+
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        observeUser()
+        
+        mainScrollView.translatesAutoresizingMaskIntoConstraints = false
+        mainScrollView.register(ViewPreviewCell.self, forCellWithReuseIdentifier: cellID)
+    }
+    
     // Sign OUT
     @IBAction func signOut(_ sender: UIButton) {
         let authUI = FUIAuth.defaultAuthUI()
@@ -62,74 +52,71 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
-        mainScrollView.translatesAutoresizingMaskIntoConstraints = false
-        mainScrollView.register(ViewPreviewCell.self, forCellWithReuseIdentifier: cellID)
-        
-        api.getUser(withId: userID as! String) { (user) in
-            guard user != nil else{
-                print("error")
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        let lowerSearchText = searchText.lowercased()
+        filteredData = searchText.isEmpty ? videos : videos.filter { video -> Bool in
+            return video.title.lowercased().hasPrefix(lowerSearchText) || video.notes.lowercased().hasPrefix(lowerSearchText)
+        }
+        DispatchQueue.main.async(execute: {
+            self.mainScrollView?.reloadData()
+        })
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return filteredData.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ViewPreviewCell
+        let video = filteredData[indexPath.item]
+        api.getThumbnailImage(forVideo: video.videoID) { (image) in
+            cell.thumbnailView.image = image
+        }
+        cell.videoTitleLabel.text = video.title
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 200)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("Item selected at: \(indexPath.item)")
+        let video = filteredData[indexPath.item]
+        performSegue(withIdentifier: "Select Video", sender: video)
+    }
+    
+    // Listen for changes in the user object
+    func observeUser(){
+        api.addUserDocumentListener(withId: userID!) { (user) in
+            guard user != nil else {
+                print("user nil")
                 return
             }
             self.user = user
-            //            self.addVideoChangeListener()
-        }
-    }
-    
-    func addVideoChangeListener(){
-        api.userCollection.document(userID as! String).addSnapshotListener{documentSnapshot, error in
-            guard let document = documentSnapshot else {
-                print("Error fetching document: \(error)")
-                return
-            }
-            guard let data = document.data() else {
-                print("Document was empty:")
-                return
-            }
-            // check if the video is already in the array
-            if let newVideos = data["videos"] {
-                for newVid in newVideos as! Array<String>{
-                    if !self.user.videos.contains(newVid){
-                        self.user.videos.append(newVid)
-                    }
-                }
-            }
         }
     }
     
     // Get the videos of the user
     func getVideosForUser(){
         //        remove all the vids
+        print("user object changed")
         videos.removeAll()
+        filteredData.removeAll()
         // itterate over all the video ID's for the user and fetch the Video Data
         for videoID in user.videos{
             api.fetchVideo(withId: videoID) { (video) in
                 guard video != nil else {
-                    print("error")
+                    print("error could not fetch video with ID: \(videoID)")
                     return
                 }
                 self.videos.append(video!)
+                self.filteredData.append(video!)
                 DispatchQueue.main.async(execute: {
                     self.mainScrollView?.reloadData()
                 })
             }
         }
-        //        self.user.videos.forEach({ (videoID) in
-        //
-        //            if !videos.contains(where: { $0.videoID == videoID }){
-        //                self.api.fetchVideo(withId: videoID, completion: { (video) in
-        //                    guard video != nil else {
-        //                        print("error")
-        //                        return
-        //                    }
-        //                    self.videos.append(video!)
-        //                })
-        //            }
-        //            // do nothing, the video is already in the view
-        //        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -137,7 +124,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             switch identifier {
             case "Select Video" :
                 if let vc = segue.destination as? VideoViewController{
-                    vc.video = sender as! Video
+                    vc.video = sender as? Video
                 }
             default: break
             }

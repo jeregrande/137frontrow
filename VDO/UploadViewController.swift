@@ -67,9 +67,13 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                         return
                     } else {
                         // Add video to the videos collection
+                        
+                        let notes = self.notesTextView.text
                         // create the new video document and get its ID
-                        let vidID = self.api.addVideoToDatabase(title: title, fileURL: url!.absoluteString, notes: self.notesTextView.text)
+                        let vidID = self.api.addVideoToDatabase(title: title, fileURL: url!.absoluteString, notes: notes!)
                         // add the thumbnail image to the video document's values
+                        
+                        
                         self.api.addVideoToUser(videoID: vidID)
                         //Create the thumbnail Image
                         // upload the image and get the storageURL
