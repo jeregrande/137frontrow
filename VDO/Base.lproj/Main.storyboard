@@ -151,8 +151,8 @@
                                     <action selector="signOut:" destination="SRB-Is-djW" eventType="touchUpInside" id="ov4-J1-LAm"/>
                                 </connections>
                             </button>
-                            <searchBar contentMode="redraw" searchBarStyle="minimal" translucent="NO" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sia-Aa-ulo">
-                                <rect key="frame" x="0.5" y="68" width="393.5" height="100"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" text="" translucent="NO" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sia-Aa-ulo">
+                                <rect key="frame" x="0.0" y="68" width="413" height="100"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <scopeButtonTitles>
@@ -193,10 +193,7 @@
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <real key="value" value="0.0"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -207,12 +204,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="qbS-94-evj" firstAttribute="bottom" secondItem="CkO-pb-fmn" secondAttribute="bottom" constant="30" id="5qF-C5-csh"/>
-                            <constraint firstItem="Sia-Aa-ulo" firstAttribute="leading" secondItem="Fnj-O9-Q9P" secondAttribute="leading" constant="0.47999999999999998" id="G4P-9I-UJh"/>
+                            <constraint firstItem="Sia-Aa-ulo" firstAttribute="leading" secondItem="Fnj-O9-Q9P" secondAttribute="leading" constant="0.10000000000000001" id="G4P-9I-UJh"/>
                             <constraint firstItem="BdB-kI-RWs" firstAttribute="top" secondItem="Sia-Aa-ulo" secondAttribute="bottom" id="K97-P0-ctr"/>
                             <constraint firstAttribute="bottom" secondItem="BdB-kI-RWs" secondAttribute="bottom" id="cPa-NB-wmh"/>
                             <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="BdB-kI-RWs" secondAttribute="trailing" id="dB0-rr-Hw0"/>
                             <constraint firstItem="Sia-Aa-ulo" firstAttribute="top" secondItem="Fnj-O9-Q9P" secondAttribute="top" constant="68" id="sPO-F1-1yD"/>
-                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="Sia-Aa-ulo" secondAttribute="trailing" constant="20" id="sdX-KN-gY1"/>
+                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="Sia-Aa-ulo" secondAttribute="trailing" constant="1" id="sdX-KN-gY1"/>
                             <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="CkO-pb-fmn" secondAttribute="trailing" constant="35" id="tki-aM-JgZ"/>
                             <constraint firstItem="BdB-kI-RWs" firstAttribute="leading" secondItem="qbS-94-evj" secondAttribute="leading" id="xi2-5a-U7i"/>
                         </constraints>
@@ -244,19 +241,6 @@
                                     <segue destination="SRB-Is-djW" kind="show" identifier="Exit Video View" id="zmh-43-AoD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uej-tx-CDE">
-                                <rect key="frame" x="346" y="44" width="54" height="30"/>
-                                <state key="normal" title="Options"/>
-                                <connections>
-                                    <action selector="signOut:" destination="SRB-Is-djW" eventType="touchUpInside" id="VcY-Wf-Uhf"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Player" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b3X-cl-pFA">
-                                <rect key="frame" x="159" y="44" width="96" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IIk-6O-rvH">
                                 <rect key="frame" x="0.0" y="82" width="414" height="233"/>
                                 <constraints>
@@ -363,7 +347,6 @@
                             <constraint firstAttribute="trailing" secondItem="Inc-y0-THG" secondAttribute="trailing" constant="16" id="3bT-sq-bQI"/>
                             <constraint firstItem="o5n-Hl-8rF" firstAttribute="top" secondItem="I5j-k7-6GL" secondAttribute="bottom" constant="18" id="4qn-zB-9Qa"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" constant="38" id="8BW-6v-55u"/>
-                            <constraint firstItem="b3X-cl-pFA" firstAttribute="centerX" secondItem="SaU-sd-7nC" secondAttribute="centerX" id="8gC-hO-igo"/>
                             <constraint firstItem="uf2-v8-ZNa" firstAttribute="top" secondItem="o5n-Hl-8rF" secondAttribute="bottom" constant="24" id="9oE-Yz-wPk"/>
                             <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="o5n-Hl-8rF" secondAttribute="trailing" constant="24" id="EVj-hG-qaw"/>
                             <constraint firstItem="G8J-W3-FNw" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="16" id="H7c-kU-Rw8"/>
@@ -378,14 +361,11 @@
                             <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="uf2-v8-ZNa" secondAttribute="trailing" constant="16" id="bQq-Vd-aMn"/>
                             <constraint firstItem="iyT-C4-DUJ" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="14" id="f5a-B4-mjf"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" id="hI8-fC-FPS"/>
-                            <constraint firstItem="b3X-cl-pFA" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" id="ha7-gF-CE1"/>
                             <constraint firstAttribute="trailing" secondItem="JHl-kG-fcm" secondAttribute="trailing" constant="16" id="jTW-wv-bpO"/>
                             <constraint firstItem="NC0-2A-QcZ" firstAttribute="top" secondItem="uf2-v8-ZNa" secondAttribute="bottom" constant="28" id="oZW-QF-RZx"/>
-                            <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="Uej-tx-CDE" secondAttribute="trailing" constant="14" id="t6d-lF-ojU"/>
                             <constraint firstItem="Inc-y0-THG" firstAttribute="leading" secondItem="SaU-sd-7nC" secondAttribute="leading" constant="16" id="tmu-hU-Ic8"/>
                             <constraint firstItem="RLc-Mf-X5P" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="16" id="uRu-vk-Yzf"/>
                             <constraint firstItem="NC0-2A-QcZ" firstAttribute="top" secondItem="G8J-W3-FNw" secondAttribute="bottom" constant="4" id="wsj-x2-yur"/>
-                            <constraint firstItem="Uej-tx-CDE" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" id="x3r-cF-7bR"/>
                             <constraint firstItem="I5j-k7-6GL" firstAttribute="centerX" secondItem="SaU-sd-7nC" secondAttribute="centerX" id="y5X-go-Am4"/>
                             <constraint firstItem="I5j-k7-6GL" firstAttribute="top" secondItem="Inc-y0-THG" secondAttribute="bottom" constant="8" id="yrT-Rt-BaH"/>
                         </constraints>
@@ -1084,7 +1064,6 @@
         <image name="play_button" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="85P-zu-A82"/>
-        <segue reference="zmh-43-AoD"/>
+        <segue reference="5sz-V3-qZN"/>
     </inferredMetricsTieBreakers>
 </document>

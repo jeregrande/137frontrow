@@ -43,14 +43,16 @@ class ViewPreviewCell: UICollectionViewCell {
         addSubview(videoTitleLabel)
 //        addSubview(activityIndicator)
         
+        thumbnailView.layer.masksToBounds = true;
+        thumbnailView.layer.cornerRadius = 10
         thumbnailView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         thumbnailView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        thumbnailView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        thumbnailView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        thumbnailView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
+        thumbnailView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
     
         
-        videoTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
-        videoTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8).isActive = true
+        videoTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        videoTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         videoTitleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
         videoTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
