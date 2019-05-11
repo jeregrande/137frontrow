@@ -30,6 +30,7 @@
 		7365FCB322307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
 		736BEE19228508980015C106 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736BEE18228508970015C106 /* CommentViewController.swift */; };
 		736BEE1E2285339C0015C106 /* CommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736BEE1D2285339C0015C106 /* CommentViewCell.swift */; };
+		73969F6422873F1A00D08DE4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73969F6322873F1A00D08DE4 /* Extensions.swift */; };
 		739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739819A122489D6900C74DE0 /* SignUpViewController.swift */; };
 		73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F153E6225DDCE600802F57 /* HomeViewController.swift */; };
 		BEFC5D9BAF91F903F6813B35 /* Pods_VDOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7675252B136194613B911AC /* Pods_VDOTests.framework */; };
@@ -84,6 +85,7 @@
 		7365FCB022307545003A0366 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		736BEE18228508970015C106 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		736BEE1D2285339C0015C106 /* CommentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewCell.swift; sourceTree = "<group>"; };
+		73969F6322873F1A00D08DE4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		739819A122489D6900C74DE0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		73F153E6225DDCE600802F57 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9293C2AF7888E24B55EF79B4 /* Pods-VDO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDO.debug.xcconfig"; path = "Target Support Files/Pods-VDO/Pods-VDO.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		733425BE222FC5CA009B3207 /* VDO */ = {
 			isa = PBXGroup;
 			children = (
+				73969F6222873EFC00D08DE4 /* Extensions */,
 				736BEE1A228533500015C106 /* View */,
 				736BEE17228507890015C106 /* Controller */,
 				7302ABC72276C6F30050D292 /* Model */,
@@ -211,6 +214,14 @@
 				732988CA2285E9E6004C0949 /* VideoPreviewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		73969F6222873EFC00D08DE4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				73969F6322873F1A00D08DE4 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C0CD66D2256A6703DFD5048F /* Pods */ = {
@@ -617,6 +628,7 @@
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,
 				732988CB2285E9E6004C0949 /* VideoPreviewCell.swift in Sources */,
 				7310FB502273FDA600941746 /* API.swift in Sources */,
+				73969F6422873F1A00D08DE4 /* Extensions.swift in Sources */,
 				73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */,
 				7303B466227E1AA100030DB8 /* Comment.swift in Sources */,
 				736BEE1E2285339C0015C106 /* CommentViewCell.swift in Sources */,

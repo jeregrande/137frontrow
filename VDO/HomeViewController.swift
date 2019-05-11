@@ -69,9 +69,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ViewPreviewCell
         let video = filteredData[indexPath.item]
-        api.getThumbnailImage(forVideo: video.videoID) { (image) in
-            cell.thumbnailView.image = image
-        }
+        cell.thumbnailView.loadImageUsingCacheWrithURLString(video.thumbnail)
         cell.videoTitleLabel.text = video.title
         return cell
     }
