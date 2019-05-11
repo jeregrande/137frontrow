@@ -81,7 +81,9 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         commentView.keyboardDismissMode = .interactive
         setCommentInputComponent()
         
+        setupVideoPlayerObserver()
         setupKeyboardObserver()
+        
         
         setVideoThumbnail()
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
@@ -91,7 +93,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
             player = AVPlayer(playerItem: playerItem)
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = videoThumbnail.bounds
-            playerLayer?.videoGravity = .resizeAspect
+            playerLayer?.videoGravity = .resizeAspectFill
             videoThumbnail.layer.addSublayer(playerLayer!)
             player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 2), queue: DispatchQueue.main) {[weak self] (progressTime) in
                 if let duration = self!.player?.currentItem?.duration {
@@ -121,20 +123,25 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         let comment = comments[indexPath.item]
         print("Comment: \(comment.body)")
         cell.textView.text  = comment.body
+        cell.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         api.getUser(withId: comment.userID) { (user) in
-            cell.userNameLabel.text = user?.displayName
+            cell.userNameLabel.text = user!.displayName + " said:"
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 80)
+        return CGSize(width: view.frame.width, height: 50)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // handle tap events
         print("You selected cell #\(indexPath.item)!")
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
     }
     
     
@@ -216,6 +223,10 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func setupVideoPlayerObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(playerEndedPlaying), name: Notification.Name("AVPlayerItemDidPlayToEndTimeNotification"), object: nil)
     }
     
     @objc func handleKeyboardWillShow(notification: Notification){
@@ -311,6 +322,14 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         }
     }
     
+    @objc func playerEndedPlaying(_ notification: Notification) {
+        print("player finished playing")
+        DispatchQueue.main.async {[weak self] in
+            self?.player?.seek(to: CMTime.zero)
+            self?.player?.play() //This is optional
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
@@ -323,7 +342,6 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
         NotificationCenter.default.removeObserver(self)
     }
     
