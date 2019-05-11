@@ -93,6 +93,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
             player = AVPlayer(playerItem: playerItem)
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = videoThumbnail.bounds
+//            playerLayer?.bounds = videoThumbnail.bounds
             playerLayer?.videoGravity = .resizeAspectFill
             videoThumbnail.layer.addSublayer(playerLayer!)
             player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 2), queue: DispatchQueue.main) {[weak self] (progressTime) in
@@ -147,14 +148,8 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     
     func setVideoThumbnail(){
         let thumbnailImageURL = video?.thumbnail
-        self.api.getThumbnailImage(withImageURL: thumbnailImageURL!, completition: {(image) in
-            guard image != nil else {
-                print("error")
-                return
-            }
-            self.videoThumbnail.image = image
-            self.progressBar.isHidden = false
-        })
+        videoThumbnail.loadImageUsingCacheWrithURLString(thumbnailImageURL!)
+        self.progressBar.isHidden = false
     }
     
     @IBAction func handlePlayPause(_ sender: UIButton) {

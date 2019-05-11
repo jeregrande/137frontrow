@@ -151,35 +151,21 @@
                                     <action selector="signOut:" destination="SRB-Is-djW" eventType="touchUpInside" id="ov4-J1-LAm"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBE-Nb-HGZ">
-                                <rect key="frame" x="323" y="44" width="36" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="More"/>
-                            </button>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Sia-Aa-ulo">
-                                <rect key="frame" x="0.5" y="68" width="413" height="56"/>
+                            <searchBar contentMode="redraw" searchBarStyle="minimal" translucent="NO" showsScopeBar="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Sia-Aa-ulo">
+                                <rect key="frame" x="0.5" y="68" width="393.5" height="100"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Uploaded</string>
+                                    <string>Albums</string>
+                                    <string>Shared with me</string>
+                                </scopeButtonTitles>
                                 <connections>
                                     <outlet property="delegate" destination="SRB-Is-djW" id="ZGP-CM-6pD"/>
                                 </connections>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Home" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="43H-8U-5je">
-                                <rect key="frame" x="164" y="44" width="46" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="AbR-5d-KmE">
-                                <rect key="frame" x="42.5" y="132" width="329" height="29"/>
-                                <segments>
-                                    <segment title="Albums"/>
-                                    <segment title="Uploaded"/>
-                                    <segment title="Shared with me"/>
-                                </segments>
-                            </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BdB-kI-RWs">
-                                <rect key="frame" x="0.0" y="168" width="414" height="628"/>
+                                <rect key="frame" x="0.0" y="168" width="414" height="728"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qZM-xp-qN9">
                                     <size key="itemSize" width="50" height="50"/>
@@ -194,11 +180,25 @@
                                 </connections>
                             </collectionView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CkO-pb-fmn">
-                                <rect key="frame" x="20" y="807" width="374" height="66"/>
-                                <color key="backgroundColor" red="0.32209893630000003" green="0.27378335770000001" blue="0.41960775569999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="313" y="766" width="66" height="66"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="66" id="YXQ-rG-dkV"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="45"/>
                                 <color key="tintColor" red="0.96807536530000005" green="0.96807536530000005" blue="0.96807536530000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="+"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="PYg-oc-Tib" kind="show" id="Qx4-nv-znT"/>
                                 </connections>
@@ -206,19 +206,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="AbR-5d-KmE" firstAttribute="centerX" secondItem="Fnj-O9-Q9P" secondAttribute="centerX" id="2ba-BX-utW"/>
-                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="AbR-5d-KmE" secondAttribute="trailing" constant="42.5" id="Eor-fx-Xvp"/>
+                            <constraint firstItem="qbS-94-evj" firstAttribute="bottom" secondItem="CkO-pb-fmn" secondAttribute="bottom" constant="30" id="5qF-C5-csh"/>
                             <constraint firstItem="Sia-Aa-ulo" firstAttribute="leading" secondItem="Fnj-O9-Q9P" secondAttribute="leading" constant="0.47999999999999998" id="G4P-9I-UJh"/>
-                            <constraint firstItem="CkO-pb-fmn" firstAttribute="leading" secondItem="qbS-94-evj" secondAttribute="leading" constant="20" id="Hy6-RN-euL"/>
-                            <constraint firstItem="BdB-kI-RWs" firstAttribute="top" secondItem="AbR-5d-KmE" secondAttribute="bottom" constant="8" id="Ixh-UX-Xj6"/>
-                            <constraint firstItem="AbR-5d-KmE" firstAttribute="leading" secondItem="qbS-94-evj" secondAttribute="leading" constant="42.5" id="LmF-8h-dN3"/>
-                            <constraint firstItem="CkO-pb-fmn" firstAttribute="top" secondItem="BdB-kI-RWs" secondAttribute="bottom" constant="11" id="TSS-7I-J0y"/>
-                            <constraint firstAttribute="bottom" secondItem="CkO-pb-fmn" secondAttribute="bottom" constant="23" id="aIo-jr-QUA"/>
-                            <constraint firstItem="AbR-5d-KmE" firstAttribute="top" secondItem="Sia-Aa-ulo" secondAttribute="bottom" constant="8" id="crF-CV-iwV"/>
+                            <constraint firstItem="BdB-kI-RWs" firstAttribute="top" secondItem="Sia-Aa-ulo" secondAttribute="bottom" id="K97-P0-ctr"/>
+                            <constraint firstAttribute="bottom" secondItem="BdB-kI-RWs" secondAttribute="bottom" id="cPa-NB-wmh"/>
                             <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="BdB-kI-RWs" secondAttribute="trailing" id="dB0-rr-Hw0"/>
                             <constraint firstItem="Sia-Aa-ulo" firstAttribute="top" secondItem="Fnj-O9-Q9P" secondAttribute="top" constant="68" id="sPO-F1-1yD"/>
-                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="Sia-Aa-ulo" secondAttribute="trailing" constant="0.47999999999999998" id="sdX-KN-gY1"/>
-                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="CkO-pb-fmn" secondAttribute="trailing" constant="20" id="tki-aM-JgZ"/>
+                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="Sia-Aa-ulo" secondAttribute="trailing" constant="20" id="sdX-KN-gY1"/>
+                            <constraint firstItem="qbS-94-evj" firstAttribute="trailing" secondItem="CkO-pb-fmn" secondAttribute="trailing" constant="35" id="tki-aM-JgZ"/>
                             <constraint firstItem="BdB-kI-RWs" firstAttribute="leading" secondItem="qbS-94-evj" secondAttribute="leading" id="xi2-5a-U7i"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qbS-94-evj"/>
@@ -1089,6 +1084,7 @@
         <image name="play_button" width="500" height="500"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="85P-zu-A82"/>
         <segue reference="zmh-43-AoD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -28,6 +28,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         observeUser()
         
         mainScrollView.translatesAutoresizingMaskIntoConstraints = false
