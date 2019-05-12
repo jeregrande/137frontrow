@@ -18,15 +18,18 @@ class ViewPreviewCell: UICollectionViewCell {
     let videoTitleLabel: UILabel = {
         let label = UILabel()
         label.text = "Video Title"
-        label.font = UIFont.systemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
-//        let blur = UIBlurEffect(style: .light)
-//        let blurView = UIVisualEffectView(effect: blur)
-//        blurView.frame = label.bounds
-//        label.addSubview(blurView)
-//        label.sendSubviewToBack(blurView)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let videoTitle: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.clipsToBounds = true
+//        view.backgroundColor = #colorLiteral(red: 0.05882352963, green: 0.180392161, blue: 0.2470588237, alpha: 1)
+        return view
     }()
     
     let activityIndicator: UIActivityIndicatorView = {
@@ -41,7 +44,6 @@ class ViewPreviewCell: UICollectionViewCell {
         
         addSubview(thumbnailView)
         addSubview(videoTitleLabel)
-//        addSubview(activityIndicator)
         
         thumbnailView.layer.masksToBounds = true;
         thumbnailView.layer.cornerRadius = 10
@@ -49,19 +51,26 @@ class ViewPreviewCell: UICollectionViewCell {
         thumbnailView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         thumbnailView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10).isActive = true
         thumbnailView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        thumbnailView.addSubview(videoTitle)
+        
+        videoTitle.bottomAnchor.constraint(equalTo: thumbnailView.bottomAnchor).isActive = true
+        videoTitle.trailingAnchor.constraint(equalTo: thumbnailView.trailingAnchor).isActive = true
+        videoTitle.leadingAnchor.constraint(equalTo: thumbnailView.leadingAnchor).isActive = true
+        videoTitle.heightAnchor.constraint(equalToConstant: 40).isActive = true
     
         
-        videoTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        videoTitleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
         videoTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         videoTitleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
         videoTitleLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
-//        let blur = UIBlurEffect(style: .light)
-//        let blurView = UIVisualEffectView(effect: blur)
-//        blurView.translatesAutoresizingMaskIntoConstraints = false
-//        blurView.clipsToBounds = true
-//        blurView.frame = thumbnailView.bounds
-//        addSubview(blurView)
+        
+        let blur = UIBlurEffect(style: .light)
+        let blurView = UIVisualEffectView(effect: blur)
+        blurView.frame = videoTitle.bounds
+        blurView.clipsToBounds = true
+        blurView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        videoTitle.insertSubview(blurView, at: 0)
     }
     
     required init?(coder aDecoder: NSCoder) {
