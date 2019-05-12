@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 import AVKit
 
-class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var videoThumbnail: UIImageView!
     @IBOutlet weak var videoTitleLabel: UILabel!
@@ -330,9 +330,22 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
             switch identifier {
             case "Exit Video View":
                 player?.pause()
+            case "ShowMenuSegue":
+                if let tvc = segue.destination as? MenuViewController
+                {
+                    tvc.delegate = self
+                    if let ppc = tvc.popoverPresentationController
+                    {
+                        ppc.delegate = self
+                    }
+                }
             default: break
             }
         }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
     }
     
     override func viewDidDisappear(_ animated: Bool) {

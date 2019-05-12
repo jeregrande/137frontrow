@@ -28,9 +28,9 @@
 		7365FCB122307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
 		7365FCB222307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
 		7365FCB322307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
-		736BEE19228508980015C106 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736BEE18228508970015C106 /* CommentViewController.swift */; };
 		736BEE1E2285339C0015C106 /* CommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736BEE1D2285339C0015C106 /* CommentViewCell.swift */; };
 		73969F6422873F1A00D08DE4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73969F6322873F1A00D08DE4 /* Extensions.swift */; };
+		73969F662287A67E00D08DE4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73969F652287A67E00D08DE4 /* MenuViewController.swift */; };
 		739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739819A122489D6900C74DE0 /* SignUpViewController.swift */; };
 		73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F153E6225DDCE600802F57 /* HomeViewController.swift */; };
 		BEFC5D9BAF91F903F6813B35 /* Pods_VDOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7675252B136194613B911AC /* Pods_VDOTests.framework */; };
@@ -83,9 +83,9 @@
 		733425DF222FC5CB009B3207 /* VDOUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDOUITests.swift; sourceTree = "<group>"; };
 		733425E1222FC5CB009B3207 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7365FCB022307545003A0366 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		736BEE18228508970015C106 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		736BEE1D2285339C0015C106 /* CommentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewCell.swift; sourceTree = "<group>"; };
 		73969F6322873F1A00D08DE4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		73969F652287A67E00D08DE4 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		739819A122489D6900C74DE0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		73F153E6225DDCE600802F57 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9293C2AF7888E24B55EF79B4 /* Pods-VDO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDO.debug.xcconfig"; path = "Target Support Files/Pods-VDO/Pods-VDO.debug.xcconfig"; sourceTree = "<group>"; };
@@ -202,7 +202,7 @@
 		736BEE17228507890015C106 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				736BEE18228508970015C106 /* CommentViewController.swift */,
+				73969F652287A67E00D08DE4 /* MenuViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -617,7 +617,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				736BEE19228508980015C106 /* CommentViewController.swift in Sources */,
 				739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */,
 				7310FB55227414FC00941746 /* UploadViewController.swift in Sources */,
 				7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */,
@@ -625,6 +624,7 @@
 				73071A442272E49F0088A802 /* ImagePicker.swift in Sources */,
 				73300A6C2276CA43003FB82D /* Video.swift in Sources */,
 				7302ABC92276C7AA0050D292 /* User.swift in Sources */,
+				73969F662287A67E00D08DE4 /* MenuViewController.swift in Sources */,
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,
 				732988CB2285E9E6004C0949 /* VideoPreviewCell.swift in Sources */,
 				7310FB502273FDA600941746 /* API.swift in Sources */,

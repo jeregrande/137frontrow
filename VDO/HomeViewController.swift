@@ -10,7 +10,7 @@ import UIKit
 import FirebaseUI
 import Firebase
 
-class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
+class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UIActionSheetDelegate{
     
     var imagePicker: ImagePicker!
     var user: User! {didSet{getVideosForUser()}}
@@ -23,7 +23,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mainScrollView: UICollectionView!
     
-
+    var alertController = UIAlertController()
+    var profileAlertController = UIAlertController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,11 +33,14 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         
         observeUser()
         
+        setupAlertController()
+        setupProfileAlertController()
+        
         mainScrollView.translatesAutoresizingMaskIntoConstraints = false
         mainScrollView.register(ViewPreviewCell.self, forCellWithReuseIdentifier: cellID)
     }
     
-    // Sign OUT
+    // Sign OUT DEPRECATED
     @IBAction func signOut(_ sender: UIButton) {
         let authUI = FUIAuth.defaultAuthUI()
         
@@ -51,6 +56,71 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         } catch {
             print("Unkonwn Error")
         }
+    }
+    
+    func singOut(){
+        let authUI = FUIAuth.defaultAuthUI()
+        
+        guard authUI != nil else{
+            return
+        }
+        
+        do {
+            try authUI?.signOut()
+            dismiss(animated: true, completion: nil)
+        } catch let signOutError as NSError{
+            print("Error signing out: \(signOutError)")
+        } catch {
+            print("Unkonwn Error")
+        }
+    }
+    
+    @IBAction func handleProfile(_ sender: UIButton) {
+        self.present(profileAlertController, animated: true) {
+            // ...
+        }
+    }
+    
+    @IBAction func handleNew(_ sender: UIButton) {
+        self.present(alertController, animated: true) {
+            // ...
+        }
+    }
+    
+    func setupAlertController(){
+        alertController = UIAlertController(title: nil, message: "Create a new album or upload a new video", preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let newAlbumAction = UIAlertAction(title: "Album", style: .default) { (action) in
+            print("new album selected")
+        }
+        alertController.addAction(newAlbumAction)
+        
+        let newVideoAction = UIAlertAction(title: "Video", style: .default) { (action) in
+            print("new album selected")
+        }
+        alertController.addAction(newVideoAction)
+        //        No need for a destroy action
+        //        let destroyAction = UIAlertAction(title: "Destroy", style: .destructive) { (action) in
+        //            print(action)
+        //        }
+        //        alertController.addAction(destroyAction)
+    }
+    
+    func setupProfileAlertController(){
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // ...
+        }
+        profileAlertController.addAction(cancelAction)
+        let singOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { (action) in
+            print(action)
+            self.singOut()
+        }
+        profileAlertController.addAction(singOutAction)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -113,7 +183,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
                 self.filteredData.append(video!)
                 self.timer?.invalidate()
                 self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
-
+                
             }
         }
     }
