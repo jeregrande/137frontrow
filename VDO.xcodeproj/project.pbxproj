@@ -11,7 +11,6 @@
 		7302ABC92276C7AA0050D292 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302ABC82276C7AA0050D292 /* User.swift */; };
 		7303B466227E1AA100030DB8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7303B465227E1AA100030DB8 /* Comment.swift */; };
 		7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7303B467227E1DC900030DB8 /* VideoViewController.swift */; };
-		73071A442272E49F0088A802 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73071A432272E49F0088A802 /* ImagePicker.swift */; };
 		7310FB502273FDA600941746 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB4F2273FDA600941746 /* API.swift */; };
 		7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7310FB5122740D8100941746 /* AVFoundation.framework */; };
 		7310FB55227414FC00941746 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB54227414FC00941746 /* UploadViewController.swift */; };
@@ -63,7 +62,6 @@
 		7302ABC82276C7AA0050D292 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7303B465227E1AA100030DB8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		7303B467227E1DC900030DB8 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
-		73071A432272E49F0088A802 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7310FB4F2273FDA600941746 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		7310FB5122740D8100941746 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7310FB54227414FC00941746 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
@@ -162,23 +160,17 @@
 		733425BE222FC5CA009B3207 /* VDO */ = {
 			isa = PBXGroup;
 			children = (
+				7390E6392288C26400369ED1 /* API */,
 				73969F6222873EFC00D08DE4 /* Extensions */,
 				736BEE1A228533500015C106 /* View */,
 				736BEE17228507890015C106 /* Controller */,
 				7302ABC72276C6F30050D292 /* Model */,
 				733425BF222FC5CA009B3207 /* AppDelegate.swift */,
-				733425C1222FC5CA009B3207 /* LandingViewController.swift */,
-				739819A122489D6900C74DE0 /* SignUpViewController.swift */,
 				733425C3222FC5CA009B3207 /* Main.storyboard */,
 				733425C6222FC5CB009B3207 /* Assets.xcassets */,
 				733425C8222FC5CB009B3207 /* LaunchScreen.storyboard */,
 				733425CB222FC5CB009B3207 /* Info.plist */,
 				7365FCB022307545003A0366 /* GoogleService-Info.plist */,
-				73F153E6225DDCE600802F57 /* HomeViewController.swift */,
-				73071A432272E49F0088A802 /* ImagePicker.swift */,
-				7310FB4F2273FDA600941746 /* API.swift */,
-				7310FB54227414FC00941746 /* UploadViewController.swift */,
-				7303B467227E1DC900030DB8 /* VideoViewController.swift */,
 			);
 			path = VDO;
 			sourceTree = "<group>";
@@ -204,6 +196,11 @@
 		736BEE17228507890015C106 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				7310FB54227414FC00941746 /* UploadViewController.swift */,
+				73F153E6225DDCE600802F57 /* HomeViewController.swift */,
+				739819A122489D6900C74DE0 /* SignUpViewController.swift */,
+				733425C1222FC5CA009B3207 /* LandingViewController.swift */,
+				7303B467227E1DC900030DB8 /* VideoViewController.swift */,
 				73969F652287A67E00D08DE4 /* MenuViewController.swift */,
 				7390E6372288B77400369ED1 /* SharedAlbumsViewController.swift */,
 			);
@@ -217,6 +214,14 @@
 				732988CA2285E9E6004C0949 /* VideoPreviewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7390E6392288C26400369ED1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7310FB4F2273FDA600941746 /* API.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		73969F6222873EFC00D08DE4 /* Extensions */ = {
@@ -625,7 +630,6 @@
 				7310FB55227414FC00941746 /* UploadViewController.swift in Sources */,
 				7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */,
 				733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */,
-				73071A442272E49F0088A802 /* ImagePicker.swift in Sources */,
 				73300A6C2276CA43003FB82D /* Video.swift in Sources */,
 				7302ABC92276C7AA0050D292 /* User.swift in Sources */,
 				73969F662287A67E00D08DE4 /* MenuViewController.swift in Sources */,
