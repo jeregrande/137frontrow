@@ -60,6 +60,41 @@
             </objects>
             <point key="canvasLocation" x="-1339" y="133"/>
         </scene>
+        <!--Shared Albums View Controller-->
+        <scene sceneID="5bP-1N-EwT">
+            <objects>
+                <viewController id="YiF-69-BZs" userLabel="Shared Albums View Controller" customClass="SharedAlbumsViewController" customModule="VDO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zyM-eX-CKc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UgU-Ek-IJP">
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="YiF-69-BZs" id="FeR-Jz-9FQ"/>
+                                    <outlet property="delegate" destination="YiF-69-BZs" id="b2L-rE-SHd"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UgU-Ek-IJP" firstAttribute="top" secondItem="t0p-IB-3hm" secondAttribute="top" id="ESi-JR-08J"/>
+                            <constraint firstItem="t0p-IB-3hm" firstAttribute="trailing" secondItem="UgU-Ek-IJP" secondAttribute="trailing" id="FDX-V1-BWv"/>
+                            <constraint firstItem="t0p-IB-3hm" firstAttribute="bottom" secondItem="UgU-Ek-IJP" secondAttribute="bottom" id="sY2-7c-wr7"/>
+                            <constraint firstItem="UgU-Ek-IJP" firstAttribute="leading" secondItem="t0p-IB-3hm" secondAttribute="leading" id="tyh-22-NAY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="t0p-IB-3hm"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Shared With Me" image="user_group_man_woman" id="VAI-xi-92S"/>
+                    <connections>
+                        <outlet property="tableView" destination="UgU-Ek-IJP" id="YiH-jm-uVs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="59r-fh-mI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1340" y="849"/>
+        </scene>
         <!--Create Album View Controller-->
         <scene sceneID="lUR-o6-b8w">
             <objects>
@@ -133,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axh-6N-ezX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2055" y="133"/>
+            <point key="canvasLocation" x="1054" y="133"/>
         </scene>
         <!--Uploads View Controller-->
         <scene sceneID="qbt-Wa-38x">
@@ -217,6 +252,9 @@
                                 <rect key="frame" x="355" y="7" width="39" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Menu"/>
+                                <connections>
+                                    <action selector="handleProfile:" destination="SRB-Is-djW" eventType="touchUpInside" id="mT0-c9-K89"/>
+                                </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
@@ -540,7 +578,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30P-lz-MGJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1612" y="1521"/>
+            <point key="canvasLocation" x="225" y="133"/>
         </scene>
         <!--Upload View Controller-->
         <scene sceneID="6LF-2A-Kc1">
@@ -695,7 +733,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HM6-5q-JQD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2050.7246376811595" y="862.5"/>
+            <point key="canvasLocation" x="1054" y="1570"/>
         </scene>
         <!--Sharing Select View Controller-->
         <scene sceneID="Pfj-rE-64q">
@@ -750,7 +788,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hjG-H0-VaG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2837.68115942029" y="845.75892857142856"/>
+            <point key="canvasLocation" x="1963.7681159420292" y="862.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="AfY-Zl-Aje">
@@ -763,6 +801,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="k4a-ls-Rpk" kind="relationship" relationship="viewControllers" id="qBv-hK-s5m"/>
+                        <segue destination="YiF-69-BZs" kind="relationship" relationship="viewControllers" id="uQO-0Y-fpC"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lnG-1w-8G2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -786,12 +825,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qJ-ev-u8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="224.63768115942031" y="862.5"/>
+            <point key="canvasLocation" x="1134.7826086956522" y="862.5"/>
         </scene>
     </scenes>
     <resources>
         <image name="fullscreen_button" width="250" height="250"/>
         <image name="play_button" width="500" height="500"/>
         <image name="upload" width="30" height="30"/>
+        <image name="user_group_man_woman" width="30" height="30"/>
     </resources>
 </document>

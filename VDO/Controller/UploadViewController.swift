@@ -28,7 +28,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     let SELECT_VIDEO = "Select Video"
     let UPLOAD_VIDEO = "Upload"
     
-    var imagePicker: ImagePicker!
     var api = API()
     var videoURL: URL?
     var thumbnailURL: URL?
@@ -52,7 +51,6 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         // Do any additional setup after loading the view.
         // make sure the button has the appropriate title when the VC is created.
         actionButton.setTitle(SELECT_VIDEO, for: .normal)
-        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
     
     @IBAction func handleShareToggle(_ sender: UISwitch) {
@@ -207,9 +205,14 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         selectedAlbumID = pickerData[row].albumID
     }
     
-}
-
-extension UploadViewController: ImagePickerDelegate {
-    func didSelect(image: UIImage?) {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden=true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden=false
+    }
+    
 }

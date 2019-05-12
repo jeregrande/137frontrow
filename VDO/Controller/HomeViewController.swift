@@ -12,7 +12,6 @@ import Firebase
 
 class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UIActionSheetDelegate{
     
-    var imagePicker: ImagePicker!
     var user: User! {didSet{
         getVideosForUser()
         getAlbums()
