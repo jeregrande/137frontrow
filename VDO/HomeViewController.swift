@@ -101,7 +101,8 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         alertController.addAction(newAlbumAction)
         
         let newVideoAction = UIAlertAction(title: "Video", style: .default) { (action) in
-            print("new album selected")
+            print("new video selected")
+            self.performSegue(withIdentifier: "handleNewVideo", sender: nil)
         }
         alertController.addAction(newVideoAction)
         //        No need for a destroy action

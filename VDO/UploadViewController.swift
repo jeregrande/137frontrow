@@ -29,13 +29,22 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var helperTextLabel: UILabel!
     
+    var albumPickerActionSheet = UIView()
+    var albumPickerActionSheetBottomAnchor: NSLayoutConstraint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // make sure the button has the appropriate title when the VC is created.
         actionButton.setTitle(SELECT_VIDEO, for: .normal)
+        view.addSubview(albumPickerActionSheet)
         self.imagePicker = ImagePicker(presentationController: self, delegate: self)
     }
+    
+    @IBAction func addToAlbum(_ sender: UIButton) {
+        
+    }
+    
     
     func handleSelectVideoTap() {
         // create the image picker

@@ -12,6 +12,8 @@ target 'VDO' do
   # UI Auth firebase
   pod 'FirebaseUI'
   
+  pod 'RSSelectionMenu'
+  
   
   
   target 'VDOTests' do
@@ -22,6 +24,7 @@ target 'VDO' do
     
     # UI Auth firebase
     pod 'FirebaseUI'
+    pod 'RSSelectionMenu'
 
   end
 
