@@ -13,9 +13,13 @@ import Firebase
 class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UIActionSheetDelegate{
     
     var imagePicker: ImagePicker!
-    var user: User! {didSet{getVideosForUser()}}
+    var user: User! {didSet{
+        getVideosForUser()
+        getAlbums()
+        }}
     var videos = [Video]()
     var filteredData = [Video]()
+    var albums = [Album]()
     let api = API()
     let userID = Auth.auth().currentUser?.uid
     let cellID = "cellID"
@@ -38,6 +42,23 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         
         mainScrollView.translatesAutoresizingMaskIntoConstraints = false
         mainScrollView.register(ViewPreviewCell.self, forCellWithReuseIdentifier: cellID)
+    }
+    
+    func getAlbums(){
+        for albumID in user.albums {
+            api.fetchAlbum(withId: albumID) { (album) in
+                guard album != nil else {
+                    print("error getting album data")
+                    return
+                }
+                
+                self.albums.append(album!)
+                DispatchQueue.main.async(execute: {
+                    print("table data reloaded")
+                })
+                print("album data \(String(describing: album?.title))")
+            }
+        }
     }
     
     // Sign OUT DEPRECATED
@@ -206,6 +227,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             case "Select Video" :
                 if let vc = segue.destination as? VideoViewController{
                     vc.video = sender as? Video
+                }
+            case "handleNewVideo":
+                if let vc = segue.destination as? UploadViewController{
+                    vc.pickerData = albums
                 }
             default: break
             }

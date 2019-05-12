@@ -114,7 +114,7 @@ class API {
     
     // Gets the given album object given the album's ID
     func fetchAlbum(withId id:String, completion: @escaping (Album?) -> Void){
-        let docRef = videoCollection.document(id)
+        let docRef = albumCollection.document(id)
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {
@@ -126,6 +126,7 @@ class API {
             
             // make mutable copy of the NSDictionary
             var dict = doc.data()
+            dict?["albumID"] = doc.documentID
             for (key, value) in dict! {
                 if let value = value as? Date {
                     let formatter = DateFormatter()
@@ -229,7 +230,7 @@ class API {
     
     func addVideoToAlbum(withVideo video: String, withAlbum album: String){
         albumCollection.document(album).updateData([
-            "videos": FieldValue.arrayUnion([album])
+            "videos": FieldValue.arrayUnion([video])
             ])
     }
     
