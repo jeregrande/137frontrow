@@ -30,10 +30,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     var alertController = UIAlertController()
     var profileAlertController = UIAlertController()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
         
         observeUser()
         
