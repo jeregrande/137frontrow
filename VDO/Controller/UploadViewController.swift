@@ -10,15 +10,29 @@ import AVKit
 import MobileCoreServices
 import Firebase
 
-class UploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class UploadViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIPickerViewDataSource,UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    var pickerData = [Album]()
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row].title
+    }
     
     let SELECT_VIDEO = "Select Video"
     let UPLOAD_VIDEO = "Upload"
     
-    var imagePicker: ImagePicker!
     var api = API()
     var videoURL: URL?
     var thumbnailURL: URL?
+    var user = User()
+    var selectedAlbumID: String?
     
     @IBOutlet weak var uploadProgressBar: UIProgressView!
     @IBOutlet weak var thumbnailImageView: UIImageView!
@@ -28,13 +42,27 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var notesLabel: UILabel!
     @IBOutlet weak var notesTextView: UITextView!
     @IBOutlet weak var helperTextLabel: UILabel!
+
+    @IBOutlet weak var shareToggle: UIStackView!
+    @IBOutlet weak var albumPickerView: UIPickerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // make sure the button has the appropriate title when the VC is created.
         actionButton.setTitle(SELECT_VIDEO, for: .normal)
-        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
+    }
+    
+    @IBAction func handleShareToggle(_ sender: UISwitch) {
+        switch sender.isOn {
+        case true:
+            albumPickerView.isHidden = false
+        case false:
+            albumPickerView.isHidden = true
+            selectedAlbumID = nil
+        default:
+            break
+        }
     }
     
     func handleSelectVideoTap() {
@@ -73,7 +101,9 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
                         let vidID = self.api.addVideoToDatabase(title: title, fileURL: url!.absoluteString, notes: notes!)
                         // add the thumbnail image to the video document's values
                         
-                        
+                        if let albumID = self.selectedAlbumID {
+                            self.api.addVideoToAlbum(withVideo: vidID, withAlbum: albumID)
+                        }
                         self.api.addVideoToUser(videoID: vidID)
                         //Create the thumbnail Image
                         // upload the image and get the storageURL
@@ -108,6 +138,7 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         titleLabel.isHidden = false
         notesLabel.isHidden = false
         notesTextView.isHidden = false
+        shareToggle.isHidden = false
     }
     
     
@@ -168,9 +199,20 @@ class UploadViewController: UIViewController, UIImagePickerControllerDelegate, U
         dismiss(animated: true, completion: nil)
     }
     
-}
-
-extension UploadViewController: ImagePickerDelegate {
-    func didSelect(image: UIImage?) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        print("selected item \(row)")
+        print("Selected album name: \(pickerData[row].title), with ID: \(pickerData[row].albumID)")
+        selectedAlbumID = pickerData[row].albumID
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden=true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden=false
+    }
+    
 }

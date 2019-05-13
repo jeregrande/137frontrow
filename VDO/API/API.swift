@@ -18,6 +18,7 @@ class API {
     let userCollection = Firestore.firestore().collection("users")
     let commentCollection = Firestore.firestore().collection("comments")
     let storageRef = Storage.storage()
+    let videoStorageReference = Storage.storage().reference().child("videos")
     let thumbnailsStorageReference = Storage.storage().reference().child("thumbnail_images")
     let userID = Auth.auth().currentUser?.uid as! String
     
@@ -114,7 +115,7 @@ class API {
     
     // Gets the given album object given the album's ID
     func fetchAlbum(withId id:String, completion: @escaping (Album?) -> Void){
-        let docRef = videoCollection.document(id)
+        let docRef = albumCollection.document(id)
         docRef.getDocument { (docSnap, error) in
             
             guard error == nil, let doc = docSnap, doc.exists == true else {
@@ -126,6 +127,7 @@ class API {
             
             // make mutable copy of the NSDictionary
             var dict = doc.data()
+            dict?["albumID"] = doc.documentID
             for (key, value) in dict! {
                 if let value = value as? Date {
                     let formatter = DateFormatter()
@@ -176,7 +178,9 @@ class API {
         let querry = albumCollection.whereField("albumAudience", arrayContains: user)
         querry.getDocuments { (qs, error) in
             qs?.documents.forEach({ (document) in
-                albums.append(document.documentID)
+                if let ownerID = document.data()["author"] as? String, ownerID != user {
+                    albums.append(document.documentID)
+                }
             })
             completion(albums)
         }
@@ -229,7 +233,7 @@ class API {
     
     func addVideoToAlbum(withVideo video: String, withAlbum album: String){
         albumCollection.document(album).updateData([
-            "videos": FieldValue.arrayUnion([album])
+            "videos": FieldValue.arrayUnion([video])
             ])
     }
     
@@ -268,7 +272,8 @@ class API {
             "comments": FieldValue.arrayUnion([]),
             "fileURL": fileURL,
             "notes": notes,
-            "title": title
+            "title": title,
+            "ownerID": userID
             ])
         return video.documentID
     }

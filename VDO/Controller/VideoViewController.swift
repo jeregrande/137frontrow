@@ -9,8 +9,9 @@
 import UIKit
 import AVFoundation
 import AVKit
+import Firebase
 
-class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate {
     
     @IBOutlet weak var videoThumbnail: UIImageView!
     @IBOutlet weak var videoTitleLabel: UILabel!
@@ -19,6 +20,9 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     
     @IBOutlet weak var commentView: UICollectionView!
     let cellID = "cellID"
+    
+    let BUTTON_INFO = "Info"
+    let BUTTON_EDIT = "Edit"
     
     lazy var inputTextField: UITextField = {
         let textField = UITextField()
@@ -69,6 +73,16 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         return button
     }()
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden=true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden=false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         observeComments()
@@ -76,8 +90,16 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         videoTitleLabel.text = video?.title
         videoNotesTextView.text = video?.notes
         
+        setupActionButton()
+        
         commentView.register(CommentViewCell.self, forCellWithReuseIdentifier: cellID)
+        
+        commentView.keyboardDismissMode = .interactive
         setCommentInputComponent()
+        
+        setupVideoPlayerObserver()
+        setupKeyboardObserver()
+        
         
         setVideoThumbnail()
         if let videoURLString = video?.fileURL, let url = NSURL(string: videoURLString) {
@@ -87,7 +109,8 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
             player = AVPlayer(playerItem: playerItem)
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = videoThumbnail.bounds
-            playerLayer?.videoGravity = .resizeAspect
+//            playerLayer?.bounds = videoThumbnail.bounds
+            playerLayer?.videoGravity = .resizeAspectFill
             videoThumbnail.layer.addSublayer(playerLayer!)
             player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 2), queue: DispatchQueue.main) {[weak self] (progressTime) in
                 if let duration = self!.player?.currentItem?.duration {
@@ -107,6 +130,24 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         }
     }
     
+    func setupActionButton(){
+//        if video?.ownerID == Auth.auth().currentUser?.uid {
+//            navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_EDIT, style: .plain, target: self, action: #selector(handleEditAction))
+//        } else {
+//            navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_INFO, style: .plain, target: self, action: #selector(handleInfoAction))
+//        }
+       navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_INFO, style: .plain, target: self, action: #selector(handleInfoAction))
+    }
+    
+    @objc func handleInfoAction(){
+        performSegue(withIdentifier: "showVideoInfo", sender: video)
+    }
+    
+//    @objc func handleEditAction(){
+////        performSegue(withIdentifier: "showEditView", sender: video)
+//        performSegue(withIdentifier: "showVideoInfo", sender: video)
+//    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return comments.count
     }
@@ -117,14 +158,15 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         let comment = comments[indexPath.item]
         print("Comment: \(comment.body)")
         cell.textView.text  = comment.body
+        cell.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
         api.getUser(withId: comment.userID) { (user) in
-            cell.userNameLabel.text = user?.displayName
+            cell.userNameLabel.text = user!.displayName + " said:"
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 80)
+        return CGSize(width: view.frame.width, height: 50)
     }
     
     
@@ -133,17 +175,15 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         print("You selected cell #\(indexPath.item)!")
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
+    }
+    
     
     func setVideoThumbnail(){
         let thumbnailImageURL = video?.thumbnail
-        self.api.getThumbnailImage(withImageURL: thumbnailImageURL!, completition: {(image) in
-            guard image != nil else {
-                print("error")
-                return
-            }
-            self.videoThumbnail.image = image
-            self.progressBar.isHidden = false
-        })
+        videoThumbnail.loadImageUsingCacheWrithURLString(thumbnailImageURL!)
+        self.progressBar.isHidden = false
     }
     
     @IBAction func handlePlayPause(_ sender: UIButton) {
@@ -170,7 +210,9 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         
         // constraint anchors
         containerView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        
+        containerViewBottomAnchor = containerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        containerViewBottomAnchor?.isActive = true
         containerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
@@ -204,6 +246,37 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         
     }
     
+    var containerViewBottomAnchor: NSLayoutConstraint?
+    
+    func setupKeyboardObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func setupVideoPlayerObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(playerEndedPlaying), name: Notification.Name("AVPlayerItemDidPlayToEndTimeNotification"), object: nil)
+    }
+    
+    @objc func handleKeyboardWillShow(notification: Notification){
+        let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        print(keyboardFrame.height)
+        let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+        
+        // move input area
+        containerViewBottomAnchor?.constant = -keyboardFrame.height + view.safeAreaInsets.bottom
+        UIView.animate(withDuration: keyboardDuration as! TimeInterval){
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc func handleKeyboardWillHide(notification: Notification){
+        let keyboardDuration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+        containerViewBottomAnchor?.constant = 0
+        UIView.animate(withDuration: keyboardDuration as! TimeInterval){
+            self.view.layoutIfNeeded()
+        }
+    }
     
     @objc func handleCommentSend(){
         api.addComment(withText: inputTextField.text!, toVideo: video!.videoID)
@@ -271,9 +344,18 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
                 print("Comment: \(comment)")
                 self.comments.append(comment!)
                 DispatchQueue.main.async(execute: {
+                    print("table data reloaded")
                     self.commentView?.reloadData()
                 })
             }
+        }
+    }
+    
+    @objc func playerEndedPlaying(_ notification: Notification) {
+        print("player finished playing")
+        DispatchQueue.main.async {[weak self] in
+            self?.player?.seek(to: CMTime.zero)
+            self?.player?.play() //This is optional
         }
     }
     
@@ -282,10 +364,37 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
             switch identifier {
             case "Exit Video View":
                 player?.pause()
+            case "showVideoInfo":
+                if let vc = segue.destination as? VideoInfoController {
+                    vc.video = video
+                }
+            case "showEditView":
+                if let vc = segue.identifier as? VideoEditController {
+                    vc.video = video
+                }
+            case "ShowMenuSegue":
+                if let tvc = segue.destination as? MenuViewController
+                {
+                    tvc.delegate = self
+                    if let ppc = tvc.popoverPresentationController
+                    {
+                        ppc.delegate = self
+                    }
+                }
             default: break
             }
         }
     }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
         player?.removeObserver(self, forKeyPath: "timeControlStatus")

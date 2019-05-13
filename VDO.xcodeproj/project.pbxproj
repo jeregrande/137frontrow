@@ -11,13 +11,14 @@
 		7302ABC92276C7AA0050D292 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7302ABC82276C7AA0050D292 /* User.swift */; };
 		7303B466227E1AA100030DB8 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7303B465227E1AA100030DB8 /* Comment.swift */; };
 		7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7303B467227E1DC900030DB8 /* VideoViewController.swift */; };
-		73071A442272E49F0088A802 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73071A432272E49F0088A802 /* ImagePicker.swift */; };
 		7310FB502273FDA600941746 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB4F2273FDA600941746 /* API.swift */; };
 		7310FB5222740D8100941746 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7310FB5122740D8100941746 /* AVFoundation.framework */; };
 		7310FB55227414FC00941746 /* UploadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7310FB54227414FC00941746 /* UploadViewController.swift */; };
 		732988CB2285E9E6004C0949 /* VideoPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732988CA2285E9E6004C0949 /* VideoPreviewCell.swift */; };
 		73300A6C2276CA43003FB82D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6B2276CA43003FB82D /* Video.swift */; };
 		73300A6E22776490003FB82D /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6D22776490003FB82D /* Album.swift */; };
+		73308DDD228971E500CF55DD /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73308DDC228971E500CF55DD /* AlbumViewController.swift */; };
+		73308DDF228979E500CF55DD /* MyAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73308DDE228979E500CF55DD /* MyAlbumsViewController.swift */; };
 		733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425BF222FC5CA009B3207 /* AppDelegate.swift */; };
 		733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425C1222FC5CA009B3207 /* LandingViewController.swift */; };
 		733425C5222FC5CA009B3207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733425C3222FC5CA009B3207 /* Main.storyboard */; };
@@ -28,8 +29,12 @@
 		7365FCB122307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
 		7365FCB222307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
 		7365FCB322307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
-		736BEE19228508980015C106 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736BEE18228508970015C106 /* CommentViewController.swift */; };
 		736BEE1E2285339C0015C106 /* CommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736BEE1D2285339C0015C106 /* CommentViewCell.swift */; };
+		7390E6382288B77400369ED1 /* SharedAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7390E6372288B77400369ED1 /* SharedAlbumsViewController.swift */; };
+		7390E63B2288F1C600369ED1 /* VideoInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7390E63A2288F1C600369ED1 /* VideoInfoController.swift */; };
+		7390E63D2288F1DF00369ED1 /* VideoEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7390E63C2288F1DF00369ED1 /* VideoEditController.swift */; };
+		73969F6422873F1A00D08DE4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73969F6322873F1A00D08DE4 /* Extensions.swift */; };
+		73969F662287A67E00D08DE4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73969F652287A67E00D08DE4 /* MenuViewController.swift */; };
 		739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739819A122489D6900C74DE0 /* SignUpViewController.swift */; };
 		73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F153E6225DDCE600802F57 /* HomeViewController.swift */; };
 		BEFC5D9BAF91F903F6813B35 /* Pods_VDOTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7675252B136194613B911AC /* Pods_VDOTests.framework */; };
@@ -61,13 +66,14 @@
 		7302ABC82276C7AA0050D292 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		7303B465227E1AA100030DB8 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		7303B467227E1DC900030DB8 /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
-		73071A432272E49F0088A802 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		7310FB4F2273FDA600941746 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		7310FB5122740D8100941746 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7310FB54227414FC00941746 /* UploadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadViewController.swift; sourceTree = "<group>"; };
 		732988CA2285E9E6004C0949 /* VideoPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPreviewCell.swift; sourceTree = "<group>"; };
 		73300A6B2276CA43003FB82D /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		73300A6D22776490003FB82D /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
+		73308DDC228971E500CF55DD /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		73308DDE228979E500CF55DD /* MyAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumsViewController.swift; sourceTree = "<group>"; };
 		733425BC222FC5CA009B3207 /* VDO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VDO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733425BF222FC5CA009B3207 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		733425C1222FC5CA009B3207 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -82,8 +88,12 @@
 		733425DF222FC5CB009B3207 /* VDOUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDOUITests.swift; sourceTree = "<group>"; };
 		733425E1222FC5CB009B3207 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7365FCB022307545003A0366 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		736BEE18228508970015C106 /* CommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		736BEE1D2285339C0015C106 /* CommentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewCell.swift; sourceTree = "<group>"; };
+		7390E6372288B77400369ED1 /* SharedAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAlbumsViewController.swift; sourceTree = "<group>"; };
+		7390E63A2288F1C600369ED1 /* VideoInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInfoController.swift; sourceTree = "<group>"; };
+		7390E63C2288F1DF00369ED1 /* VideoEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditController.swift; sourceTree = "<group>"; };
+		73969F6322873F1A00D08DE4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		73969F652287A67E00D08DE4 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		739819A122489D6900C74DE0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		73F153E6225DDCE600802F57 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		9293C2AF7888E24B55EF79B4 /* Pods-VDO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VDO.debug.xcconfig"; path = "Target Support Files/Pods-VDO/Pods-VDO.debug.xcconfig"; sourceTree = "<group>"; };
@@ -158,22 +168,17 @@
 		733425BE222FC5CA009B3207 /* VDO */ = {
 			isa = PBXGroup;
 			children = (
+				7390E6392288C26400369ED1 /* API */,
+				73969F6222873EFC00D08DE4 /* Extensions */,
 				736BEE1A228533500015C106 /* View */,
 				736BEE17228507890015C106 /* Controller */,
 				7302ABC72276C6F30050D292 /* Model */,
 				733425BF222FC5CA009B3207 /* AppDelegate.swift */,
-				733425C1222FC5CA009B3207 /* LandingViewController.swift */,
-				739819A122489D6900C74DE0 /* SignUpViewController.swift */,
 				733425C3222FC5CA009B3207 /* Main.storyboard */,
 				733425C6222FC5CB009B3207 /* Assets.xcassets */,
 				733425C8222FC5CB009B3207 /* LaunchScreen.storyboard */,
 				733425CB222FC5CB009B3207 /* Info.plist */,
 				7365FCB022307545003A0366 /* GoogleService-Info.plist */,
-				73F153E6225DDCE600802F57 /* HomeViewController.swift */,
-				73071A432272E49F0088A802 /* ImagePicker.swift */,
-				7310FB4F2273FDA600941746 /* API.swift */,
-				7310FB54227414FC00941746 /* UploadViewController.swift */,
-				7303B467227E1DC900030DB8 /* VideoViewController.swift */,
 			);
 			path = VDO;
 			sourceTree = "<group>";
@@ -199,7 +204,17 @@
 		736BEE17228507890015C106 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				736BEE18228508970015C106 /* CommentViewController.swift */,
+				7310FB54227414FC00941746 /* UploadViewController.swift */,
+				73F153E6225DDCE600802F57 /* HomeViewController.swift */,
+				739819A122489D6900C74DE0 /* SignUpViewController.swift */,
+				733425C1222FC5CA009B3207 /* LandingViewController.swift */,
+				7303B467227E1DC900030DB8 /* VideoViewController.swift */,
+				73969F652287A67E00D08DE4 /* MenuViewController.swift */,
+				7390E6372288B77400369ED1 /* SharedAlbumsViewController.swift */,
+				7390E63A2288F1C600369ED1 /* VideoInfoController.swift */,
+				7390E63C2288F1DF00369ED1 /* VideoEditController.swift */,
+				73308DDC228971E500CF55DD /* AlbumViewController.swift */,
+				73308DDE228979E500CF55DD /* MyAlbumsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -211,6 +226,22 @@
 				732988CA2285E9E6004C0949 /* VideoPreviewCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		7390E6392288C26400369ED1 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7310FB4F2273FDA600941746 /* API.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		73969F6222873EFC00D08DE4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				73969F6322873F1A00D08DE4 /* Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		C0CD66D2256A6703DFD5048F /* Pods */ = {
@@ -606,20 +637,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				736BEE19228508980015C106 /* CommentViewController.swift in Sources */,
+				7390E6382288B77400369ED1 /* SharedAlbumsViewController.swift in Sources */,
 				739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */,
 				7310FB55227414FC00941746 /* UploadViewController.swift in Sources */,
+				7390E63D2288F1DF00369ED1 /* VideoEditController.swift in Sources */,
+				73308DDF228979E500CF55DD /* MyAlbumsViewController.swift in Sources */,
 				7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */,
 				733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */,
-				73071A442272E49F0088A802 /* ImagePicker.swift in Sources */,
 				73300A6C2276CA43003FB82D /* Video.swift in Sources */,
+				7390E63B2288F1C600369ED1 /* VideoInfoController.swift in Sources */,
 				7302ABC92276C7AA0050D292 /* User.swift in Sources */,
+				73969F662287A67E00D08DE4 /* MenuViewController.swift in Sources */,
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,
 				732988CB2285E9E6004C0949 /* VideoPreviewCell.swift in Sources */,
 				7310FB502273FDA600941746 /* API.swift in Sources */,
+				73969F6422873F1A00D08DE4 /* Extensions.swift in Sources */,
 				73F153E7225DDCE600802F57 /* HomeViewController.swift in Sources */,
 				7303B466227E1AA100030DB8 /* Comment.swift in Sources */,
 				736BEE1E2285339C0015C106 /* CommentViewCell.swift in Sources */,
+				73308DDD228971E500CF55DD /* AlbumViewController.swift in Sources */,
 				73300A6E22776490003FB82D /* Album.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

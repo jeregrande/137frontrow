@@ -10,12 +10,14 @@ import UIKit
 import FirebaseUI
 import Firebase
 
-class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate{
+class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate, UIActionSheetDelegate{
     
-    var imagePicker: ImagePicker!
-    var user: User! {didSet{getVideosForUser()}}
+    var user: User! {didSet{
+        getVideosForUser()
+        }}
     var videos = [Video]()
     var filteredData = [Video]()
+    var albums = [Album]()
     let api = API()
     let userID = Auth.auth().currentUser?.uid
     let cellID = "cellID"
@@ -23,19 +25,24 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mainScrollView: UICollectionView!
     
-
+    var alertController = UIAlertController()
+    var profileAlertController = UIAlertController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        
         observeUser()
+        
+        setupAlertController()
+        setupProfileAlertController()
         
         mainScrollView.translatesAutoresizingMaskIntoConstraints = false
         mainScrollView.register(ViewPreviewCell.self, forCellWithReuseIdentifier: cellID)
     }
     
-    // Sign OUT
-    @IBAction func signOut(_ sender: UIButton) {
+    func singOut(){
         let authUI = FUIAuth.defaultAuthUI()
         
         guard authUI != nil else{
@@ -50,6 +57,55 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         } catch {
             print("Unkonwn Error")
         }
+    }
+    
+    @IBAction func handleProfile(_ sender: UIButton) {
+        self.present(profileAlertController, animated: true) {
+            // ...
+        }
+    }
+    
+    @IBAction func handleNew(_ sender: UIBarButtonItem) {
+        self.present(alertController, animated: true) {
+            // ...
+        }
+    }
+    
+    func setupAlertController(){
+        alertController = UIAlertController(title: nil, message: "Create a new album or upload a new video", preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // ...
+        }
+        alertController.addAction(cancelAction)
+        
+        let newAlbumAction = UIAlertAction(title: "Album", style: .default) { (action) in
+            print("new album selected")
+        }
+        alertController.addAction(newAlbumAction)
+        
+        let newVideoAction = UIAlertAction(title: "Video", style: .default) { (action) in
+            print("new video selected")
+            self.performSegue(withIdentifier: "handleNewVideo", sender: nil)
+        }
+        alertController.addAction(newVideoAction)
+        //        No need for a destroy action
+        //        let destroyAction = UIAlertAction(title: "Destroy", style: .destructive) { (action) in
+        //            print(action)
+        //        }
+        //        alertController.addAction(destroyAction)
+    }
+    
+    func setupProfileAlertController(){
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // ...
+        }
+        profileAlertController.addAction(cancelAction)
+        let singOutAction = UIAlertAction(title: "Sign Out", style: .destructive) { (action) in
+            print(action)
+            self.singOut()
+        }
+        profileAlertController.addAction(singOutAction)
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -69,9 +125,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ViewPreviewCell
         let video = filteredData[indexPath.item]
-        api.getThumbnailImage(forVideo: video.videoID) { (image) in
-            cell.thumbnailView.image = image
-        }
+        cell.thumbnailView.loadImageUsingCacheWrithURLString(video.thumbnail)
         cell.videoTitleLabel.text = video.title
         return cell
     }
@@ -112,12 +166,23 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
                 }
                 self.videos.append(video!)
                 self.filteredData.append(video!)
-                DispatchQueue.main.async(execute: {
-                    self.mainScrollView?.reloadData()
-                })
+                self.timer?.invalidate()
+                self.timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.handleReloadTable), userInfo: nil, repeats: false)
+                
             }
         }
     }
+    
+    // Workaround for fixing table reloads
+    var timer: Timer?
+    
+    @objc func handleReloadTable(){
+        DispatchQueue.main.async(execute: {
+            print("table data reloaded")
+            self.mainScrollView?.reloadData()
+        })
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
@@ -125,6 +190,10 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
             case "Select Video" :
                 if let vc = segue.destination as? VideoViewController{
                     vc.video = sender as? Video
+                }
+            case "handleNewVideo":
+                if let vc = segue.destination as? UploadViewController{
+                    vc.pickerData = albums
                 }
             default: break
             }
