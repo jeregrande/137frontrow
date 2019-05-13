@@ -131,22 +131,22 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     }
     
     func setupActionButton(){
-        if video?.ownerID == Auth.auth().currentUser?.uid {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_EDIT, style: .plain, target: self, action: #selector(handleEditAction))
-        } else {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_INFO, style: .plain, target: self, action: #selector(handleInfoAction))
-        }
-       
+//        if video?.ownerID == Auth.auth().currentUser?.uid {
+//            navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_EDIT, style: .plain, target: self, action: #selector(handleEditAction))
+//        } else {
+//            navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_INFO, style: .plain, target: self, action: #selector(handleInfoAction))
+//        }
+       navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_INFO, style: .plain, target: self, action: #selector(handleInfoAction))
     }
     
     @objc func handleInfoAction(){
         performSegue(withIdentifier: "showVideoInfo", sender: video)
     }
     
-    @objc func handleEditAction(){
-//        performSegue(withIdentifier: "showEditView", sender: video)
-        performSegue(withIdentifier: "showVideoInfo", sender: video)
-    }
+//    @objc func handleEditAction(){
+////        performSegue(withIdentifier: "showEditView", sender: video)
+//        performSegue(withIdentifier: "showVideoInfo", sender: video)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return comments.count
