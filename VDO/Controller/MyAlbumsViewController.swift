@@ -66,16 +66,29 @@ class MyAlbumsViewController: UIViewController, UITableViewDelegate, UITableView
         //        alertController.addAction(destroyAction)
     }
     
+    func createNewAlbum(withTitle title: String){
+        print("new album with title: \(title)")
+        
+        api.createAlbum(withTitle: title)
+    }
+    
     func setUpNewAlbumAlertController(){
         newAlbumAlertController = UIAlertController(title: "Create a new album", message: "Enter the name of the new album", preferredStyle: UIAlertController.Style.alert)
         
         let createAlbumAction = UIAlertAction(title: "Create", style: .default) { (action) in
-            //...
+            let titleField = self.newAlbumAlertController.textFields![0] as UITextField
+            self.createNewAlbum(withTitle: titleField.text!)
         }
+        
+        createAlbumAction.isEnabled = false
         newAlbumAlertController.addAction(createAlbumAction)
         
         newAlbumAlertController.addTextField { (textField) in
             textField.placeholder = "Album name"
+            
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
+                createAlbumAction.isEnabled = textField.text != ""
+            }
         }
         
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
@@ -85,6 +98,7 @@ class MyAlbumsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func getUserAlbums(){
+        albums.removeAll()
         for albumID in user!.albums {
             api.fetchAlbum(withId: albumID) { (album) in
                 guard album != nil else {

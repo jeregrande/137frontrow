@@ -200,18 +200,38 @@ class API {
     
     // Creates an album with the given title for the current user
     func createAlbum(withTitle title: String){
-        albumCollection.addDocument(data: [
+        var document: DocumentReference? = nil
+        
+        document = albumCollection.addDocument(data: [
             "author": userID,
             "title": title,
             "videos": FieldValue.arrayUnion([]),
             "albumAudience": FieldValue.arrayUnion([userID])
-            ])
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(document!.documentID)")
+                self.addAlbumToUser(albumID: document!.documentID, userID: self.userID)
+            }
+        }
+        
+    }
+    
+    func addAlbumToUser(albumID: String, userID: String){
+        let user = userCollection.document(userID).updateData([
+            "albums": FieldValue.arrayUnion([albumID])
+        ]) {err in
+            if let err = err {
+                print("error adding album to user")
+            }
+        }
     }
     
     
     func addUserToAblum(withAlbum album: String, withUser user: String){
         albumCollection.document(album).updateData([
-            "albumAudience": user
+            "albumAudience": FieldValue.arrayUnion([user])
             ])
     }
     
