@@ -18,6 +18,7 @@
 		73300A6C2276CA43003FB82D /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6B2276CA43003FB82D /* Video.swift */; };
 		73300A6E22776490003FB82D /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73300A6D22776490003FB82D /* Album.swift */; };
 		73308DDD228971E500CF55DD /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73308DDC228971E500CF55DD /* AlbumViewController.swift */; };
+		73308DDF228979E500CF55DD /* MyAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73308DDE228979E500CF55DD /* MyAlbumsViewController.swift */; };
 		733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425BF222FC5CA009B3207 /* AppDelegate.swift */; };
 		733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 733425C1222FC5CA009B3207 /* LandingViewController.swift */; };
 		733425C5222FC5CA009B3207 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 733425C3222FC5CA009B3207 /* Main.storyboard */; };
@@ -72,6 +73,7 @@
 		73300A6B2276CA43003FB82D /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		73300A6D22776490003FB82D /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		73308DDC228971E500CF55DD /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		73308DDE228979E500CF55DD /* MyAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAlbumsViewController.swift; sourceTree = "<group>"; };
 		733425BC222FC5CA009B3207 /* VDO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VDO.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		733425BF222FC5CA009B3207 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		733425C1222FC5CA009B3207 /* LandingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandingViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				7390E63A2288F1C600369ED1 /* VideoInfoController.swift */,
 				7390E63C2288F1DF00369ED1 /* VideoEditController.swift */,
 				73308DDC228971E500CF55DD /* AlbumViewController.swift */,
+				73308DDE228979E500CF55DD /* MyAlbumsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */,
 				7310FB55227414FC00941746 /* UploadViewController.swift in Sources */,
 				7390E63D2288F1DF00369ED1 /* VideoEditController.swift in Sources */,
+				73308DDF228979E500CF55DD /* MyAlbumsViewController.swift in Sources */,
 				7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */,
 				733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */,
 				73300A6C2276CA43003FB82D /* Video.swift in Sources */,

@@ -14,7 +14,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     
     var user: User! {didSet{
         getVideosForUser()
-        getAlbums()
         }}
     var videos = [Video]()
     var filteredData = [Video]()
@@ -43,41 +42,6 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         mainScrollView.register(ViewPreviewCell.self, forCellWithReuseIdentifier: cellID)
     }
     
-    func getAlbums(){
-        for albumID in user.albums {
-            api.fetchAlbum(withId: albumID) { (album) in
-                guard album != nil else {
-                    print("error getting album data")
-                    return
-                }
-                
-                self.albums.append(album!)
-                DispatchQueue.main.async(execute: {
-                    print("table data reloaded")
-                })
-                print("album data \(String(describing: album?.title))")
-            }
-        }
-    }
-    
-    // Sign OUT DEPRECATED
-    @IBAction func signOut(_ sender: UIButton) {
-        let authUI = FUIAuth.defaultAuthUI()
-        
-        guard authUI != nil else{
-            return
-        }
-        
-        do {
-            try authUI?.signOut()
-            dismiss(animated: true, completion: nil)
-        } catch let signOutError as NSError{
-            print("Error signing out: \(signOutError)")
-        } catch {
-            print("Unkonwn Error")
-        }
-    }
-    
     func singOut(){
         let authUI = FUIAuth.defaultAuthUI()
         
@@ -101,7 +65,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         }
     }
     
-    @IBAction func handleNew(_ sender: UIButton) {
+    @IBAction func handleNew(_ sender: UIBarButtonItem) {
         self.present(alertController, animated: true) {
             // ...
         }

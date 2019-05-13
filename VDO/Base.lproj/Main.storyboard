@@ -103,6 +103,49 @@
             </objects>
             <point key="canvasLocation" x="-1339" y="1570"/>
         </scene>
+        <!--My Albums View Controller-->
+        <scene sceneID="Cij-Cr-SKL">
+            <objects>
+                <viewController id="kRJ-Dt-oef" customClass="MyAlbumsViewController" customModule="VDO" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7RJ-Xi-a2p">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DBM-gM-dqS">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="kRJ-Dt-oef" id="3Hh-Zi-ZYv"/>
+                                    <outlet property="delegate" destination="kRJ-Dt-oef" id="1ga-qH-QOA"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottomMargin" secondItem="DBM-gM-dqS" secondAttribute="bottom" id="b8g-Ie-cVy"/>
+                            <constraint firstItem="DBM-gM-dqS" firstAttribute="top" secondItem="QP9-XA-VaW" secondAttribute="top" id="dvu-rY-xhH"/>
+                            <constraint firstItem="QP9-XA-VaW" firstAttribute="trailing" secondItem="DBM-gM-dqS" secondAttribute="trailing" id="hO6-Pp-qZU"/>
+                            <constraint firstItem="DBM-gM-dqS" firstAttribute="leading" secondItem="QP9-XA-VaW" secondAttribute="leading" id="zFM-Md-b9P"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="QP9-XA-VaW"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ihe-uW-rgV">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="add" id="a2H-ZR-ACf">
+                            <connections>
+                                <action selector="handleNew:" destination="kRJ-Dt-oef" id="07A-L7-qg7"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="zyY-OV-Zcg"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="DBM-gM-dqS" id="XT3-Fe-Ifi"/>
+                        <segue destination="dzg-lr-aZG" kind="show" identifier="show_album" id="7NP-An-FbG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZaC-4Z-Q2P" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="390" y="860"/>
+        </scene>
         <!--Album View Controller-->
         <scene sceneID="b3D-55-BKr">
             <objects>
@@ -143,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJD-9b-7ML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="389.85507246376812" y="847.76785714285711"/>
+            <point key="canvasLocation" x="1300" y="829.6875"/>
         </scene>
         <!--Uploads View Controller-->
         <scene sceneID="qbt-Wa-38x">
@@ -195,32 +238,10 @@
                         <viewLayoutGuide key="safeArea" id="qbS-94-evj"/>
                     </view>
                     <navigationItem key="navigationItem" id="oCc-TB-zRs">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="6bN-rg-EiE">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="CkO-pb-fmn">
-                                <rect key="frame" x="20" y="0.0" width="30" height="44"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="IvD-H3-pkb"/>
-                                    <constraint firstAttribute="height" constant="30" id="gDh-iO-4i9"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="45"/>
-                                <color key="tintColor" red="0.96807536530000005" green="0.96807536530000005" blue="0.96807536530000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="+">
-                                    <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="handleNew:" destination="SRB-Is-djW" eventType="touchUpInside" id="UL2-mo-Q2h"/>
-                                </connections>
-                            </button>
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="add" id="6bN-rg-EiE">
+                            <connections>
+                                <action selector="handleNew:" destination="SRB-Is-djW" id="S5j-62-Kxu"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="PSi-Nx-q4x">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="8qj-bN-5zH">
@@ -425,7 +446,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46b-cm-XRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="224.63768115942031" y="3062.9464285714284"/>
+            <point key="canvasLocation" x="-375" y="2308"/>
         </scene>
         <!--Video Edit Controller-->
         <scene sceneID="q5g-MS-Lny">
@@ -450,7 +471,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30P-lz-MGJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1054" y="3063"/>
+            <point key="canvasLocation" x="454" y="2308"/>
         </scene>
         <!--Upload View Controller-->
         <scene sceneID="6LF-2A-Kc1">
@@ -619,6 +640,7 @@
                     <connections>
                         <segue destination="k4a-ls-Rpk" kind="relationship" relationship="viewControllers" id="qBv-hK-s5m"/>
                         <segue destination="qxF-Sc-ykq" kind="relationship" relationship="viewControllers" id="uQO-0Y-fpC"/>
+                        <segue destination="uvU-TH-K7k" kind="relationship" relationship="viewControllers" id="MBO-QF-yug"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lnG-1w-8G2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -642,7 +664,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qJ-ev-u8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1101" y="848"/>
+            <point key="canvasLocation" x="2010.144927536232" y="847.76785714285711"/>
         </scene>
         <!--Shared With Me-->
         <scene sceneID="7NG-Rr-u7i">
@@ -663,14 +685,35 @@
             </objects>
             <point key="canvasLocation" x="-1340.5797101449277" y="848.4375"/>
         </scene>
+        <!--Albums-->
+        <scene sceneID="3g1-WL-xPx">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="uvU-TH-K7k" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Albums" image="albums" id="vgh-Ol-Xqc"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="jeu-JH-3Ag">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="kRJ-Dt-oef" kind="relationship" relationship="rootViewController" id="L19-LW-ULA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9qQ-4J-veB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-388.40579710144931" y="860.49107142857144"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="albums" width="30" height="30"/>
         <image name="fullscreen_button" width="250" height="250"/>
         <image name="play_button" width="500" height="500"/>
         <image name="upload" width="30" height="30"/>
         <image name="user_group_man_woman" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3cK-o5-tsN"/>
+        <segue reference="85P-zu-A82"/>
+        <segue reference="7NP-An-FbG"/>
     </inferredMetricsTieBreakers>
 </document>
