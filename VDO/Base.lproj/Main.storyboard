@@ -272,6 +272,7 @@
         <!--Video View Controller-->
         <scene sceneID="njR-iU-cuu">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2za-gW-Z52" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="PLO-7q-qaO" customClass="VideoViewController" customModule="VDO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="SaU-sd-7nC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -376,17 +377,6 @@
                                 </constraints>
                                 <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uyk-A5-eqm">
-                                <rect key="frame" x="360" y="88" width="30" height="30"/>
-                                <state key="normal" title="///">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <segue destination="lFX-YN-ksq" kind="popoverPresentation" identifier="ShowMenuSegue" popoverAnchorView="uyk-A5-eqm" id="7Fi-TE-Zl6">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -403,10 +393,8 @@
                             <constraint firstItem="o5n-Hl-8rF" firstAttribute="top" secondItem="JHl-kG-fcm" secondAttribute="bottom" constant="18" id="OGA-ab-CCj"/>
                             <constraint firstItem="uf2-v8-ZNa" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" constant="16" id="Tba-Va-A07"/>
                             <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="NC0-2A-QcZ" secondAttribute="trailing" constant="16" id="VZR-Ss-JZM"/>
-                            <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="uyk-A5-eqm" secondAttribute="trailing" constant="24" id="WgV-rz-qG7"/>
                             <constraint firstItem="uf2-v8-ZNa" firstAttribute="top" secondItem="RLc-Mf-X5P" secondAttribute="bottom" id="a1l-Nq-XyG"/>
                             <constraint firstItem="se4-0B-lAC" firstAttribute="trailing" secondItem="uf2-v8-ZNa" secondAttribute="trailing" constant="16" id="bQq-Vd-aMn"/>
-                            <constraint firstItem="uyk-A5-eqm" firstAttribute="top" secondItem="se4-0B-lAC" secondAttribute="top" id="eXW-br-YhS"/>
                             <constraint firstItem="IIk-6O-rvH" firstAttribute="leading" secondItem="se4-0B-lAC" secondAttribute="leading" id="hI8-fC-FPS"/>
                             <constraint firstAttribute="trailing" secondItem="JHl-kG-fcm" secondAttribute="trailing" constant="16" id="jTW-wv-bpO"/>
                             <constraint firstItem="NC0-2A-QcZ" firstAttribute="top" secondItem="uf2-v8-ZNa" secondAttribute="bottom" constant="28" id="oZW-QF-RZx"/>
@@ -426,7 +414,6 @@
                         <outlet property="videoTitleLabel" destination="o5n-Hl-8rF" id="jHr-W6-HdG"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2za-gW-Z52" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="225" y="2297"/>
         </scene>

@@ -20,6 +20,9 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     @IBOutlet weak var commentView: UICollectionView!
     let cellID = "cellID"
     
+    let BUTTON_INFO = "Info"
+    let BUTTON_EDIT = "Edit"
+    
     lazy var inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter comment..."
@@ -43,6 +46,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         }}
     var comments = [Comment]()
     let api = API()
+    var user: User?
     
     @IBAction func handleFullScreen(_ sender: Any) {
         player?.pause()
@@ -86,6 +90,8 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         videoTitleLabel.text = video?.title
         videoNotesTextView.text = video?.notes
         
+        setupActionButton()
+        
         commentView.register(CommentViewCell.self, forCellWithReuseIdentifier: cellID)
         
         commentView.keyboardDismissMode = .interactive
@@ -122,6 +128,23 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
                 }
             }
         }
+    }
+    
+    func setupActionButton(){
+        if video?.ownerID == user?.userID {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_EDIT, style: .plain, target: self, action: #selector(handleEditAction))
+        } else {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_INFO, style: .plain, target: self, action: #selector(handleInfoAction))
+        }
+       
+    }
+    
+    @objc func handleInfoAction(){
+        
+    }
+    
+    @objc func handleEditAction(){
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
