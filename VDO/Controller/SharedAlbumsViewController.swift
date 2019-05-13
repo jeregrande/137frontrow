@@ -23,7 +23,7 @@ class SharedAlbumsViewController: UIViewController, UITableViewDataSource, UITab
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         observeUser()
     }
@@ -63,9 +63,9 @@ class SharedAlbumsViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return albums.count
     }
-//
+    //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .value1, reuseIdentifier: cellID)
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellID)
         cell.textLabel?.text = albums[indexPath.item].title
         if let count = albums[indexPath.item].videos.count as? NSNumber {
             var postfix = ""
@@ -77,19 +77,26 @@ class SharedAlbumsViewController: UIViewController, UITableViewDataSource, UITab
             }
             cell.detailTextLabel?.text = count.stringValue + postfix
         }
-//        cell.backgroundColor = #colorLiteral(red: 0.1215686277, green: 0.01176470611, blue: 0.4235294163, alpha: 1)
+        cell.selectionStyle = .blue
+        
         return cell
     }
-//
-//
-//    /*
-//    // MARK: - Navigation
-//
-//    // In a storyboard-based application, you will often want to do a little preparation before navigation
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        // Get the new view controller using segue.destination.
-//        // Pass the selected object to the new view controller.
-//    }
-//    */
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("selected item at \(indexPath.row)")
+        performSegue(withIdentifier: "showAlbum", sender: albums[indexPath.item])
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case "showAlbum":
+                if let vc = segue.destination as? AlbumViewController {
+                    vc.album = (sender as? Album)!
+                }
+            default: break
+            }
+        }
+    }
 }
