@@ -178,7 +178,9 @@ class API {
         let querry = albumCollection.whereField("albumAudience", arrayContains: user)
         querry.getDocuments { (qs, error) in
             qs?.documents.forEach({ (document) in
-                albums.append(document.documentID)
+                if let ownerID = document.data()["author"] as? String, ownerID != user {
+                    albums.append(document.documentID)
+                }
             })
             completion(albums)
         }
