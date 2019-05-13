@@ -18,6 +18,7 @@ class API {
     let userCollection = Firestore.firestore().collection("users")
     let commentCollection = Firestore.firestore().collection("comments")
     let storageRef = Storage.storage()
+    let videoStorageReference = Storage.storage().reference().child("videos")
     let thumbnailsStorageReference = Storage.storage().reference().child("thumbnail_images")
     let userID = Auth.auth().currentUser?.uid as! String
     

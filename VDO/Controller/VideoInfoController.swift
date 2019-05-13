@@ -8,14 +8,69 @@
 
 import UIKit
 
-class VideoInfoController: UIViewController {
+class VideoInfoController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return tableData.count
+    }
     
-    var video: Video?
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.value1, reuseIdentifier: cellID)
+        cell.textLabel?.text = tableData[indexPath.item].0
+        if let detail = tableData[indexPath.item].1 as? String {
+            cell.detailTextLabel?.text = detail
+        }
+        
+        if let detail = tableData[indexPath.item].1 as? NSNumber {
+            cell.detailTextLabel?.text = detail.stringValue
+        }
+        cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        return cell
+    }
+    
+    
+    let api = API()
+    @IBOutlet weak var metadataTableView: UITableView!
+    let cellID = "cellID"
+    var tableData = [(String, Any)]()
+    
+    var video: Video? {didSet{
+        getVideoMetadata()
+        }}
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        metadataTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
 
         // Do any additional setup after loading the view.
+    }
+    
+    func getVideoMetadata(){
+        let videoref = api.storageRef.reference(forURL: video!.fileURL)
+        
+        videoref.getMetadata { (metadata, error) in
+            if let error = error {
+                print("error fecthing metadata of video: \(self.video!.videoID)")
+            } else {
+//                let decoder = JSONDecoder()
+                var dict = metadata?.dictionaryRepresentation()
+                print("dict metadata: \(dict)")
+                for (index, keyValue) in dict! {
+                    self.tableData.append((index, keyValue))
+                }
+                
+                DispatchQueue.main.async(execute:  {
+                    self.metadataTableView.reloadData()
+                })
+                
+                
+                
+//                if let metadata = try? JSONSerialization.data(withJSONObject: dict!, options: []) {
+//                    let video = try? decoder.decode(Video.self, from: data)
+//                    completion(video)
+//                }
+            }
+        }
     }
     
     

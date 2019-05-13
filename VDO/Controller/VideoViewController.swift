@@ -144,7 +144,8 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     }
     
     @objc func handleEditAction(){
-        performSegue(withIdentifier: "showEditView", sender: video)
+//        performSegue(withIdentifier: "showEditView", sender: video)
+        performSegue(withIdentifier: "showVideoInfo", sender: video)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -363,7 +364,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
             switch identifier {
             case "Exit Video View":
                 player?.pause()
-            case "showVideoIndo":
+            case "showVideoInfo":
                 if let vc = segue.destination as? VideoInfoController {
                     vc.video = video
                 }
