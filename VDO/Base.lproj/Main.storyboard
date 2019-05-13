@@ -412,33 +412,17 @@
                         <outlet property="videoNotesTextView" destination="uf2-v8-ZNa" id="YPW-w1-OjS"/>
                         <outlet property="videoThumbnail" destination="IIk-6O-rvH" id="uph-aQ-u6K"/>
                         <outlet property="videoTitleLabel" destination="o5n-Hl-8rF" id="jHr-W6-HdG"/>
+                        <segue destination="Jfh-pf-Q2c" kind="show" identifier="showVideoInfo" id="c33-Lc-AFY"/>
+                        <segue destination="ejp-ID-eit" kind="show" identifier="showEditView" id="gq6-ld-Mz6"/>
                     </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="225" y="2297"/>
         </scene>
-        <!--Menu View Controller-->
-        <scene sceneID="ovU-nX-zi0">
-            <objects>
-                <viewController id="lFX-YN-ksq" customClass="MenuViewController" customModule="VDO" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5f3-1S-v17">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="3f1-Fh-5XO"/>
-                    </view>
-                    <connections>
-                        <segue destination="Jfh-pf-Q2c" kind="show" id="ub8-vm-9Ut"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XrQ-eS-Mq2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="225" y="3084"/>
-        </scene>
-        <!--Video Meta View Controller-->
+        <!--Video Info Controller-->
         <scene sceneID="Ndj-wJ-dE5">
             <objects>
-                <viewController id="Jfh-pf-Q2c" customClass="VideoMetaViewController" sceneMemberID="viewController">
+                <viewController id="Jfh-pf-Q2c" customClass="VideoInfoController" customModule="VDO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="USi-0B-iVE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -499,16 +483,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kbK-GI-itr">
-                                <rect key="frame" x="16" y="44" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3xG-Sh-ZO8">
-                                <rect key="frame" x="305" y="44" width="54" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Options"/>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BYO-t0-IR9">
                                 <rect key="frame" x="161" y="44" width="53" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -523,28 +497,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="46b-cm-XRn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="977" y="3084"/>
+            <point key="canvasLocation" x="225" y="3063"/>
         </scene>
-        <!--Edit Note View Controller-->
+        <!--Video Edit Controller-->
         <scene sceneID="q5g-MS-Lny">
             <objects>
-                <viewController id="ejp-ID-eit" customClass="EditNoteViewController" sceneMemberID="viewController">
+                <viewController id="ejp-ID-eit" customClass="VideoEditController" customModule="VDO" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mtA-RZ-qGQ">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fiV-Ma-94N">
-                                <rect key="frame" x="16" y="44" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Back"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Edit Note" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lre-Lp-rbI">
-                                <rect key="frame" x="152" y="44" width="71" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cTc-pC-Jrz">
                                 <rect key="frame" x="16" y="98" width="343" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -553,11 +515,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TY1-Jg-X9Q">
-                                <rect key="frame" x="322" y="44" width="37" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Rnq-jj-kQZ"/>
@@ -565,7 +522,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="30P-lz-MGJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="225" y="133"/>
+            <point key="canvasLocation" x="1054" y="3063"/>
         </scene>
         <!--Upload View Controller-->
         <scene sceneID="6LF-2A-Kc1">

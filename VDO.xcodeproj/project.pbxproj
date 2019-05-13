@@ -29,6 +29,8 @@
 		7365FCB322307545003A0366 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7365FCB022307545003A0366 /* GoogleService-Info.plist */; };
 		736BEE1E2285339C0015C106 /* CommentViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 736BEE1D2285339C0015C106 /* CommentViewCell.swift */; };
 		7390E6382288B77400369ED1 /* SharedAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7390E6372288B77400369ED1 /* SharedAlbumsViewController.swift */; };
+		7390E63B2288F1C600369ED1 /* VideoInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7390E63A2288F1C600369ED1 /* VideoInfoController.swift */; };
+		7390E63D2288F1DF00369ED1 /* VideoEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7390E63C2288F1DF00369ED1 /* VideoEditController.swift */; };
 		73969F6422873F1A00D08DE4 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73969F6322873F1A00D08DE4 /* Extensions.swift */; };
 		73969F662287A67E00D08DE4 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73969F652287A67E00D08DE4 /* MenuViewController.swift */; };
 		739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 739819A122489D6900C74DE0 /* SignUpViewController.swift */; };
@@ -84,6 +86,8 @@
 		7365FCB022307545003A0366 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		736BEE1D2285339C0015C106 /* CommentViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewCell.swift; sourceTree = "<group>"; };
 		7390E6372288B77400369ED1 /* SharedAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedAlbumsViewController.swift; sourceTree = "<group>"; };
+		7390E63A2288F1C600369ED1 /* VideoInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInfoController.swift; sourceTree = "<group>"; };
+		7390E63C2288F1DF00369ED1 /* VideoEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditController.swift; sourceTree = "<group>"; };
 		73969F6322873F1A00D08DE4 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		73969F652287A67E00D08DE4 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		739819A122489D6900C74DE0 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -203,6 +207,8 @@
 				7303B467227E1DC900030DB8 /* VideoViewController.swift */,
 				73969F652287A67E00D08DE4 /* MenuViewController.swift */,
 				7390E6372288B77400369ED1 /* SharedAlbumsViewController.swift */,
+				7390E63A2288F1C600369ED1 /* VideoInfoController.swift */,
+				7390E63C2288F1DF00369ED1 /* VideoEditController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -628,9 +634,11 @@
 				7390E6382288B77400369ED1 /* SharedAlbumsViewController.swift in Sources */,
 				739819A222489D6900C74DE0 /* SignUpViewController.swift in Sources */,
 				7310FB55227414FC00941746 /* UploadViewController.swift in Sources */,
+				7390E63D2288F1DF00369ED1 /* VideoEditController.swift in Sources */,
 				7303B468227E1DC900030DB8 /* VideoViewController.swift in Sources */,
 				733425C2222FC5CA009B3207 /* LandingViewController.swift in Sources */,
 				73300A6C2276CA43003FB82D /* Video.swift in Sources */,
+				7390E63B2288F1C600369ED1 /* VideoInfoController.swift in Sources */,
 				7302ABC92276C7AA0050D292 /* User.swift in Sources */,
 				73969F662287A67E00D08DE4 /* MenuViewController.swift in Sources */,
 				733425C0222FC5CA009B3207 /* AppDelegate.swift in Sources */,

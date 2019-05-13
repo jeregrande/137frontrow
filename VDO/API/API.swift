@@ -269,7 +269,8 @@ class API {
             "comments": FieldValue.arrayUnion([]),
             "fileURL": fileURL,
             "notes": notes,
-            "title": title
+            "title": title,
+            "ownerID": userID
             ])
         return video.documentID
     }

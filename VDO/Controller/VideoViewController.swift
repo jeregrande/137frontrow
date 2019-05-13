@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 import AVKit
+import Firebase
 
 class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UIPopoverPresentationControllerDelegate {
     
@@ -46,7 +47,6 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
         }}
     var comments = [Comment]()
     let api = API()
-    var user: User?
     
     @IBAction func handleFullScreen(_ sender: Any) {
         player?.pause()
@@ -131,7 +131,7 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     }
     
     func setupActionButton(){
-        if video?.ownerID == user?.userID {
+        if video?.ownerID == Auth.auth().currentUser?.uid {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_EDIT, style: .plain, target: self, action: #selector(handleEditAction))
         } else {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_INFO, style: .plain, target: self, action: #selector(handleInfoAction))
@@ -140,11 +140,11 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
     }
     
     @objc func handleInfoAction(){
-        
+        performSegue(withIdentifier: "showVideoInfo", sender: video)
     }
     
     @objc func handleEditAction(){
-        
+        performSegue(withIdentifier: "showEditView", sender: video)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -363,6 +363,14 @@ class VideoViewController: UIViewController, UITextFieldDelegate, UICollectionVi
             switch identifier {
             case "Exit Video View":
                 player?.pause()
+            case "showVideoIndo":
+                if let vc = segue.destination as? VideoInfoController {
+                    vc.video = video
+                }
+            case "showEditView":
+                if let vc = segue.identifier as? VideoEditController {
+                    vc.video = video
+                }
             case "ShowMenuSegue":
                 if let tvc = segue.destination as? MenuViewController
                 {
