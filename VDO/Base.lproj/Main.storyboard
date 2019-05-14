@@ -101,7 +101,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="59r-fh-mI7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1339" y="1570"/>
+            <point key="canvasLocation" x="-1339" y="1550"/>
         </scene>
         <!--My Albums View Controller-->
         <scene sceneID="Cij-Cr-SKL">
@@ -186,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CJD-9b-7ML" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1300" y="829.6875"/>
+            <point key="canvasLocation" x="1290" y="860"/>
         </scene>
         <!--Uploads View Controller-->
         <scene sceneID="qbt-Wa-38x">
@@ -664,7 +664,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8qJ-ev-u8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2010.144927536232" y="847.76785714285711"/>
+            <point key="canvasLocation" x="2035" y="860"/>
         </scene>
         <!--Shared With Me-->
         <scene sceneID="7NG-Rr-u7i">
@@ -683,7 +683,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kcx-ZB-QJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1340.5797101449277" y="848.4375"/>
+            <point key="canvasLocation" x="-1339" y="860"/>
         </scene>
         <!--Albums-->
         <scene sceneID="3g1-WL-xPx">
@@ -713,7 +713,7 @@
         <image name="user_group_man_woman" width="30" height="30"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="85P-zu-A82"/>
+        <segue reference="3cK-o5-tsN"/>
         <segue reference="7NP-An-FbG"/>
     </inferredMetricsTieBreakers>
 </document>

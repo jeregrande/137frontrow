@@ -21,12 +21,13 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
     let api = API()
     let userID = Auth.auth().currentUser?.uid
     let cellID = "cellID"
-    
+    var newAlbumAlertController = UIAlertController()
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var mainScrollView: UICollectionView!
     
     var alertController = UIAlertController()
     var profileAlertController = UIAlertController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,7 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         observeUser()
         
         setupAlertController()
+        setUpNewAlbumAlertController()
         setupProfileAlertController()
         
         mainScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,6 +83,9 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         
         let newAlbumAction = UIAlertAction(title: "Album", style: .default) { (action) in
             print("new album selected")
+            self.present(self.newAlbumAlertController, animated: true) {
+                // ...
+            }
         }
         alertController.addAction(newAlbumAction)
         
@@ -96,6 +101,36 @@ class HomeViewController: UIViewController, UICollectionViewDelegateFlowLayout, 
         //        alertController.addAction(destroyAction)
     }
     
+    func createNewAlbum(withTitle title: String){
+        print("new album with title: \(title)")
+        
+        api.createAlbum(withTitle: title)
+    }
+    
+    func setUpNewAlbumAlertController(){
+        newAlbumAlertController = UIAlertController(title: "Create a new album", message: "Enter the name of the new album", preferredStyle: UIAlertController.Style.alert)
+        
+        let createAlbumAction = UIAlertAction(title: "Create", style: .default) { (action) in
+            let titleField = self.newAlbumAlertController.textFields![0] as UITextField
+            self.createNewAlbum(withTitle: titleField.text!)
+        }
+        
+        createAlbumAction.isEnabled = false
+        newAlbumAlertController.addAction(createAlbumAction)
+        
+        newAlbumAlertController.addTextField { (textField) in
+            textField.placeholder = "Album name"
+            
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
+                createAlbumAction.isEnabled = textField.text != ""
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // ...
+        }
+        newAlbumAlertController.addAction(cancelAction)
+    }
     func setupProfileAlertController(){
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
             // ...

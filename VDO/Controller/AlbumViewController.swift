@@ -20,14 +20,86 @@ class AlbumViewController: UIViewController, UICollectionViewDelegateFlowLayout,
     let api = API()
     // Workaround for fixing table reloads
     var timer: Timer?
+    var alertController = UIAlertController()
+    var shareAlertController = UIAlertController()
+    
     @IBOutlet weak var albumCollectionView: UICollectionView!
     
+    let BUTTON_SHARE = "Share"
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupActionButton()
+        setupAlertController()
+        
         // register the Cell here
         albumCollectionView.register(ViewPreviewCell.self, forCellWithReuseIdentifier: cellID)
+    }
+    
+    @IBAction func shareAlert(_ sender: UIBarButtonItem) {
+        self.present(alertController, animated: true) {
+            // ...
+        }
+    }
+    
+    func setupAlertController(){
+        alertController = UIAlertController(title: nil, message: "Share album to user:", preferredStyle: UIAlertController.Style.actionSheet)
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // ...
+        }
+        
+        let shareAction = UIAlertAction(title: "Share", style: .default) { (action) in
+            print("share album selected")
+            self.present(self.shareAlertController, animated: true) {
+                // ...
+            }
+        }
+        
+        alertController.addAction(cancelAction)
+        alertController.addAction(shareAction)
+    }
+    
+    func setupActionButton(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: BUTTON_SHARE, style: .plain, target: self, action: #selector(handleShareAction))
+    }
+    
+    @objc func handleShareAction(){
+        self.present(alertController, animated: true) {
+            // ...
+        }
+    }
+    
+    func setUpNewAlbumAlertController(){
+        shareAlertController = UIAlertController(title: "Share Album to user", message: "Enter the name of the user to share to", preferredStyle: UIAlertController.Style.alert)
+        
+        let shareToUserAction = UIAlertAction(title: "Share", style: .default) { (action) in
+            let usernameField = self.shareAlertController.textFields![0] as UITextField
+            self.shareAlbumToUser(withUser: usernameField.text!)
+        }
+        
+        shareToUserAction.isEnabled = false
+        shareAlertController.addAction(shareToUserAction)
+        
+        shareAlertController.addTextField { (textField) in
+            textField.placeholder = "Recipient's name"
+            
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
+                shareToUserAction.isEnabled = textField.text != ""
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            // ...
+        }
+        shareAlertController.addAction(cancelAction)
+    }
+    
+    func shareAlbumToUser(withUser user: String){
+        print("shared album to user: \(user)")
+        
+        api.addUserToAblum(withAlbum: album.title, withUser: user)
     }
     
     // Get the videos of the album
